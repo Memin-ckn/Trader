@@ -1,0 +1,30 @@
+# Python sanal ortamı ve önbellek dosyaları
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Harici klonlanan repo (içinde kendi .git dizini olduğu için çakışmayı önler)
+claude-trading-skills/
+
+# Geçici QA / Test dosyaları
+test_*.json
+test_*.md
+reports/
+
+# Ortam değişkenleri ve gizli anahtarlar
+.env
+.env.*
+
+# İşletim sistemi ve editör dosyaları
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
