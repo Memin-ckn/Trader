@@ -4,15 +4,18 @@
 - UI
     - 11 agent'ın verdiği kararlar, gerekçeleri, nihai karar, portfolyodaki hisseler, toplam para, kar/zarar gibi bilgileri görebileceğim bir ui istiyorum.
     - Bu UI hangisi daha kolay olacaksa o şekilde yapılsın. Basit web app, csv dosyası, ASCII art ile oluşturulmuş markdown ve benzeri herhangi bir şeyi kabul ederim. Yalnızca bilmem gerekenleri göreyim yeterli benim için.
+- Borsa
+    - Şu an anladığım kadarıyla test amaçlı yazdığımız 50 adet hisseyi kullanıyor ancak bunun planladığımız abd borsalarını (s&p 500 gibi) takip etmesi gerekiyor.
+- Forex Factory diye bir site var onun işimize yarayıp yaramadığı kontrol edilecek. Eğer iyiyse belki bir agent onun için ekleyebiliriz ya da şu anki agentlar orayı kontrol edebilir analiz için.
 - Backtest
     - Kullandığımız teknolojilerin izin verdiği kadar (maks 3 yıl min 1 yıl) geriye gidip 1 yıllık süreci simüle edeceğiz. Bu sayede oluşturduğumuz sistemin 1 yıllık getirisini tahmini olarak hesaplayabilriiz.
 
 # In Progress
-- Validation (`validate_system.py`)
+- Validation (`validate_system.py` & `test_senaryolari.md`)
     - Proje üzerinde yapılan her değişikliğin sisteme uygun, hatasız ve temiz olduğunu test edebileceğimiz senaryolar oluşturulacak.
     - Bu senaryolar her değişiklik sonrası test edilecek ve bütün testlerden geçilmeden hiçbir değişiklik onaylanmayacak.
-    - **Mevcut Durum:** İzole geçici dosyalar üzerinde çalışan ilk doğrulama paketi (`validate_system.py`) oluşturuldu (Kuyruk önceliği/taşma, 14 gün `EXPIRED` temizliği, `BUY -> HOLD -> SELL` muhasebe denkliği, %20 pozisyon tavanı/yetersiz bakiye ve `yfinance` `NaN` dayanıklılığı).
-    - **Eksikler / Yapılacaklar:** Test senaryoları henüz tam kapsamlı değil; daha fazla uç durum (edge-case) ve entegrasyon senaryosu eklenerek geliştirilecek.
+    - **Mevcut Durum:** İzole geçici dosyalar üzerinde çalışan ilk doğrulama paketi (`validate_system.py`) oluşturuldu (Kuyruk önceliği/taşma, 14 gün `EXPIRED` temizliği, `BUY -> HOLD -> SELL` muhasebe denkliği, %20 pozisyon tavanı/yetersiz bakiye ve `yfinance` `NaN` dayanıklılığı). Ayrıca tüm gerçek ABD borsası (S&P 500 / NASDAQ), gerçek tarihsel veriyle backtest, kademeli alım/kısmi satış komisyon muhasebesi, 11 ajan UI görünürlüğü ve Forex Factory (`USD` odaklı) testlerini kapsayan `test_senaryolari.md` şartnamesi revize edilerek tamamlandı.
+    - **Eksikler / Yapılacaklar:** `test_senaryolari.md` içinde tanımlanan yeni uç durum ve gerçek piyasa verisi senaryoları `validate_system.py` içerisine kodlanarak aktif test sayısı artırılacak.
 
 # Testing
 

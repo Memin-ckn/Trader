@@ -6,11 +6,11 @@ Gerçek para riske atmadan, **3.500 $ sanal bakiye** ve gerçekçi aracı kurum 
 
 ---
 
-## 🚀 Proje Ne Aşamada? (Genel İlerleme: %68)
+## 🚀 Proje Ne Aşamada? (Genel İlerleme: %55)
 
-`██████████████░░░░░░` **%68 Tamamlandı**
+`███████████░░░░░░░░░` **%55 Tamamlandı**
 
-Kanban görev tablomuza göre toplam **8 ana aşamanın 5'i tamamen bitti, 1'i yapım aşamasında, 2'si ise sırada bekliyor.**
+Kanban görev tablomuza göre toplam **10 ana görevin 5'i tamamen bitti, 1'i yapım aşamasında, 4'ü ise sırada bekliyor.**
 
 ---
 
@@ -24,16 +24,18 @@ Kanban görev tablomuza göre toplam **8 ana aşamanın 5'i tamamen bitti, 1'i y
 
 ---
 
-### 🚧 Şu An Üzerinde Çalıştığımız Kısmı (Devam Eden)
+### 🚧 Şu An Üzerinde Çalıştığımız Kısım (Devam Eden)
 
-- **Otomatik Kontrol ve Test Sistemi (Validation):** Sistemde bir değişiklik yaptığımızda hiçbir hesabın şaşmadığından emin olmak için kendi kendini test eden bir mekanizma kuruyoruz. Temel testler çalışıyor, şu an daha detaylı senaryolar ekliyoruz.
+- **Otomatik Kontrol ve Test Sistemi (Validation):** Sistemde yapılan değişikliklerin kuralları ve muhasebeyi bozmadığını kanıtlayan temel test paketi (`validate_system.py`) çalışıyor. Gelecekteki geliştirmeleri de güvence altına alacak 21 maddelik kapsamlı test şartnamesi (`test_senaryolari.md`) hazırlandı; ileri test senaryolarının entegrasyonu sürüyor.
 
 ---
 
 ### 📋 Sırada Ne Var? (Yapılacaklar)
 
-1. **Görsel Takip Ekranı (UI):** Komitenin hangi hisseye neden karar verdiğini, elimizdeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade ve anlaşılır bir ekran yapılacak.
-2. **Geçmişe Dönük Test (Backtest):** "Bu sistemi 1-3 yıl önce çalıştırmaya başlasaydık bugün paramız ne kadar olurdu?" sorusunun cevabını görmek için geçmiş borsa verileriyle hızlandırılmış simülasyon yapılacak.
+1. **Temiz Dosya Mimarisi:** Dosyaların modüler klasörlere (`src/`, `config/` vb.) yerleştirilerek projenin daha düzenli, okunabilir ve profesyonel bir yapıya kavuşturulması.
+2. **Görsel Takip Ekranı (UI):** 11 uzmanın kararlarını, gerekçelerini, portföydeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade bir arayüz/pano hazırlanması.
+3. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
+4. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
 
 ---
 
