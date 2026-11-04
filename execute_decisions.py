@@ -1,0 +1,470 @@
+#!/usr/bin/env python3
+"""
+execute_decisions.py
+Yerel Paper Trading Orkestrası - İşlem ve Hafıza Yürütücüsü
+
+Görevler:
+1. decisions.json dosyasını okumak.
+2. state.json dosyasındaki portföy ve pozisyon durumunu güncellemek:
+   - BUY: Kasanın maks %20'si kuralına uyarak alım yap, kasadan hisse bedeli + 1.50$ komisyon düş,
+          open_positions ve trade_history'ye ekle, watchlist'ten çıkar.
+   - SELL: Açık pozisyonu kapat, hisse satış bedelinden 1.50$ komisyon düşüp kasaya ekle,
+           net PnL (alış komisyonu + satış komisyonu dahil) hesaplayıp trade_history'ye işle.
+   - WAIT_BUY: Hedef giriş fiyatı, stop-loss planı ve 14 günlük son geçerlilik tarihiyle watchlist'e ekle/güncelle.
+   - DROP: İzleme listesinden çıkar.
+   - HOLD: Mevcut açık pozisyonu koru ve güncel fiyatını güncelle.
+3. Açık pozisyonların güncel piyasa değeriyle total_equity_usd değerini yeniden hesaplamak.
+4. state.json dosyasını kaydetmek.
+5. Son durumu okunabilir formatta PORTFOLIO_DASHBOARD.md dosyasına yazdırmak.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import sys
+from datetime import date, datetime, timedelta
+from decimal import ROUND_FLOOR, Decimal
+from pathlib import Path
+from typing import Any
+
+BASE_DIR = Path("/home/memin/Projects/Trader").resolve()
+STATE_FILE = BASE_DIR / "state.json"
+DECISIONS_FILE = BASE_DIR / "decisions.json"
+DASHBOARD_FILE = BASE_DIR / "PORTFOLIO_DASHBOARD.md"
+
+INITIAL_CASH = 3500.00
+FEE_PER_TRADE = 1.50
+MAX_POSITION_PCT = 0.20
+
+
+def _floor_shares(val: float) -> float:
+    """Pay adedini bütçe aşımını önlemek için her zaman 2 ondalık basamağa aşağı yuvarlar (floor)."""
+    if not math.isfinite(val) or val <= 0:
+        return 0.0
+    dec_val = Decimal(str(val))
+    return float(dec_val.quantize(Decimal("0.01"), rounding=ROUND_FLOOR))
+
+
+def load_json(filepath: Path) -> dict[str, Any]:
+    if not filepath.exists():
+        raise FileNotFoundError(f"{filepath} bulunamadı!")
+    with filepath.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_json(filepath: Path, data: dict[str, Any]) -> None:
+    with filepath.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+
+def generate_dashboard_markdown(
+    state: dict[str, Any], decisions_data: dict[str, Any], today_str: str
+) -> str:
+    summary = state.get("portfolio_summary", {})
+    cash = summary.get("cash_usd", INITIAL_CASH)
+    equity = summary.get("total_equity_usd", INITIAL_CASH)
+    fees_paid = summary.get("total_fees_paid_usd", 0.0)
+
+    open_positions = state.get("open_positions", [])
+    positions_value = round(sum(round(pos["shares"] * pos["current_price"], 2) for pos in open_positions), 2)
+    net_pnl = round(equity - INITIAL_CASH, 2)
+    net_pnl_pct = (net_pnl / INITIAL_CASH) * 100
+
+    watchlist = [w for w in state.get("watchlist", []) if w.get("status") != "EXPIRED"]
+    history = state.get("trade_history", [])
+
+    lines = [
+        "# 📊 PORTFOLIO DASHBOARD (Paper Trading)",
+        f"**Son Güncelleme:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  |  **Tarih:** {today_str}",
+        "",
+        "## 1. Portföy Özeti",
+        "| Metrik | Değer |",
+        "|---|---|",
+        f"| **Nakit Bakiye (Cash)** | `${cash:,.2f}` |",
+        f"| **Hisse Pozisyon Değeri** | `${positions_value:,.2f}` |",
+        f"| **Toplam Varlık (Total Equity)** | `${equity:,.2f}` |",
+        f"| **Başlangıç Sermayesi** | `${INITIAL_CASH:,.2f}` |",
+        f"| **Toplam Net Kâr / Zarar** | `${net_pnl:+,.2f}` (`{net_pnl_pct:+.2f}%`) |",
+        f"| **Ödenen Toplam Komisyon** | `${fees_paid:,.2f}` (Midas 1.50$/işlem) |",
+        f"| **Maksimum Pozisyon Limiti** | `%20` (Maks `${equity * MAX_POSITION_PCT:,.2f}`) |",
+        "",
+        "## 2. Açık Pozisyonlar (`open_positions`)",
+    ]
+
+    if open_positions:
+        lines.extend([
+            "| Sembol | Adet | Alış Fiyatı | Güncel Fiyat | Piyasa Değeri | Kâr/Zarar ($) | Kâr/Zarar (%) | Stop-Loss | Kâr Al (TP) | Yatırım Tezi |",
+            "|---|---|---|---|---|---|---|---|---|---|",
+        ])
+        for p in open_positions:
+            val = round(p["shares"] * p["current_price"], 2)
+            cost = round(p["shares"] * p["avg_buy_price"], 2)
+            pnl = round(val - cost, 2)
+            pnl_pct = (pnl / cost) * 100 if cost > 0 else 0.0
+            lines.append(
+                f"| **{p['ticker']}** | {p['shares']:.2f} | `${p['avg_buy_price']:.2f}` | `${p['current_price']:.2f}` | `${val:,.2f}` | `${pnl:+,.2f}` | `{pnl_pct:+.2f}%` | `${p.get('stop_loss', 0):.2f}` | `${p.get('take_profit', 0):.2f}` | {p.get('thesis', '-')} |"
+            )
+    else:
+        lines.append("*Şu anda açık pozisyon bulunmamaktadır (Nakit ağırlıklı).*")
+
+    lines.extend([
+        "",
+        "## 3. İzleme Listesi (`watchlist`)",
+    ])
+
+    if watchlist:
+        lines.extend([
+            "| Sembol | Eklenme Tarihi | Son Geçerlilik | Hedef Giriş Fiyatı | Planlanan Stop | Durum | Gerekçe |",
+            "|---|---|---|---|---|---|---|",
+        ])
+        for w in watchlist:
+            lines.append(
+                f"| **{w['ticker']}** | {w.get('added_date')} | {w.get('expires_date')} | `${w.get('target_entry_price', 0):.2f}` | `${w.get('stop_loss_plan', 0):.2f}` | `{w.get('status')}` | {w.get('reason', '-')} |"
+            )
+    else:
+        lines.append("*İzleme listesinde aktif hisse bulunmamaktadır.*")
+
+    lines.extend([
+        "",
+        "## 4. Son İşlem Geçmişi (`trade_history` - Son 10 İşlem)",
+    ])
+
+    if history:
+        lines.extend([
+            "| Tarih | Sembol | İşlem | Adet | Fiyat | Komisyon | Net PnL ($) | Komite Özeti |",
+            "|---|---|---|---|---|---|---|---|",
+        ])
+        for t in reversed(history[-10:]):
+            pnl_str = f"${t.get('pnl_usd', 0):+,.2f}" if t.get("action") == "SELL" else "-"
+            lines.append(
+                f"| {t.get('date')} | **{t.get('ticker')}** | `{t.get('action')}` | {t.get('shares', 0):.2f} | `${t.get('price', 0):.2f}` | `${t.get('fee_usd', 0):.2f}` | {pnl_str} | {t.get('committee_summary', '-')} |"
+            )
+    else:
+        lines.append("*Henüz tamamlanmış işlem kaydı bulunmamaktadır.*")
+
+    lines.extend([
+        "",
+        "## 5. Bugünkü Komite Karar Özeti",
+        f"**Devre Kesici Onayı:** `{decisions_data.get('circuit_breaker_acknowledged', 'UNKNOWN')}`",
+        f"**Komite Genel Notu:** {decisions_data.get('committee_overall_note', 'Kayıt yok.')}",
+        "",
+    ])
+
+    return "\n".join(lines)
+
+
+def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> dict[str, Any]:
+    """
+    Kararları state sözlüğü üzerinde yürütür, portföy özetini ve açık pozisyonları günceller.
+    """
+    today_str = decisions_data.get("decisions_date") or date.today().strftime("%Y-%m-%d")
+    cb_status = str(decisions_data.get("circuit_breaker_acknowledged", "TRADING_ALLOWED")).upper().strip()
+
+    summary = state.setdefault("portfolio_summary", {})
+    cash = round(float(summary.get("cash_usd", INITIAL_CASH)), 2)
+    open_positions: list[dict[str, Any]] = state.setdefault("open_positions", [])
+    watchlist: list[dict[str, Any]] = state.setdefault("watchlist", [])
+    trade_history: list[dict[str, Any]] = state.setdefault("trade_history", [])
+
+    # Başlangıç toplam varlığını mevcut nakit ve açık pozisyonlardan doğrula
+    initial_positions_val = round(
+        sum(round(float(p.get("shares", 0.0)) * float(p.get("current_price", 0.0)), 2) for p in open_positions),
+        2,
+    )
+    total_equity = round(float(summary.get("total_equity_usd", cash + initial_positions_val)), 2)
+    total_fees = round(float(summary.get("total_fees_paid_usd", 0.0)), 2)
+
+    print(f"[*] İşlem Başlangıcı: Nakit = ${cash:,.2f} | Varlık = ${total_equity:,.2f}")
+
+    decisions = decisions_data.get("decisions", [])
+    print(f"[*] İşlenecek Karar Sayısı: {len(decisions)}\n")
+
+    for d in decisions:
+        ticker = str(d.get("ticker", "")).upper().strip()
+        action = str(d.get("action", "")).upper().strip()
+        raw_price = d.get("price", 0.0)
+        raw_shares = d.get("shares", 0.0)
+        price = float(raw_price) if raw_price is not None else 0.0
+        shares = float(raw_shares) if raw_shares is not None else 0.0
+        reason = d.get("reason", "")
+        thesis = d.get("thesis", reason)
+
+        if not ticker:
+            continue
+
+        print(f"--- [İŞLEM: {ticker} -> {action}] ---")
+
+        if action == "BUY":
+            if cb_status in ("HALTED", "COOLDOWN"):
+                print(f"    [X] Devre kesici ({cb_status}) aktif olduğu için {ticker} alımı engellendi!")
+                continue
+
+            if not math.isfinite(price) or price <= 0 or not math.isfinite(shares) or shares <= 0:
+                print(f"    [X] Geçersiz fiyat ({price}) veya adet ({shares}) nedeniyle {ticker} alımı iptal edildi.")
+                continue
+
+            price = round(price, 2)
+            shares = _floor_shares(shares)
+
+            # Maksimum Pozisyon Kontrolü: Kasanın (Total Equity) kesin olarak en fazla %20'si
+            max_allowed_val = round(total_equity * MAX_POSITION_PCT, 2)
+            existing_pos = next((p for p in open_positions if p.get("ticker") == ticker), None)
+            existing_val = (
+                round(float(existing_pos["shares"]) * float(existing_pos["current_price"]), 2)
+                if existing_pos
+                else 0.0
+            )
+            rem_allowed_val = max(0.0, round(max_allowed_val - existing_val, 2))
+            position_cost = round(shares * price, 2)
+
+            if position_cost > rem_allowed_val:
+                # Pozisyon büyüklüğünü kasanın %20'sine (aşağı yuvarlayarak / floor) sınırla
+                shares = _floor_shares(rem_allowed_val / price)
+                position_cost = round(shares * price, 2)
+                # Eğer kayan nokta çarpımı hala sınırı 1 cent aşıyorsa 0.01 adet düşür
+                while shares > 0 and position_cost > rem_allowed_val:
+                    shares = round(shares - 0.01, 2)
+                    position_cost = round(shares * price, 2)
+                print(
+                    f"    [!] Pozisyon boyutu kasanın %20'si ile sınırlandı (Maks: ${rem_allowed_val:.2f}) -> {shares:.2f} adet (${position_cost:.2f})."
+                )
+
+            total_buy_required = round(position_cost + FEE_PER_TRADE, 2)
+            if total_buy_required > cash:
+                # Nakit yetersizse bakiye kadar alım hesapla (floor ile asla kasayı eksiye düşürme)
+                avail_cash_for_stock = max(0.0, round(cash - FEE_PER_TRADE, 2))
+                shares = _floor_shares(avail_cash_for_stock / price)
+                position_cost = round(shares * price, 2)
+                while shares > 0 and round(position_cost + FEE_PER_TRADE, 2) > cash:
+                    shares = round(shares - 0.01, 2)
+                    position_cost = round(shares * price, 2)
+                total_buy_required = round(position_cost + FEE_PER_TRADE, 2)
+                print(
+                    f"    [!] Yetersiz nakit! Alım nakit miktarına göre uyarlandı: {shares:.2f} adet (${position_cost:.2f})."
+                )
+
+            if shares <= 0 or position_cost <= 0 or total_buy_required > cash:
+                print(f"    [X] Yetersiz bakiye veya limit aşımı nedeniyle {ticker} alımı iptal edildi.")
+                continue
+
+            # Kasadan düş
+            cash = round(cash - total_buy_required, 2)
+            total_fees = round(total_fees + FEE_PER_TRADE, 2)
+
+            stop_loss = round(float(d.get("stop_loss", price * 0.94)), 2)
+            take_profit = round(float(d.get("take_profit", price * 1.15)), 2)
+
+            if existing_pos:
+                old_shares = float(existing_pos["shares"])
+                old_cost = round(old_shares * float(existing_pos["avg_buy_price"]), 2)
+                new_total_shares = round(old_shares + shares, 2)
+                existing_pos["shares"] = new_total_shares
+                existing_pos["avg_buy_price"] = round((old_cost + position_cost) / new_total_shares, 2)
+                existing_pos["current_price"] = price
+                existing_pos["stop_loss"] = stop_loss
+                existing_pos["take_profit"] = take_profit
+                existing_pos["thesis"] = thesis
+            else:
+                open_positions.append({
+                    "ticker": ticker,
+                    "shares": round(shares, 2),
+                    "avg_buy_price": price,
+                    "current_price": price,
+                    "stop_loss": stop_loss,
+                    "take_profit": take_profit,
+                    "buy_date": today_str,
+                    "thesis": thesis,
+                })
+
+            # İşlem geçmişine yaz
+            trade_history.append({
+                "date": today_str,
+                "ticker": ticker,
+                "action": "BUY",
+                "shares": round(shares, 2),
+                "price": price,
+                "fee_usd": FEE_PER_TRADE,
+                "pnl_usd": 0.0,
+                "committee_summary": thesis,
+            })
+
+            # Eğer izleme listesindeyse çıkar
+            watchlist[:] = [w for w in watchlist if w.get("ticker") != ticker]
+
+            print(
+                f"    [✓] {shares:.2f} adet {ticker} @ ${price:.2f} alındı. Maliyet: ${position_cost:.2f} + ${FEE_PER_TRADE:.2f} komisyon."
+            )
+            print(f"        Stop-Loss: ${stop_loss:.2f} | Kâr Al: ${take_profit:.2f}")
+
+        elif action == "SELL":
+            # Pozisyonu bul
+            match_idx = next((i for i, p in enumerate(open_positions) if p.get("ticker") == ticker), None)
+            if match_idx is None:
+                print(f"    [!] Uyarı: {ticker} açık pozisyonlarda bulunamadı!")
+                continue
+
+            if not math.isfinite(price) or price <= 0:
+                price = float(open_positions[match_idx].get("current_price", 0.0))
+
+            price = round(price, 2)
+            pos = open_positions.pop(match_idx)
+            pos_shares = round(float(pos.get("shares", shares)), 2)
+            avg_buy = round(float(pos.get("avg_buy_price", price)), 2)
+            buy_date = pos.get("buy_date", today_str)
+
+            gross_proceeds = round(pos_shares * price, 2)
+            net_proceeds = round(gross_proceeds - FEE_PER_TRADE, 2)
+            cash = round(cash + net_proceeds, 2)
+            total_fees = round(total_fees + FEE_PER_TRADE, 2)
+
+            # Net kâr/zarar hesabı: Satış tutarı - Alış tutarı - (Alış komisyonu + Satış komisyonu)
+            buy_cost = round(pos_shares * avg_buy, 2)
+            trade_net_pnl = round((gross_proceeds - buy_cost) - (FEE_PER_TRADE * 2), 2)
+
+            trade_history.append({
+                "date": today_str,
+                "ticker": ticker,
+                "action": "SELL",
+                "shares": pos_shares,
+                "price": price,
+                "fee_usd": FEE_PER_TRADE,
+                "pnl_usd": trade_net_pnl,
+                "buy_date": buy_date,
+                "committee_summary": reason,
+            })
+
+            pnl_sign = "+" if trade_net_pnl >= 0 else ""
+            print(
+                f"    [✓] {pos_shares:.2f} adet {ticker} @ ${price:.2f} satıldı. Gelir: ${gross_proceeds:.2f} - ${FEE_PER_TRADE:.2f} komisyon."
+            )
+            print(f"        Net Kâr/Zarar: {pnl_sign}${trade_net_pnl:.2f}")
+
+        elif action == "WAIT_BUY":
+            target_entry = float(d.get("target_entry_price", price))
+            stop_plan = float(d.get("stop_loss_plan", target_entry * 0.94))
+            expires = (date.fromisoformat(today_str) + timedelta(days=14)).strftime("%Y-%m-%d")
+
+            # Var olanı güncelle veya yeni ekle
+            existing = next((w for w in watchlist if w.get("ticker") == ticker), None)
+            if existing:
+                existing["expires_date"] = expires
+                existing["target_entry_price"] = round(target_entry, 2)
+                existing["stop_loss_plan"] = round(stop_plan, 2)
+                existing["status"] = "WAIT_BUY"
+                existing["reason"] = reason
+                print(
+                    f"    [✓] {ticker} izleme listesinde güncellendi (Hedef: ${target_entry:.2f}, Son Gün: {expires})."
+                )
+            else:
+                watchlist.append({
+                    "ticker": ticker,
+                    "added_date": today_str,
+                    "expires_date": expires,
+                    "target_entry_price": round(target_entry, 2),
+                    "stop_loss_plan": round(stop_plan, 2),
+                    "status": "WAIT_BUY",
+                    "reason": reason,
+                })
+                print(
+                    f"    [✓] {ticker} izleme listesine eklendi (Hedef: ${target_entry:.2f}, Stop Planı: ${stop_plan:.2f}, Son Gün: {expires})."
+                )
+
+        elif action == "DROP":
+            before_len = len(watchlist)
+            watchlist[:] = [w for w in watchlist if w.get("ticker") != ticker]
+            if len(watchlist) < before_len:
+                print(f"    [✓] {ticker} izleme listesinden çıkarıldı (DROP).")
+            else:
+                print(f"    [*] {ticker} listede zaten yoktu.")
+
+        elif action == "HOLD":
+            # Açık pozisyonun güncel fiyatını güncelle
+            for p in open_positions:
+                if p.get("ticker") == ticker:
+                    if math.isfinite(price) and price > 0:
+                        p["current_price"] = round(price, 2)
+                    if d.get("stop_loss") is not None:
+                        p["stop_loss"] = round(float(d["stop_loss"]), 2)
+                    if d.get("take_profit") is not None:
+                        p["take_profit"] = round(float(d["take_profit"]), 2)
+                    print(f"    [✓] {ticker} pozisyonu korundu (HOLD). Güncel Fiyat: ${p['current_price']:.2f}")
+                    break
+        else:
+            print(f"    [!] Tanımlanamayan aksiyon: {action} (Atlandı)")
+
+    # 4. Süresi dolmuş (EXPIRED) watchlist elemanları varsa temizle ve Toplam Portföy Değerini (Total Equity) Yeniden Hesapla
+    watchlist[:] = [w for w in watchlist if w.get("status") != "EXPIRED"]
+    positions_market_val = round(
+        sum(round(float(pos["shares"]) * float(pos["current_price"]), 2) for pos in open_positions),
+        2,
+    )
+    new_total_equity = round(cash + positions_market_val, 2)
+
+    summary["cash_usd"] = round(cash, 2)
+    summary["total_equity_usd"] = round(new_total_equity, 2)
+    summary["total_fees_paid_usd"] = round(total_fees, 2)
+    summary["last_run_timestamp"] = datetime.now().isoformat()
+
+    return state
+
+
+def main(
+    state_file: Path | None = None,
+    decisions_file: Path | None = None,
+    dashboard_file: Path | None = None,
+) -> int:
+    state_path = state_file or STATE_FILE
+    decisions_path = decisions_file or DECISIONS_FILE
+    dashboard_path = dashboard_file or DASHBOARD_FILE
+
+    print("=" * 60)
+    print("Yerel Paper Trading Orkestrası - Karar Yürütücüsü (execute_decisions)")
+    print("=" * 60)
+
+    is_init = "--init" in sys.argv
+
+    if not decisions_path.exists() and not is_init:
+        print(f"[!] Hata: {decisions_path} bulunamadı!")
+        print("    Lütfen önce Komite analizini yapıp decisions.json dosyasını oluşturun.")
+        print("    (Başlangıç gösterge panelini oluşturmak için: python execute_decisions.py --init)")
+        return 1
+
+    state = load_json(state_path)
+    decisions_data = load_json(decisions_path) if decisions_path.exists() else {
+        "decisions_date": date.today().strftime("%Y-%m-%d"),
+        "circuit_breaker_acknowledged": "INITIALIZED",
+        "committee_overall_note": "Başlangıç durumu (Henüz işlem yapılmadı).",
+        "decisions": []
+    }
+
+    today_str = decisions_data.get("decisions_date") or date.today().strftime("%Y-%m-%d")
+    process_decisions(state, decisions_data)
+
+    summary = state["portfolio_summary"]
+    open_positions = state.get("open_positions", [])
+    positions_market_val = round(
+        sum(round(float(pos["shares"]) * float(pos["current_price"]), 2) for pos in open_positions),
+        2,
+    )
+
+    # 5. state.json Kaydet
+    save_json(state_path, state)
+    print(f"\n[✓] {state_path.name} başarıyla güncellendi.")
+    print(f"    Yeni Nakit: ${summary['cash_usd']:,.2f}")
+    print(f"    Hisse Varlığı: ${positions_market_val:,.2f}")
+    print(f"    Toplam Varlık: ${summary['total_equity_usd']:,.2f}")
+    print(f"    Ödenen Toplam Komisyon: ${summary['total_fees_paid_usd']:,.2f}")
+
+    # 6. PORTFOLIO_DASHBOARD.md Oluştur
+    dashboard_md = generate_dashboard_markdown(state, decisions_data, today_str)
+    with dashboard_path.open("w", encoding="utf-8") as f:
+        f.write(dashboard_md)
+    print(f"[✓] Portföy gösterge paneli güncellendi: {dashboard_path}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

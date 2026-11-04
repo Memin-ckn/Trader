@@ -1,0 +1,47 @@
+{
+  "decisions_date": "2026-11-04",
+  "circuit_breaker_acknowledged": "TRADING_ALLOWED",
+  "committee_overall_note": "Devre kesici TRADING_ALLOWED durumunda; hesap yeni risk alımına açık. Analiz edilen 5 hisse arasından Minervini Stage 2 kriterlerini kusursuz sağlayan ve RSI'ı ideal dengede (58.4) olan MRK için AL (BUY) kararı üretildi. Aşırı alımdaki LLY (RSI 81.9) ve dip arayışındaki MSFT (RSI 27.8) disiplin kuralı gereği hedef pullback fiyatlarıyla izleme listesine (WAIT_BUY) eklendi. Trendi çökmüş ve Stage 2 filtresinden geçemeyen META ve NFLX ise elendi (DROP).",
+  "decisions": [
+    {
+      "ticker": "MRK",
+      "action": "BUY",
+      "shares": 3.66,
+      "price": 148.36,
+      "stop_loss": 138.80,
+      "take_profit": 168.00,
+      "thesis": "Minervini Stage 2 tam puanı (100/100). Fiyat SMA50, SMA150 ve SMA200 üzerinde. 52 haftalık zirvesine %5 mesafede dar konsolidasyon sergiliyor. RSI(14)=58.4 dengeli bölgede ve MACD pozitif momentum teyidi veriyor.",
+      "reason": "11 disiplin kuralının tamamından onay aldı. Pozisyon tutarı $543.00 (%15.51 <= %20 kasa tavanı). Göze alınan risk $34.99 (%1.00 kasa riski). R:R oranı ~1:2."
+    },
+    {
+      "ticker": "LLY",
+      "action": "WAIT_BUY",
+      "price": 1410.99,
+      "target_entry_price": 1350.00,
+      "stop_loss_plan": 1285.00,
+      "thesis": "Minervini Stage 2 tam puan (100/100) ve güçlü kurumsal lider. Ancak 1 aylık +%23.5 rallinin ardından RSI(14)=81.9 ile aşırı alım bölgesinde.",
+      "reason": "Tepe kovalamama kuralı işletildi. SMA50'ye doğru $1350.00 seviyesinde bir geri çekilme (pullback) beklenmek üzere 14 günlük süreyle izleme listesine eklendi."
+    },
+    {
+      "ticker": "MSFT",
+      "action": "WAIT_BUY",
+      "price": 507.12,
+      "target_entry_price": 500.00,
+      "stop_loss_plan": 480.00,
+      "thesis": "Haftalık fiyat hareketinde dönüş (failed extreme) teyidi mevcut ve Stage 2 puanı 71.4. Ancak RSI=27.8 ile kısa vadeli satış baskısı devam ediyor.",
+      "reason": "Düşen bıçak tutmama kuralı. $500.00 psikolojik desteğinin test edilip taban oluşturması beklenmek üzere izleme listesine alındı."
+    },
+    {
+      "ticker": "META",
+      "action": "DROP",
+      "price": 606.73,
+      "reason": "Minervini Stage 2 filtresinden geçemedi (28.6/100). Fiyat tüm hareketli ortalamalarının (SMA50, SMA150, SMA200) altında, RSI=8.2 ile sert çöküşte. Yatırım tezi geçersiz."
+    },
+    {
+      "ticker": "NFLX",
+      "action": "DROP",
+      "price": 62.34,
+      "reason": "Minervini Stage 2 kriterlerinden 0/100 puan aldı. 1 yıllık getiri -%44.3, 52 haftalık dip seviyesinde Stage 4 düşüş trendinde. Listeye alınması uygun değil."
+    }
+  ]
+}

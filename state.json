@@ -1,0 +1,54 @@
+{
+  "portfolio_summary": {
+    "cash_usd": 2955.5,
+    "total_equity_usd": 3498.5,
+    "max_position_pct": 0.2,
+    "fee_per_trade_usd": 1.5,
+    "total_fees_paid_usd": 1.5,
+    "last_run_timestamp": "2026-11-04T18:52:27.867638"
+  },
+  "open_positions": [
+    {
+      "ticker": "MRK",
+      "shares": 3.66,
+      "avg_buy_price": 148.36,
+      "current_price": 148.36,
+      "stop_loss": 138.8,
+      "take_profit": 168.0,
+      "buy_date": "2026-11-04",
+      "thesis": "Minervini Stage 2 tam puanı (100/100). Fiyat SMA50, SMA150 ve SMA200 üzerinde. 52 haftalık zirvesine %5 mesafede dar konsolidasyon sergiliyor. RSI(14)=58.4 dengeli bölgede ve MACD pozitif momentum teyidi veriyor."
+    }
+  ],
+  "watchlist": [
+    {
+      "ticker": "LLY",
+      "added_date": "2026-11-04",
+      "expires_date": "2026-11-18",
+      "target_entry_price": 1350.0,
+      "stop_loss_plan": 1285.0,
+      "status": "WAIT_BUY",
+      "reason": "Tepe kovalamama kuralı işletildi. SMA50'ye doğru $1350.00 seviyesinde bir geri çekilme (pullback) beklenmek üzere 14 günlük süreyle izleme listesine eklendi."
+    },
+    {
+      "ticker": "MSFT",
+      "added_date": "2026-11-04",
+      "expires_date": "2026-11-18",
+      "target_entry_price": 500.0,
+      "stop_loss_plan": 480.0,
+      "status": "WAIT_BUY",
+      "reason": "Düşen bıçak tutmama kuralı. $500.00 psikolojik desteğinin test edilip taban oluşturması beklenmek üzere izleme listesine alındı."
+    }
+  ],
+  "trade_history": [
+    {
+      "date": "2026-11-04",
+      "ticker": "MRK",
+      "action": "BUY",
+      "shares": 3.66,
+      "price": 148.36,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Minervini Stage 2 tam puanı (100/100). Fiyat SMA50, SMA150 ve SMA200 üzerinde. 52 haftalık zirvesine %5 mesafede dar konsolidasyon sergiliyor. RSI(14)=58.4 dengeli bölgede ve MACD pozitif momentum teyidi veriyor."
+    }
+  ]
+}

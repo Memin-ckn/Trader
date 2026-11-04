@@ -1,0 +1,10 @@
+{
+  "market": "US_LIQUID_POOL",
+  "tickers": [
+    "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA", "BRK-B", "LLY", "AVGO",
+    "JPM", "V", "UNH", "XOM", "MA", "COST", "HD", "PG", "JNJ", "NFLX",
+    "AMD", "CRM", "BAC", "ABBV", "KO", "PEP", "MRK", "WMT", "TMO", "LIN",
+    "CSCO", "ACN", "MCD", "ABT", "ADBE", "DHR", "INTC", "DIS", "VZ", "CMCSA",
+    "NKE", "TXN", "PFE", "PM", "UNP", "NEE", "LOW", "SPGI", "HON", "QCOM"
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-03T01:38:17.347905",
+  "as_of_date": "2026-11-03",
+  "portfolio_summary": {
+    "cash_usd": 3500.0,
+    "total_equity_usd": 3500.0,
+    "max_position_pct": 0.2,
+    "fee_per_trade_usd": 1.5,
+    "total_fees_paid_usd": 0.0,
+    "last_run_timestamp": null
+  },
+  "circuit_breaker": {
+    "recommendation": "TRADING_ALLOWED",
+    "rationale": "No account-level circuit breaker rules are active; new trade risk may proceed.",
+    "triggered_rules": [],
+    "metrics": {
+      "realized_pnl_today": 0.0,
+      "realized_pnl_wtd": 0.0,
+      "realized_pnl_mtd": 0.0,
+      "consecutive_losses": 0,
+      "last_loss_exit_at": null,
+      "theses_scanned": 0
+    }
+  },
+  "queue_summary": {
+    "total_candidates": 5,
+    "open_positions_count": 0,
+    "watchlist_count": 0,
+    "discovery_count": 5
+  },
+  "candidates": [
+    {
+      "ticker": "MSFT",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 507.12,
+        "change_1m_pct": -2.01,
+        "change_3m_pct": 4.19,
+        "change_1y_pct": -1.26,
+        "high_52w": 551.15,
+        "low_52w": 348.54,
+        "rsi_14": 27.84,
+        "macd": 2.7391,
+        "macd_signal": 6.1985,
+        "macd_hist": -3.4594,
+        "sma_50": 513.39,
+        "sma_150": 447.35,
+        "sma_200": 437.12,
+        "volume_latest": 33949220,
+        "volume_20d_avg": 22013400,
+        "volume_change_pct": 54.22,
+        "atr_14": 12.79,
+        "pe_ratio": 26.47,
+        "pb_ratio": 8.0,
+        "trend_template": {
+          "passed": true,
+          "score": 71.4,
+          "passed_count": 5,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": false,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": false
+          }
+        }
+      },
+      "weekly_price_action": {
+        "verdict": "CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "failed_extreme",
+        "nearest_swing_high": 551.1500244140625,
+        "nearest_swing_low": 348.54386902384044,
+        "stop_reference": 481.54
+      },
+      "position_sizing": {
+        "entry_price": 507.12,
+        "stop_price": 481.54,
+        "recommended_shares": 1.36,
+        "position_value": 689.68,
+        "risk_dollars": 34.79,
+        "risk_pct": 0.99,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "MRK",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 148.36,
+        "change_1m_pct": 2.81,
+        "change_3m_pct": 16.8,
+        "change_1y_pct": 77.62,
+        "high_52w": 156.0,
+        "low_52w": 79.67,
+        "rsi_14": 58.39,
+        "macd": 0.3745,
+        "macd_signal": 0.0844,
+        "macd_hist": 0.2901,
+        "sma_50": 146.52,
+        "sma_150": 129.48,
+        "sma_200": 125.71,
+        "volume_latest": 9050917,
+        "volume_20d_avg": 10293155,
+        "volume_change_pct": -12.07,
+        "atr_14": 5.12,
+        "pe_ratio": 149.86,
+        "pb_ratio": 8.73,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        }
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 153.57000732421875,
+        "nearest_swing_low": 138.8000030517578,
+        "stop_reference": 138.8
+      },
+      "position_sizing": {
+        "entry_price": 148.36,
+        "stop_price": 138.8,
+        "recommended_shares": 3.66,
+        "position_value": 543.0,
+        "risk_dollars": 34.99,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "META",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 606.73,
+        "change_1m_pct": -16.67,
+        "change_3m_pct": 2.87,
+        "change_1y_pct": -6.1,
+        "high_52w": 779.82,
+        "low_52w": 519.37,
+        "rsi_14": 8.21,
+        "macd": -22.6711,
+        "macd_signal": -9.978,
+        "macd_hist": -12.693,
+        "sma_50": 670.93,
+        "sma_150": 628.17,
+        "sma_200": 631.21,
+        "volume_latest": 18931716,
+        "volume_20d_avg": 23141920,
+        "volume_change_pct": -18.19,
+        "atr_14": 23.54,
+        "pe_ratio": 20.7,
+        "pb_ratio": 5.69,
+        "trend_template": {
+          "passed": false,
+          "score": 28.6,
+          "passed_count": 2,
+          "criteria": {
+            "c1_price_above_sma150_200": false,
+            "c2_sma150_above_sma200": false,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": false,
+            "c5_25pct_above_52w_low": false,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": false
+          }
+        }
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 771.27001953125,
+        "nearest_swing_low": 536.8463247077087,
+        "stop_reference": 536.85
+      },
+      "position_sizing": {
+        "entry_price": 606.73,
+        "stop_price": 536.85,
+        "recommended_shares": 0.5,
+        "position_value": 303.37,
+        "risk_dollars": 34.94,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "NFLX",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 62.34,
+        "change_1m_pct": -7.04,
+        "change_3m_pct": -14.99,
+        "change_1y_pct": -44.28,
+        "high_52w": 116.73,
+        "low_52w": 61.39,
+        "rsi_14": 26.31,
+        "macd": -2.7541,
+        "macd_signal": -2.3017,
+        "macd_hist": -0.4524,
+        "sma_50": 72.33,
+        "sma_150": 79.43,
+        "sma_200": 81.47,
+        "volume_latest": 40101404,
+        "volume_20d_avg": 44789490,
+        "volume_change_pct": -10.47,
+        "atr_14": 2.12,
+        "pe_ratio": 18.02,
+        "pb_ratio": 8.74,
+        "trend_template": {
+          "passed": false,
+          "score": 0.0,
+          "passed_count": 0,
+          "criteria": {
+            "c1_price_above_sma150_200": false,
+            "c2_sma150_above_sma200": false,
+            "c3_sma200_trending_up": false,
+            "c4_price_above_sma50": false,
+            "c5_25pct_above_52w_low": false,
+            "c6_within_25pct_52w_high": false,
+            "c7_positive_1y_relative_strength": false
+          }
+        }
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 73.06999969482422,
+        "nearest_swing_low": 65.08000183105469,
+        "stop_reference": 58.1
+      },
+      "position_sizing": {
+        "entry_price": 62.34,
+        "stop_price": 58.1,
+        "recommended_shares": 8.25,
+        "position_value": 514.31,
+        "risk_dollars": 34.98,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "LLY",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 1410.99,
+        "change_1m_pct": 23.46,
+        "change_3m_pct": 26.01,
+        "change_1y_pct": 64.56,
+        "high_52w": 1449.68,
+        "low_52w": 828.96,
+        "rsi_14": 81.9,
+        "macd": 52.8367,
+        "macd_signal": 36.2742,
+        "macd_hist": 16.5624,
+        "sma_50": 1200.25,
+        "sma_150": 1121.43,
+        "sma_200": 1091.2,
+        "volume_latest": 3498286,
+        "volume_20d_avg": 2533800,
+        "volume_change_pct": 38.06,
+        "atr_14": 48.24,
+        "pe_ratio": 45.8,
+        "pb_ratio": 31.23,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        }
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "continuation_intact",
+        "nearest_swing_high": 1292.6500244140625,
+        "nearest_swing_low": 1131.2099609375,
+        "stop_reference": 1314.51
+      },
+      "position_sizing": {
+        "entry_price": 1410.99,
+        "stop_price": 1314.51,
+        "recommended_shares": 0.36,
+        "position_value": 507.96,
+        "risk_dollars": 34.73,
+        "risk_pct": 0.99,
+        "binding_constraint": null
+      }
+    }
+  ]
+}
