@@ -34,7 +34,21 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from src.paths import BASE_DIR, DASHBOARD_FILE, DECISIONS_FILE, STATE_FILE
+from src.paths import (
+    BASE_DIR,
+    BRIEFING_FILE,
+    DASHBOARD_FILE,
+    DECISIONS_FILE,
+    HTML_DASHBOARD_FILE,
+    STATE_FILE,
+)
+from src.ui_dashboard import (
+    build_11_agent_scorecard,
+    generate_dashboard_html,
+    generate_dashboard_markdown,
+    sanitize_table_cell as _sanitize_table_cell,
+    save_text_atomic,
+)
 
 INITIAL_CASH = 3500.00
 FEE_PER_TRADE = 1.50
@@ -62,114 +76,6 @@ def save_json(filepath: Path, data: dict[str, Any]) -> None:
     with tmp_path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     os.replace(tmp_path, filepath)
-
-
-def _sanitize_table_cell(text: Any) -> str:
-    """Markdown tablolarını bozabilecek pipe (|), yeni satır ve satır başı karakterlerini temizler."""
-    if text is None:
-        return "-"
-    cleaned = str(text).replace("|", "/").replace("\n", " ").replace("\r", " ").strip()
-    return cleaned if cleaned else "-"
-
-
-def generate_dashboard_markdown(
-    state: dict[str, Any], decisions_data: dict[str, Any], today_str: str
-) -> str:
-    summary = state.get("portfolio_summary", {})
-    cash = summary.get("cash_usd", INITIAL_CASH)
-    equity = summary.get("total_equity_usd", INITIAL_CASH)
-    fees_paid = summary.get("total_fees_paid_usd", 0.0)
-
-    open_positions = state.get("open_positions", [])
-    positions_value = round(sum(round(pos["shares"] * pos["current_price"], 2) for pos in open_positions), 2)
-    net_pnl = round(equity - INITIAL_CASH, 2)
-    net_pnl_pct = (net_pnl / INITIAL_CASH) * 100 if INITIAL_CASH > 0 else 0.0
-
-    watchlist = [w for w in state.get("watchlist", []) if w.get("status") != "EXPIRED"]
-    history = state.get("trade_history", [])
-
-    lines = [
-        "# 📊 PORTFOLIO DASHBOARD (Paper Trading)",
-        f"**Son Güncelleme:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  |  **Tarih:** {today_str}",
-        "",
-        "## 1. Portföy Özeti",
-        "| Metrik | Değer |",
-        "|---|---|",
-        f"| **Nakit Bakiye (Cash)** | `${cash:,.2f}` |",
-        f"| **Hisse Pozisyon Değeri** | `${positions_value:,.2f}` |",
-        f"| **Toplam Varlık (Total Equity)** | `${equity:,.2f}` |",
-        f"| **Başlangıç Sermayesi** | `${INITIAL_CASH:,.2f}` |",
-        f"| **Toplam Net Kâr / Zarar** | `${net_pnl:+,.2f}` (`{net_pnl_pct:+.2f}%`) |",
-        f"| **Ödenen Toplam Komisyon** | `${fees_paid:,.2f}` (Midas 1.50$/işlem) |",
-        f"| **Maksimum Pozisyon Limiti** | `%20` (Maks `${equity * MAX_POSITION_PCT:,.2f}`) |",
-        "",
-        "## 2. Açık Pozisyonlar (`open_positions`)",
-    ]
-
-    if open_positions:
-        lines.extend([
-            "| Sembol | Adet | Alış Fiyatı | Güncel Fiyat | Piyasa Değeri | Kâr/Zarar ($) | Kâr/Zarar (%) | Stop-Loss | Kâr Al (TP) | Yatırım Tezi |",
-            "|---|---|---|---|---|---|---|---|---|---|",
-        ])
-        for p in open_positions:
-            val = round(p["shares"] * p["current_price"], 2)
-            cost = round(p["shares"] * p["avg_buy_price"], 2)
-            pnl = round(val - cost, 2)
-            pnl_pct = (pnl / cost) * 100 if cost > 0 else 0.0
-            thesis_clean = _sanitize_table_cell(p.get("thesis", "-"))
-            lines.append(
-                f"| **{p['ticker']}** | {p['shares']:.2f} | `${p['avg_buy_price']:.2f}` | `${p['current_price']:.2f}` | `${val:,.2f}` | `${pnl:+,.2f}` | `{pnl_pct:+.2f}%` | `${p.get('stop_loss', 0):.2f}` | `${p.get('take_profit', 0):.2f}` | {thesis_clean} |"
-            )
-    else:
-        lines.append("*Şu anda açık pozisyon bulunmamaktadır (Nakit ağırlıklı).*")
-
-    lines.extend([
-        "",
-        "## 3. İzleme Listesi (`watchlist`)",
-    ])
-
-    if watchlist:
-        lines.extend([
-            "| Sembol | Eklenme Tarihi | Son Geçerlilik | Hedef Giriş Fiyatı | Planlanan Stop | Durum | Gerekçe |",
-            "|---|---|---|---|---|---|---|",
-        ])
-        for w in watchlist:
-            reason_clean = _sanitize_table_cell(w.get("reason", "-"))
-            lines.append(
-                f"| **{w['ticker']}** | {w.get('added_date')} | {w.get('expires_date')} | `${w.get('target_entry_price', 0):.2f}` | `${w.get('stop_loss_plan', 0):.2f}` | `{w.get('status')}` | {reason_clean} |"
-            )
-    else:
-        lines.append("*İzleme listesinde aktif hisse bulunmamaktadır.*")
-
-    lines.extend([
-        "",
-        "## 4. Son İşlem Geçmişi (`trade_history` - Son 10 İşlem)",
-    ])
-
-    if history:
-        lines.extend([
-            "| Tarih | Sembol | İşlem | Adet | Fiyat | Komisyon | Net PnL ($) | Komite Özeti |",
-            "|---|---|---|---|---|---|---|---|",
-        ])
-        for t in reversed(history[-10:]):
-            pnl_str = f"${t.get('pnl_usd', 0):+,.2f}" if t.get("action") == "SELL" else "-"
-            summary_clean = _sanitize_table_cell(t.get("committee_summary", "-"))
-            lines.append(
-                f"| {t.get('date')} | **{t.get('ticker')}** | `{t.get('action')}` | {t.get('shares', 0):.2f} | `${t.get('price', 0):.2f}` | `${t.get('fee_usd', 0):.2f}` | {pnl_str} | {summary_clean} |"
-            )
-    else:
-        lines.append("*Henüz tamamlanmış işlem kaydı bulunmamaktadır.*")
-
-    committee_note = _sanitize_table_cell(decisions_data.get("committee_overall_note", "Kayıt yok."))
-    lines.extend([
-        "",
-        "## 5. Bugünkü Komite Karar Özeti",
-        f"**Devre Kesici Onayı:** `{decisions_data.get('circuit_breaker_acknowledged', 'UNKNOWN')}`",
-        f"**Komite Genel Notu:** {committee_note}",
-        "",
-    ])
-
-    return "\n".join(lines)
 
 
 def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> dict[str, Any]:
@@ -461,10 +367,18 @@ def main(
     state_file: Path | None = None,
     decisions_file: Path | None = None,
     dashboard_file: Path | None = None,
+    html_dashboard_file: Path | None = None,
+    briefing_file: Path | None = None,
 ) -> int:
     state_path = state_file or STATE_FILE
     decisions_path = decisions_file or DECISIONS_FILE
     dashboard_path = dashboard_file or DASHBOARD_FILE
+    html_path = html_dashboard_file or (
+        HTML_DASHBOARD_FILE if dashboard_file is None else dashboard_path.with_suffix(".html")
+    )
+    briefing_path = briefing_file or (
+        BRIEFING_FILE if state_file is None else state_path.parent / "daily_briefing.json"
+    )
 
     print("=" * 60)
     print("Yerel Paper Trading Orkestrası - Karar Yürütücüsü (execute_decisions)")
@@ -485,6 +399,7 @@ def main(
         "committee_overall_note": "Başlangıç durumu (Henüz işlem yapılmadı).",
         "decisions": []
     }
+    briefing_data = load_json(briefing_path) if briefing_path.exists() else None
 
     today_str = decisions_data.get("decisions_date") or date.today().strftime("%Y-%m-%d")
     process_decisions(state, decisions_data)
@@ -504,11 +419,14 @@ def main(
     print(f"    Toplam Varlık: ${summary['total_equity_usd']:,.2f}")
     print(f"    Ödenen Toplam Komisyon: ${summary['total_fees_paid_usd']:,.2f}")
 
-    # 6. PORTFOLIO_DASHBOARD.md Oluştur
-    dashboard_md = generate_dashboard_markdown(state, decisions_data, today_str)
-    with dashboard_path.open("w", encoding="utf-8") as f:
-        f.write(dashboard_md)
-    print(f"[✓] Portföy gösterge paneli güncellendi: {dashboard_path}")
+    # 6. PORTFOLIO_DASHBOARD.md ve yerel dashboard.html Oluştur
+    dashboard_md = generate_dashboard_markdown(state, decisions_data, today_str, briefing_data=briefing_data)
+    save_text_atomic(dashboard_path, dashboard_md)
+    print(f"[✓] Portföy gösterge paneli (Markdown) güncellendi: {dashboard_path}")
+
+    dashboard_html = generate_dashboard_html(state, decisions_data, today_str, briefing_data=briefing_data)
+    save_text_atomic(html_path, dashboard_html)
+    print(f"[✓] Yerel interaktif gösterge paneli (HTML) güncellendi: {html_path}")
 
     return 0
 

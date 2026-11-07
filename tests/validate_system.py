@@ -718,11 +718,12 @@ class TestPaperTradingOrchestra(unittest.TestCase):
 
     def test_tc13_ui_dashboard_sanitization_and_empty_state(self) -> None:
         """
-        TC-13: UI / Dashboard veri bütünlüğü ve sanitization testi.
-        Ajan tezlerinde veya gerekçelerinde dikey çizgi (|), satır sonu (\n) olduğunda
-        tablo formatının bozulmaması; boş portföy durumunda ZeroDivisionError vermemesi.
+        TC-13: UI / Dashboard veri bütünlüğü, 11 Ajan Karar Karnesi görünürlüğü,
+        sanitization (Markdown + HTML XSS) ve Canlı Mod Gizlilik Kalkanı (Privacy Mode) testi.
         """
-        # Sanitization kontrolü
+        from src import ui_dashboard as uid
+
+        # 1. Sanitization kontrolü (Markdown & HTML XSS)
         dirty_text = "Stage 2 | Breakout\nTarget $200 | Strong volume\r\n"
         cleaned = ed._sanitize_table_cell(dirty_text)
         self.assertNotIn("|", cleaned)
@@ -730,7 +731,12 @@ class TestPaperTradingOrchestra(unittest.TestCase):
         self.assertNotIn("\r", cleaned)
         self.assertEqual(cleaned, "Stage 2 / Breakout Target $200 / Strong volume")
 
-        # Boş Portföy (Empty State) ve 0 başlangıç kasasında ZeroDivisionError vermeme
+        xss_text = '<script>alert("xss")</script>'
+        escaped_html = uid.escape_html(xss_text)
+        self.assertNotIn("<script>", escaped_html)
+        self.assertIn("&lt;script&gt;", escaped_html)
+
+        # 2. Boş Portföy (Empty State) ve 0 başlangıç kasasında ZeroDivisionError vermeme
         empty_state = {
             "portfolio_summary": {"cash_usd": 0.0, "total_equity_usd": 0.0, "total_fees_paid_usd": 0.0},
             "open_positions": [],
@@ -744,9 +750,68 @@ class TestPaperTradingOrchestra(unittest.TestCase):
             "decisions": [],
         }
         md = ed.generate_dashboard_markdown(empty_state, decisions_data, "2026-11-04")
+        html_empty = uid.generate_dashboard_html(empty_state, decisions_data, "2026-11-04")
         self.assertIn("# 📊 PORTFOLIO DASHBOARD", md)
         self.assertIn("*Şu anda açık pozisyon bulunmamaktadır (Nakit ağırlıklı).*", md)
         self.assertIn("*İzleme listesinde aktif hisse bulunmamaktadır.*", md)
+        self.assertIn("<!DOCTYPE html>", html_empty)
+
+        # 3. 11 Ajan Karnesi Tam Görünürlük Testi (Bölüm 4.2.1)
+        sample_state = {
+            "portfolio_summary": {"cash_usd": 2955.50, "total_equity_usd": 3498.50, "total_fees_paid_usd": 1.50},
+            "open_positions": [
+                {
+                    "ticker": "MRK",
+                    "shares": 3.66,
+                    "avg_buy_price": 148.36,
+                    "current_price": 148.36,
+                    "stop_loss": 138.80,
+                    "take_profit": 168.00,
+                    "thesis": "Minervini Stage 2 tam puan",
+                }
+            ],
+            "watchlist": [],
+            "trade_history": [],
+        }
+        sample_decisions = {
+            "decisions_date": "2026-11-04",
+            "circuit_breaker_acknowledged": "TRADING_ALLOWED",
+            "committee_overall_note": "MRK alım onayı.",
+            "decisions": [
+                {
+                    "ticker": "MRK",
+                    "action": "BUY",
+                    "shares": 3.66,
+                    "price": 148.36,
+                    "stop_loss": 138.80,
+                    "take_profit": 168.00,
+                    "thesis": "Stage 2 tam puan",
+                    "reason": "11 ajan onayladı",
+                }
+            ],
+        }
+        scorecard = uid.build_11_agent_scorecard(sample_decisions["decisions"][0])
+        self.assertEqual(len(scorecard), 11, "Her hisse için tam 11 ajan değerlendirmesi üretilmelidir!")
+        for idx, step_obj in enumerate(scorecard, start=1):
+            self.assertEqual(step_obj["step"], idx)
+            self.assertIn(step_obj["verdict"], ("PASS", "WARN", "FAIL"))
+            self.assertTrue(len(step_obj["rationale"]) > 5)
+
+        full_md = uid.generate_dashboard_markdown(sample_state, sample_decisions, "2026-11-04")
+        full_html = uid.generate_dashboard_html(sample_state, sample_decisions, "2026-11-04")
+        self.assertIn("11 Ajan Komite Karar Karnesi", full_md)
+        self.assertIn("Minervini Trend Şablonu (Stage 2)", full_md)
+        self.assertIn("Şeytanın Avukatı & Risk/Ödül (R:R)", full_md)
+        self.assertIn("Minervini Trend Şablonu (Stage 2)", full_html)
+        self.assertIn("togglePrivacy()", full_html)
+
+        # 4. Canlı Mod / Gizlilik Kalkanı (Privacy Mode) Testi
+        private_md = uid.generate_dashboard_markdown(
+            sample_state, sample_decisions, "2026-11-04", privacy_mode=True
+        )
+        self.assertIn("🔒 [GİZLİ - CANLI MOD]", private_md)
+        self.assertNotIn("$2,955.50", private_md, "Gizlilik modunda kişisel nakit bakiyesi public Markdown'da görünmemeli!")
+        self.assertNotIn("$3,498.50", private_md, "Gizlilik modunda toplam varlık tutarı public Markdown'da görünmemeli!")
 
     def test_tc14_large_universe_ticker_standardization_and_perf(self) -> None:
         """

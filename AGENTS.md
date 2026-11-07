@@ -16,14 +16,16 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
   - **`src/` (Kaynak Kodlar):**
     - `src/paths.py`: Tüm dosya yollarını çalışma dizininden bağımsız (`CWD-independent`) çözümleyen merkezi modül.
     - `src/prepare_daily_batch.py`: Günlük izleme listesi temizliği, 5 hisselik öncelikli kuyruk oluşturma, `yfinance` veri çekimi ve `data/daily_briefing.json` üretim motoru.
-    - `src/execute_decisions.py`: Komite kararlarını (`data/decisions.json`) icra eden, portföy muhasebesini yürüten, `data/state.json` ve `docs/PORTFOLIO_DASHBOARD.md` dosyalarını güncelleyen yürütücü.
+    - `src/execute_decisions.py`: Komite kararlarını (`data/decisions.json`) icra eden, portföy muhasebesini yürüten, `data/state.json`, `docs/PORTFOLIO_DASHBOARD.md` ve `docs/dashboard.html` dosyalarını güncelleyen yürütücü.
+    - `src/ui_dashboard.py`: 11 ajan karar karnesini sentezleyen, Markdown/ASCII (`docs/PORTFOLIO_DASHBOARD.md`) ve yerel interaktif HTML (`docs/dashboard.html`) panolarını üreten ve canlı mod gizlilik kalkanını (`Privacy Mode` / `LIVE`) uygulayan UI motoru.
   - **`data/` (Canlı Hafıza ve Veri Dosyaları):**
     - `data/state.json`: Portföy bakiyesi, açık pozisyonlar, izleme listesi ve işlem geçmişini tutan canlı hafıza dosyası.
     - `data/universe.json`: Keşif için taranan likit ABD hisseleri (S&P 500 / NASDAQ) havuzu.
     - `data/daily_briefing.json`: Günlük 5 aday hissenin teknik, temel ve risk/boyutlandırma verilerini içeren brifing paketi.
     - `data/decisions.json`: 11 adımlı komitenin ürettiği günlük işlem kararları.
   - **`docs/` (Anayasa, Panolar ve Şartnameler):**
-    - `docs/PORTFOLIO_DASHBOARD.md`: İnsan tarafından okunabilir güncel portföy ve performans gösterge paneli.
+    - `docs/PORTFOLIO_DASHBOARD.md`: İnsan tarafından okunabilir güncel portföy ve 11 ajan performans gösterge paneli (`LIVE` modda kişisel rakamlar maskelenir).
+    - `docs/dashboard.html`: `.gitignore` korumasında yalnızca yerel bilgisayarda çalışan, sunucusuz interaktif HTML5 gösterge paneli.
     - `docs/Kanban.md`: Proje görevlerinin ve geliştirme adımlarının takip edildiği canlı Kanban panosu.
     - `docs/PROJECT_CONTEXT.md`: Projenin kuruluş anayasası ve tek doğruluk kaynağı.
     - `docs/COMMITTEE_PROMPT.md`: 11 ajanlık yatırım komitesinin karar süzgeci ve `decisions.json` üretim kuralları.

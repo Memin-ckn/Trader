@@ -6,11 +6,11 @@ Gerçek para riske atmadan, **3.500 $ sanal bakiye** ve gerçekçi aracı kurum 
 
 ---
 
-## 🚀 Proje Ne Aşamada? (Genel İlerleme: %64)
+## 🚀 Proje Ne Aşamada? (Genel İlerleme: %73)
 
-`█████████████░░░░░░░` **%64 Tamamlandı**
+`███████████████░░░░░` **%73 Tamamlandı**
 
-Kanban görev tablomuza göre toplam **11 ana görevin 7'si tamamen bitti, 4'ü ise sırada bekliyor.**
+Kanban görev tablomuza göre toplam **11 ana görevin 8'i tamamen bitti, 3'ü ise sırada bekliyor.**
 
 ---
 
@@ -23,21 +23,21 @@ Kanban görev tablomuza göre toplam **11 ana görevin 7'si tamamen bitti, 4'ü 
 5. **Yapay Zeka Hafıza Sistemi:** Sistemin kuralları hiç unutmaması ve her gün aynı disiplinle çalışması için kalıcı rehber dosyaları hazırlandı.
 6. **21 Senaryolu Otomatik Doğrulama ve Test Sistemi:** Sıfır canlı temas (Zero-Touch SHA-256) garantisiyle çalışan, kademeli alım, kısmi satış, devre kesici, atomik yazma ve makro filtre dahil 21 senaryoyu kapsayan test paketi tamamlandı.
 7. **Temiz ve Modüler Dosya Mimarisi:** Kök dizindeki kalabalık giderilerek tüm kaynak kodlar (`src/`), canlı veriler (`data/`), belgeler/panolar (`docs/`) ve testler (`tests/`) kendi klasörlerine yerleştirildi.
+8. **Görsel Takip Ekranı (UI) ve 11 Uzman Karnesi:** İncelenen her hisse için 11 uzmanın ayrı ayrı verdiği kararları (`✅ Onay / ⚠️ Uyarı / ❌ Red`), gerekçelerini, portföy dağılımını ve kâr/zarar durumunu gösteren hem GitHub uyumlu (`docs/PORTFOLIO_DASHBOARD.md`) hem de yerel interaktif web arayüzü (`docs/dashboard.html`) ile kişisel gizlilik kalkanı kuruldu.
 
 ---
 
 ### 🚧 Şu An Üzerinde Çalıştığımız Kısım (Devam Eden)
 
-- *Dosya mimarisi düzenlemesi tamamlandı; sıradaki görev (Görsel Takip Ekranı / UI) için hazır bekliyor.*
+- *Görsel takip ekranı (UI) ve 11 uzman karnesi tamamlandı; sıradaki görev (Gerçek Borsa Havuzu — S&P 500 Takibi) için hazır bekliyor.*
 
 ---
 
 ### 📋 Sırada Ne Var? (Yapılacaklar)
 
-1. **Görsel Takip Ekranı (UI):** 11 uzmanın kararlarını, gerekçelerini, portföydeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade bir arayüz/pano hazırlanması.
-2. **Gerçek Borsa Havuzu (S&P 500 / NASDAQ):** 50 hisselik test havuzunun genişletilerek planlanan gerçek ABD borsası endekslerinin taranması.
-3. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
-4. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
+1. **Gerçek Borsa Havuzu (S&P 500 / NASDAQ):** 50 hisselik test havuzunun genişletilerek planlanan gerçek ABD borsası endekslerinin taranması.
+2. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
+3. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
 
 ---
 

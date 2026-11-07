@@ -1,9 +1,6 @@
 > 🔗 **Canlı GitHub Project Panosu:** [Trader Project #10](https://github.com/users/Memin-ckn/projects/10)
 
 # To do
-- UI
-    - 11 agent'ın verdiği kararlar, gerekçeleri, nihai karar, portfolyodaki hisseler, toplam para, kar/zarar gibi bilgileri görebileceğim bir ui istiyorum.
-    - Bu UI hangisi daha kolay olacaksa o şekilde yapılsın. Basit web app, csv dosyası, ASCII art ile oluşturulmuş markdown ve benzeri herhangi bir şeyi kabul ederim. Yalnızca bilmem gerekenleri göreyim yeterli benim için.
 - Borsa (S&P 500 Takibi)
     - Şu an anladığım kadarıyla test amaçlı yazdığımız 50 adet hisseyi kullanıyor ancak bunun planladığımız abd borsalarını (s&p 500 gibi) takip etmesi gerekiyor.
 - Forex Factory Entegrasyonu ve Değerlendirmesi
@@ -16,6 +13,10 @@
 # Testing
 
 # Complete
+- UI
+    - `src/ui_dashboard.py` ile incelenen her hisse için 11 komite ajanının/adımının ayrı ayrı kararını (`✅ ONAY`, `⚠️ UYARI`, `❌ RED`), metriklerini ve gerekçelerini sentezleyen 11 Ajan Karar Karnesi motoru kuruldu.
+    - Hem GitHub/IDE uyumlu ASCII grafikli ve 11 ajan tablolu `docs/PORTFOLIO_DASHBOARD.md` hem de sunucu gerektirmeyen, tek dosyalık koyu temalı interaktif web paneli (`docs/dashboard.html`) üretildi.
+    - Gizlilik ve Canlı Mod Kalkanı (`Privacy Mode` / `LIVE`) eklendi: `docs/dashboard.html` `.gitignore` ile yalnızca yerel bilgisayarda tutulurken, canlı parayla işlemlere geçildiğinde public Markdown dosyasındaki kişisel bakiye, lot ve işlem tutarlarının otomatik maskelenmesi sağlandı.
 - Dosya Mimarisi ve Modüler Klasör Yapısı (`src/`, `data/`, `docs/`, `tests/`)
     - Kök dizindeki tüm dağınık dosyalar görevlerine göre `src/`, `data/`, `docs/` ve `tests/` alt klasörlerine taşındı; kök dizinde yalnızca `README.md` ve ajan kılavuzları (`AGENTS.md` / `CLAUDE.md`) bırakılarak maksimum sadelik sağlandı.
     - `src/paths.py` ile merkezi ve çalışma dizininden bağımsız (CWD-independent) yol çözümleme sistemi kuruldu.
