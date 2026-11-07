@@ -18,6 +18,7 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
     - `src/prepare_daily_batch.py`: Günlük izleme listesi temizliği, 5 hisselik öncelikli kuyruk oluşturma, `yfinance` veri çekimi ve `data/daily_briefing.json` üretim motoru.
     - `src/execute_decisions.py`: Komite kararlarını (`data/decisions.json`) icra eden, portföy muhasebesini yürüten, `data/state.json`, `docs/PORTFOLIO_DASHBOARD.md` ve `docs/dashboard.html` dosyalarını güncelleyen yürütücü.
     - `src/ui_dashboard.py`: 11 ajan karar karnesini sentezleyen, Markdown/ASCII (`docs/PORTFOLIO_DASHBOARD.md`) ve yerel interaktif HTML (`docs/dashboard.html`) panolarını üreten ve canlı mod gizlilik kalkanını (`Privacy Mode` / `LIVE`) uygulayan UI motoru.
+    - `src/update_universe.py`: S&P 500 bileşenlerini ve GICS sektörlerini çeken, `yfinance` formatına (`BRK-B`, `BF-B`) normalize eden, ikincil pay sınıflarını (`GOOG`, `FOX`, `NWS`) eleyerek `data/universe.json` dosyasını güncelleyen betik.
   - **`data/` (Canlı Hafıza ve Veri Dosyaları):**
     - `data/state.json`: Portföy bakiyesi, açık pozisyonlar, izleme listesi ve işlem geçmişini tutan canlı hafıza dosyası.
     - `data/universe.json`: Keşif için taranan likit ABD hisseleri (S&P 500 / NASDAQ) havuzu.

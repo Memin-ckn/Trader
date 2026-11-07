@@ -1,18 +1,22 @@
 > 🔗 **Canlı GitHub Project Panosu:** [Trader Project #10](https://github.com/users/Memin-ckn/projects/10)
 
 # To do
-- Borsa (S&P 500 Takibi)
-    - Şu an anladığım kadarıyla test amaçlı yazdığımız 50 adet hisseyi kullanıyor ancak bunun planladığımız abd borsalarını (s&p 500 gibi) takip etmesi gerekiyor.
 - Forex Factory Entegrasyonu ve Değerlendirmesi
     - Forex Factory diye bir site var onun işimize yarayıp yaramadığı kontrol edilecek. Eğer iyiyse belki bir agent onun için ekleyebiliriz ya da şu anki agentlar orayı kontrol edebilir analiz için.
 - Backtest Simülasyonu
     - Kullandığımız teknolojilerin izin verdiği kadar (maks 3 yıl min 1 yıl) geriye gidip 1 yıllık süreci simüle edeceğiz. Bu sayede oluşturduğumuz sistemin 1 yıllık getirisini tahmini olarak hesaplayabilriiz.
+- Optimizasyon
+    - Projede kullanılmayan, işe yaramayan, daha optimize şekilde yapılabilecek, tekrar eden ne varsa silinmeli. Tekrarlar fonksiyon haline getirilip kullanılmalı. Projede kalabalık yaratan ve verimliliği azaltan her şeyden kurtulunup tertemiz hale getirilmeli.
 
 # In Progress
 
 # Testing
 
 # Complete
+- Borsa (S&P 500 Takibi)
+    - `src/update_universe.py` betiği yazılarak S&P 500 bileşenleri ve 11 GICS sektör bilgisi çekildi; semboller `yfinance` formatına (`BRK.B` -> `BRK-B`, `BF.B` -> `BF-B`) normalize edildi.
+    - Aynı şirketin ikincil pay sınıfları (`GOOG`, `FOX`, `NWS`) elenip tekilleştirilerek `data/universe.json` dosyası tam 500 tekil S&P 500 hissesi ve sektör haritasıyla güncellendi.
+    - `src/prepare_daily_batch.py` içinde hatalı/eksik `yfinance` verilerinde 5 hisselik kotayı koruyan `Discovery Fallback` (`TC-15`) döngüsü ve ABD seansı kapanmadan (16:00 ET öncesi) yarım günlük hacim yanılsamasını önleyen `strip_incomplete_intraday_bar` / `is_market_session_valid` (`TC-16`) korumaları devreye alındı.
 - UI
     - `src/ui_dashboard.py` ile incelenen her hisse için 11 komite ajanının/adımının ayrı ayrı kararını (`✅ ONAY`, `⚠️ UYARI`, `❌ RED`), metriklerini ve gerekçelerini sentezleyen 11 Ajan Karar Karnesi motoru kuruldu.
     - Hem GitHub/IDE uyumlu ASCII grafikli ve 11 ajan tablolu `docs/PORTFOLIO_DASHBOARD.md` hem de sunucu gerektirmeyen, tek dosyalık koyu temalı interaktif web paneli (`docs/dashboard.html`) üretildi.

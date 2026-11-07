@@ -240,9 +240,13 @@ def get_fallback_candidates(
     return [{"ticker": c, "source": "DISCOVERY_FALLBACK", "details": {}} for c in chosen]
 
 
-def is_market_session_valid(date_str: str, hist: pd.DataFrame | None = None) -> tuple[bool, str]:
+def is_market_session_valid(
+    date_str: str,
+    hist: pd.DataFrame | None = None,
+    now_et: datetime | None = None,
+) -> tuple[bool, str]:
     """
-    ABD borsa seansı takvim kontrolü (Haftasonu, resmi tatil ve yarım gün/sıfır hacim kontrolü).
+    ABD borsa seansı takvim kontrolü (Haftasonu, resmi tatil, seans kapanış saati ve yarım gün/sıfır hacim kontrolü).
     """
     try:
         dt = date.fromisoformat(date_str)
@@ -261,6 +265,13 @@ def is_market_session_valid(date_str: str, hist: pd.DataFrame | None = None) -> 
     if (dt.month, dt.day) in fixed_holidays:
         return False, f"Resmi Borsa Tatili: {fixed_holidays[(dt.month, dt.day)]}"
 
+    if now_et is not None:
+        if now_et.date() == dt and (now_et.hour, now_et.minute) < (16, 0):
+            return (
+                False,
+                f"ABD seansı henüz kapanmadı ({now_et.strftime('%H:%M')} ET < 16:00 ET): Yarım günlük hacim yanılsaması koruması",
+            )
+
     if hist is not None and isinstance(hist, pd.DataFrame) and not hist.empty:
         if "Volume" in hist.columns:
             last_vol = hist["Volume"].iloc[-1]
@@ -268,6 +279,36 @@ def is_market_session_valid(date_str: str, hist: pd.DataFrame | None = None) -> 
                 return False, "Eksik/Sıfır seans hacmi (Borsa açılmamış veya yarım gün olabilir)"
 
     return True, "Geçerli işlem seansı"
+
+
+def strip_incomplete_intraday_bar(
+    hist: pd.DataFrame | None,
+    now_et: datetime | None = None,
+) -> tuple[pd.DataFrame, bool]:
+    """
+    ABD borsası seansı (09:30 - 16:00 ET) henüz kapanmadan betik çalıştırılırsa,
+    yfinance tarafından döndürülen o günkü tamamlanmamış (yarım günlük) barı düşürerek
+    20 günlük hacim ortalaması ve indikatör yanılsamasını önler.
+    """
+    if hist is None or not isinstance(hist, pd.DataFrame) or len(hist) < 2:
+        return (hist if isinstance(hist, pd.DataFrame) else pd.DataFrame()), False
+
+    if now_et is None:
+        try:
+            from zoneinfo import ZoneInfo
+            now_et = datetime.now(ZoneInfo("America/New_York"))
+        except Exception:
+            return hist, False
+
+    last_idx = hist.index[-1]
+    last_bar_date_str = last_idx.strftime("%Y-%m-%d") if hasattr(last_idx, "strftime") else str(last_idx)[:10]
+    et_today_str = now_et.strftime("%Y-%m-%d")
+
+    # Seans kapanışından (16:00 ET) önce bugünün barı oluşmuşsa yarım günlük hacim yanılsamasını önlemek için kırp
+    if last_bar_date_str == et_today_str and (now_et.hour, now_et.minute) < (16, 0):
+        return hist.iloc[:-1].copy(), True
+
+    return hist, False
 
 
 def evaluate_forex_factory_macro_risk(
@@ -683,13 +724,22 @@ def main(
     print(f"[*] Devre Kesici Durumu: {circuit_breaker_result['recommendation']}")
     print(f"    {circuit_breaker_result['rationale']}")
 
-    # 5. Hisse Verilerini Çek ve Modülleri Çalıştır
-    candidates_data = []
-    for item in queue:
+    # 5. Hisse Verilerini Çek ve Modülleri Çalıştır (Discovery Fallback & Seans Koruması Aktif)
+    candidates_data: list[dict[str, Any]] = []
+    failed_tickers: set[str] = set()
+    fallback_attempts = 0
+    max_fallback_attempts = 10
+    sectors_map = universe.get("sectors", {}) if isinstance(universe, dict) else {}
+
+    idx = 0
+    while idx < len(queue) and len(candidates_data) < 5:
+        item = queue[idx]
+        idx += 1
         ticker = item["ticker"]
         source = item["source"]
         print(f"\n[+] {ticker} analiz ediliyor ({source})...")
 
+        fetch_failed = False
         try:
             yf_ticker = yf.Ticker(ticker)
             hist = yf_ticker.history(period="2y")
@@ -697,33 +747,76 @@ def main(
 
             if hist is None or hist.empty:
                 print(f"    [!] {ticker} için fiyat verisi alınamadı!")
-                continue
+                fetch_failed = True
+            else:
+                hist, stripped_intraday = strip_incomplete_intraday_bar(hist)
+                if stripped_intraday:
+                    print(
+                        f"    [*] Not: ABD seansı henüz kapanmadığı için {ticker} yarım günlük barı kırpıldı (Son tam kapanış baz alındı)."
+                    )
 
-            indicators = calculate_indicators(hist, info)
-            if "error" in indicators:
-                print(f"    [!] {ticker} veri hatası: {indicators['error']}")
-                continue
+                last_bar_dt = (
+                    hist.index[-1].strftime("%Y-%m-%d")
+                    if hasattr(hist.index[-1], "strftime")
+                    else today_str
+                )
+                session_ok, session_msg = is_market_session_valid(last_bar_dt, hist)
+                if not session_ok and "hacmi" in session_msg:
+                    print(f"    [!] {ticker} seans/hacim uyarısı: {session_msg}")
+                    fetch_failed = True
+                else:
+                    indicators = calculate_indicators(hist, info)
+                    if "error" in indicators:
+                        print(f"    [!] {ticker} veri hatası: {indicators['error']}")
+                        fetch_failed = True
+                    else:
+                        if ticker in sectors_map:
+                            indicators["sector"] = sectors_map[ticker]
+                        elif info.get("sector"):
+                            indicators["sector"] = str(info.get("sector"))
 
-            pa_res, sizing_res = run_technical_and_sizing(
-                ticker, hist, indicators, account_size, today_str
-            )
+                        pa_res, sizing_res = run_technical_and_sizing(
+                            ticker, hist, indicators, account_size, today_str
+                        )
 
-            candidate_payload = {
-                "ticker": ticker,
-                "source": source,
-                "source_details": item["details"],
-                "market_data": indicators,
-                "weekly_price_action": pa_res,
-                "position_sizing": sizing_res,
-            }
-            candidates_data.append(candidate_payload)
+                        candidate_payload = {
+                            "ticker": ticker,
+                            "source": source,
+                            "source_details": item["details"],
+                            "market_data": indicators,
+                            "weekly_price_action": pa_res,
+                            "position_sizing": sizing_res,
+                        }
+                        candidates_data.append(candidate_payload)
 
-            print(f"    Fiyat: ${indicators['current_price']} | RSI(14): {indicators['rsi_14']} | SMA50: {indicators['sma_50']}")
-            print(f"    Stage 2 Skoru: {indicators['trend_template']['score']}/100 (Geçti mi: {indicators['trend_template']['passed']})")
-            print(f"    Önerilen Pozisyon: {sizing_res['recommended_shares']} adet (${sizing_res['position_value']:.2f}) | Risk: ${sizing_res.get('risk_dollars', 0)}")
+                        print(
+                            f"    Fiyat: ${indicators['current_price']} | RSI(14): {indicators['rsi_14']} | SMA50: {indicators['sma_50']}"
+                        )
+                        print(
+                            f"    Stage 2 Skoru: {indicators['trend_template']['score']}/100 (Geçti mi: {indicators['trend_template']['passed']})"
+                        )
+                        print(
+                            f"    Önerilen Pozisyon: {sizing_res['recommended_shares']} adet (${sizing_res['position_value']:.2f}) | Risk: ${sizing_res.get('risk_dollars', 0)}"
+                        )
 
         except Exception as exc:
             print(f"    [!] {ticker} işlenirken hata oluştu: {exc}")
+            fetch_failed = True
+
+        # Keşif (DISCOVERY) sırasında hata alınırsa 5 hisselik kotayı korumak için yedek aday çek (TC-15)
+        if fetch_failed and source in ("DISCOVERY", "DISCOVERY_FALLBACK"):
+            failed_tickers.add(ticker)
+            if fallback_attempts < max_fallback_attempts:
+                fallbacks = get_fallback_candidates(
+                    state, universe, queue, count=1, failed_tickers=failed_tickers
+                )
+                if fallbacks:
+                    fb_item = fallbacks[0]
+                    queue.append(fb_item)
+                    fallback_attempts += 1
+                    print(
+                        f"    [↻] Discovery Fallback: {ticker} yerine yedek aday kuyruğa eklendi -> {fb_item['ticker']}"
+                    )
 
     # 6. daily_briefing.json Oluştur ve Kaydet
     briefing = {
@@ -736,7 +829,9 @@ def main(
             "total_candidates": len(candidates_data),
             "open_positions_count": sum(1 for c in candidates_data if c["source"] == "OPEN_POSITION"),
             "watchlist_count": sum(1 for c in candidates_data if c["source"] == "WATCHLIST"),
-            "discovery_count": sum(1 for c in candidates_data if c["source"] == "DISCOVERY"),
+            "discovery_count": sum(
+                1 for c in candidates_data if c["source"] in ("DISCOVERY", "DISCOVERY_FALLBACK")
+            ),
         },
         "candidates": candidates_data,
     }

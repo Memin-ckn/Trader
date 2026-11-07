@@ -815,22 +815,35 @@ class TestPaperTradingOrchestra(unittest.TestCase):
 
     def test_tc14_large_universe_ticker_standardization_and_perf(self) -> None:
         """
-        TC-14: Tam evren ölçek ve format testi.
-        universe.json içinde 500+ sembol olduğunda yfinance ticker standartlarına uygunluk (BRK-B),
-        mükerrer olmaması ve kuyruk motorunun hızlı seçimi.
+        TC-14: Tam evren ölçek, S&P 500 sektör verisi, ikincil pay sınıfı elemesi ve format testi.
+        universe.json içinde ~500 sembol olduğunda yfinance ticker standartlarına uygunluk (BRK-B, BF-B),
+        ikincil pay sınıflarının (GOOG, FOX, NWS) elenmesi, mükerrer olmaması ve kuyruk motorunun hızlı seçimi.
         """
+        from src import update_universe as uu
+
         # Ticker standardizasyonu
         self.assertEqual(pdb.clean_universe_ticker("BRK.B"), "BRK-B")
         self.assertEqual(pdb.clean_universe_ticker("bf.b"), "BF-B")
         self.assertEqual(pdb.clean_universe_ticker("  aapl "), "AAPL")
+        self.assertEqual(uu.normalize_ticker("BRK.B"), "BRK-B")
+        self.assertEqual(uu.normalize_ticker("BF.B"), "BF-B")
+
+        # Gerçek universe.json doğrulaması (~500 S&P 500 hissesi + sektör haritası)
+        real_univ = pdb.load_json(REAL_UNIVERSE_FILE)
+        real_tickers = real_univ.get("tickers", [])
+        self.assertGreaterEqual(len(real_tickers), 490, "universe.json en az ~500 S&P 500 hissesi içermelidir!")
+        self.assertEqual(len(real_tickers), len(set(real_tickers)), "universe.json içinde mükerrer sembol olmamalı!")
+        self.assertIn("BRK-B", real_tickers)
+        self.assertIn("BF-B", real_tickers)
+        for sec_cls in ("GOOG", "FOX", "NWS"):
+            self.assertNotIn(sec_cls, real_tickers, f"İkincil pay sınıfı {sec_cls} elenmiş olmalı!")
+        self.assertIn("sectors", real_univ, "universe.json içinde sektör bilgisi bulunmalıdır!")
+        self.assertGreaterEqual(len(real_univ["sectors"]), 490)
 
         # 500+ hisselik havuzda kuyruk oluşturma ve performans (<50ms)
-        large_tickers = [f"TICK{i}" for i in range(500)] + ["BRK.B", "AAPL"]
-        large_universe = {"tickers": large_tickers}
         state = {"open_positions": [], "watchlist": []}
-
         start_time = time.perf_counter()
-        queue = pdb.build_analysis_queue(state, large_universe, max_items=5)
+        queue = pdb.build_analysis_queue(state, real_univ, max_items=5)
         elapsed = time.perf_counter() - start_time
 
         self.assertEqual(len(queue), 5)
@@ -888,6 +901,20 @@ class TestPaperTradingOrchestra(unittest.TestCase):
         valid_vol, msg_vol = pdb.is_market_session_valid("2026-11-04", df_zero_vol)
         self.assertFalse(valid_vol)
         self.assertIn("hacmi", msg_vol)
+
+        # Seans kapanmadan (ör. 11:30 ET < 16:00 ET) yarım günlük hacim yanılsaması koruması
+        intraday_et = datetime(2026, 11, 4, 11, 30)
+        valid_intra, msg_intra = pdb.is_market_session_valid("2026-11-04", now_et=intraday_et)
+        self.assertFalse(valid_intra)
+        self.assertIn("kapanmadı", msg_intra)
+
+        df_intraday = pd.DataFrame(
+            {"Open": [100.0, 101.0], "High": [102.0, 102.0], "Low": [99.0, 100.0], "Close": [101.0, 101.5], "Volume": [10_000_000.0, 1_200_000.0]},
+            index=[pd.Timestamp("2026-11-03"), pd.Timestamp("2026-11-04")],
+        )
+        trimmed_df, was_stripped = pdb.strip_incomplete_intraday_bar(df_intraday, now_et=intraday_et)
+        self.assertTrue(was_stripped, "Seans kapanmadan oluşan bugünkü yarım bar kırpılmalıdır!")
+        self.assertEqual(len(trimmed_df), 1)
 
     def test_tc17_forex_factory_macro_filter_and_failsafe(self) -> None:
         """

@@ -1,10 +1,3517 @@
 {
-  "market": "US_LIQUID_POOL",
+  "market": "US_SP500",
+  "updated_at": "2026-11-07T21:45:52.633022",
+  "source": "EMBEDDED_SP500_SNAPSHOT",
+  "total_count": 500,
+  "excluded_secondary_classes": [
+    "FOX",
+    "GOOG",
+    "NWS"
+  ],
   "tickers": [
-    "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA", "BRK-B", "LLY", "AVGO",
-    "JPM", "V", "UNH", "XOM", "MA", "COST", "HD", "PG", "JNJ", "NFLX",
-    "AMD", "CRM", "BAC", "ABBV", "KO", "PEP", "MRK", "WMT", "TMO", "LIN",
-    "CSCO", "ACN", "MCD", "ABT", "ADBE", "DHR", "INTC", "DIS", "VZ", "CMCSA",
-    "NKE", "TXN", "PFE", "PM", "UNP", "NEE", "LOW", "SPGI", "HON", "QCOM"
+    "AAPL",
+    "ACN",
+    "ADBE",
+    "ADI",
+    "ADP",
+    "ADSK",
+    "AKAM",
+    "AMAT",
+    "AMD",
+    "ANET",
+    "ANSS",
+    "APH",
+    "APTV",
+    "AVGO",
+    "CDNS",
+    "CDW",
+    "CRM",
+    "CRWD",
+    "CSCO",
+    "CTSH",
+    "DELL",
+    "ENPH",
+    "EPAM",
+    "FFIV",
+    "FICO",
+    "FSLR",
+    "FTNT",
+    "GDDY",
+    "GEN",
+    "GLW",
+    "HPE",
+    "HPQ",
+    "IBM",
+    "INTC",
+    "INTU",
+    "IT",
+    "JBL",
+    "KEYS",
+    "KLAC",
+    "LDOS",
+    "LRCX",
+    "MCHP",
+    "MPWR",
+    "MSFT",
+    "MSI",
+    "MU",
+    "NOW",
+    "NTAP",
+    "NVDA",
+    "NXPI",
+    "ON",
+    "ORCL",
+    "PANW",
+    "PLTR",
+    "PTC",
+    "QCOM",
+    "QRVO",
+    "ROP",
+    "SMCI",
+    "SNPS",
+    "STX",
+    "SWKS",
+    "TDY",
+    "TEL",
+    "TER",
+    "TRMB",
+    "TXN",
+    "TYL",
+    "UBER",
+    "VRSN",
+    "WDC",
+    "WDAY",
+    "ZBRA",
+    "ACGL",
+    "AFL",
+    "AIG",
+    "AIZ",
+    "AJG",
+    "ALL",
+    "AMP",
+    "AON",
+    "APO",
+    "AXP",
+    "BAC",
+    "BEN",
+    "BK",
+    "BLK",
+    "BRK-B",
+    "BX",
+    "C",
+    "CB",
+    "CBOE",
+    "CFG",
+    "CINF",
+    "CME",
+    "COF",
+    "COR",
+    "CPAY",
+    "DFS",
+    "EG",
+    "ERIE",
+    "FDS",
+    "FI",
+    "FIS",
+    "FITB",
+    "GPN",
+    "GS",
+    "HBAN",
+    "HIG",
+    "ICE",
+    "IVZ",
+    "JKHY",
+    "JPM",
+    "KEY",
+    "KKR",
+    "L",
+    "MA",
+    "MCO",
+    "MET",
+    "MKTX",
+    "MMC",
+    "MS",
+    "MSCI",
+    "MTB",
+    "NDAQ",
+    "NTRS",
+    "PFG",
+    "PGR",
+    "PNC",
+    "PRU",
+    "PYPL",
+    "RF",
+    "RJF",
+    "SCHW",
+    "SPGI",
+    "STT",
+    "SYF",
+    "TFC",
+    "TROW",
+    "TRV",
+    "USB",
+    "V",
+    "WFC",
+    "WRB",
+    "WTW",
+    "A",
+    "ABBV",
+    "ABT",
+    "ALGN",
+    "AMGN",
+    "BAX",
+    "BDX",
+    "BIIB",
+    "BMY",
+    "BSX",
+    "CAH",
+    "CI",
+    "CNC",
+    "COO",
+    "CRL",
+    "CVS",
+    "DGX",
+    "DHR",
+    "DXCM",
+    "ELV",
+    "EW",
+    "GEHC",
+    "GILD",
+    "HCA",
+    "HOLX",
+    "HSIC",
+    "HUM",
+    "IDXX",
+    "INCY",
+    "IQV",
+    "ISRG",
+    "JNJ",
+    "LH",
+    "LLY",
+    "MCK",
+    "MDT",
+    "MOH",
+    "MRK",
+    "MRNA",
+    "MTD",
+    "PFE",
+    "PODD",
+    "REGN",
+    "RMD",
+    "RVTY",
+    "SOLV",
+    "STE",
+    "SYK",
+    "TECH",
+    "TMO",
+    "UHS",
+    "UNH",
+    "VRTX",
+    "VTRS",
+    "WAT",
+    "WST",
+    "ZBH",
+    "ZTS",
+    "ABNB",
+    "AMZN",
+    "AZO",
+    "BBY",
+    "BKNG",
+    "BLDR",
+    "BWA",
+    "CCL",
+    "CMG",
+    "CZR",
+    "DECK",
+    "DHI",
+    "DPZ",
+    "DRI",
+    "EBAY",
+    "EXPE",
+    "F",
+    "GM",
+    "GPC",
+    "GRMN",
+    "HAS",
+    "HD",
+    "HLT",
+    "KMX",
+    "LEN",
+    "LKQ",
+    "LOW",
+    "LULU",
+    "LVS",
+    "MAR",
+    "MCD",
+    "MGM",
+    "MHK",
+    "NCLH",
+    "NKE",
+    "NVR",
+    "ORLY",
+    "PHM",
+    "POOL",
+    "RCL",
+    "RL",
+    "ROST",
+    "SBUX",
+    "TJX",
+    "TPR",
+    "TSCO",
+    "TSLA",
+    "ULTA",
+    "WSM",
+    "WYNN",
+    "YUM",
+    "ALLE",
+    "AME",
+    "AOS",
+    "AXON",
+    "BA",
+    "BR",
+    "CARR",
+    "CAT",
+    "CHRW",
+    "CMI",
+    "CPRT",
+    "CSX",
+    "CTAS",
+    "DAL",
+    "DAY",
+    "DE",
+    "DOV",
+    "EFX",
+    "EME",
+    "EMR",
+    "ETN",
+    "EXPD",
+    "FAST",
+    "FDX",
+    "FTV",
+    "GD",
+    "GE",
+    "GEV",
+    "GNRC",
+    "GWW",
+    "HII",
+    "HON",
+    "HUBB",
+    "HWM",
+    "IEX",
+    "IR",
+    "ITW",
+    "J",
+    "JBHT",
+    "JCI",
+    "LHX",
+    "LII",
+    "LMT",
+    "LUV",
+    "MAS",
+    "MMM",
+    "NDSN",
+    "NOC",
+    "NSC",
+    "ODFL",
+    "OTIS",
+    "PAYC",
+    "PAYX",
+    "PCAR",
+    "PH",
+    "PNR",
+    "PWR",
+    "ROK",
+    "ROL",
+    "RSG",
+    "RTX",
+    "SNA",
+    "SWK",
+    "TDG",
+    "TT",
+    "TXT",
+    "UAL",
+    "UNP",
+    "UPS",
+    "URI",
+    "VLTO",
+    "VRSK",
+    "WAB",
+    "WM",
+    "XYL",
+    "CHTR",
+    "CMCSA",
+    "DIS",
+    "EA",
+    "FOXA",
+    "GOOGL",
+    "IPG",
+    "LYV",
+    "META",
+    "MTCH",
+    "NFLX",
+    "NWSA",
+    "OMC",
+    "PARA",
+    "T",
+    "TMUS",
+    "TTWO",
+    "VZ",
+    "WBD",
+    "ADM",
+    "BF-B",
+    "BG",
+    "CAG",
+    "CHD",
+    "CL",
+    "CLX",
+    "COST",
+    "CPB",
+    "DG",
+    "DLTR",
+    "EL",
+    "GIS",
+    "HRL",
+    "HSY",
+    "K",
+    "KDP",
+    "KHC",
+    "KMB",
+    "KO",
+    "KR",
+    "KVUE",
+    "LW",
+    "MDLZ",
+    "MKC",
+    "MNST",
+    "MO",
+    "PEP",
+    "PG",
+    "PM",
+    "SJM",
+    "STZ",
+    "SYY",
+    "TAP",
+    "TGT",
+    "TSN",
+    "WBA",
+    "WMT",
+    "APA",
+    "BKR",
+    "COP",
+    "CTRA",
+    "CVX",
+    "DVN",
+    "EOG",
+    "EQT",
+    "FANG",
+    "HAL",
+    "HES",
+    "KMI",
+    "MPC",
+    "MRO",
+    "OKE",
+    "OXY",
+    "PSX",
+    "SLB",
+    "TPL",
+    "TRGP",
+    "VLO",
+    "WMB",
+    "XOM",
+    "AEE",
+    "AEP",
+    "AES",
+    "ATO",
+    "AWK",
+    "CEG",
+    "CMS",
+    "CNP",
+    "D",
+    "DTE",
+    "DUK",
+    "ED",
+    "EIX",
+    "ES",
+    "ETR",
+    "EVRG",
+    "EXC",
+    "FE",
+    "LNT",
+    "NEE",
+    "NI",
+    "NRG",
+    "PCG",
+    "PEG",
+    "PNW",
+    "PPL",
+    "SO",
+    "SRE",
+    "VST",
+    "WEC",
+    "XEL",
+    "ARE",
+    "AVB",
+    "BXP",
+    "CBRE",
+    "CCI",
+    "CPT",
+    "CSGP",
+    "DLR",
+    "DOC",
+    "EQIX",
+    "EQR",
+    "ESS",
+    "EXR",
+    "FRT",
+    "HST",
+    "INVH",
+    "IRM",
+    "KIM",
+    "MAA",
+    "O",
+    "PLD",
+    "PSA",
+    "REG",
+    "SBAC",
+    "SPG",
+    "UDR",
+    "VICI",
+    "VTR",
+    "WELL",
+    "WY",
+    "ALB",
+    "AMCR",
+    "APD",
+    "AVY",
+    "BALL",
+    "CE",
+    "CF",
+    "CTVA",
+    "DD",
+    "DOW",
+    "ECL",
+    "EMN",
+    "FCX",
+    "FMC",
+    "IFF",
+    "IP",
+    "LIN",
+    "LYB",
+    "MLM",
+    "MOS",
+    "NEM",
+    "NUE",
+    "PKG",
+    "PPG",
+    "SHW",
+    "SMG",
+    "STLD",
+    "SW",
+    "VMC",
+    "WRK"
+  ],
+  "sectors": {
+    "AAPL": "Information Technology",
+    "ACN": "Information Technology",
+    "ADBE": "Information Technology",
+    "ADI": "Information Technology",
+    "ADP": "Information Technology",
+    "ADSK": "Information Technology",
+    "AKAM": "Information Technology",
+    "AMAT": "Information Technology",
+    "AMD": "Information Technology",
+    "ANET": "Information Technology",
+    "ANSS": "Information Technology",
+    "APH": "Information Technology",
+    "APTV": "Information Technology",
+    "AVGO": "Information Technology",
+    "CDNS": "Information Technology",
+    "CDW": "Information Technology",
+    "CRM": "Information Technology",
+    "CRWD": "Information Technology",
+    "CSCO": "Information Technology",
+    "CTSH": "Information Technology",
+    "DELL": "Information Technology",
+    "ENPH": "Information Technology",
+    "EPAM": "Information Technology",
+    "FFIV": "Information Technology",
+    "FICO": "Information Technology",
+    "FSLR": "Information Technology",
+    "FTNT": "Information Technology",
+    "GDDY": "Information Technology",
+    "GEN": "Information Technology",
+    "GLW": "Information Technology",
+    "HPE": "Information Technology",
+    "HPQ": "Information Technology",
+    "IBM": "Information Technology",
+    "INTC": "Information Technology",
+    "INTU": "Information Technology",
+    "IT": "Information Technology",
+    "JBL": "Information Technology",
+    "KEYS": "Information Technology",
+    "KLAC": "Information Technology",
+    "LDOS": "Information Technology",
+    "LRCX": "Information Technology",
+    "MCHP": "Information Technology",
+    "MPWR": "Information Technology",
+    "MSFT": "Information Technology",
+    "MSI": "Information Technology",
+    "MU": "Information Technology",
+    "NOW": "Information Technology",
+    "NTAP": "Information Technology",
+    "NVDA": "Information Technology",
+    "NXPI": "Information Technology",
+    "ON": "Information Technology",
+    "ORCL": "Information Technology",
+    "PANW": "Information Technology",
+    "PLTR": "Information Technology",
+    "PTC": "Information Technology",
+    "QCOM": "Information Technology",
+    "QRVO": "Information Technology",
+    "ROP": "Information Technology",
+    "SMCI": "Information Technology",
+    "SNPS": "Information Technology",
+    "STX": "Information Technology",
+    "SWKS": "Information Technology",
+    "TDY": "Information Technology",
+    "TEL": "Information Technology",
+    "TER": "Information Technology",
+    "TRMB": "Information Technology",
+    "TXN": "Information Technology",
+    "TYL": "Information Technology",
+    "UBER": "Information Technology",
+    "VRSN": "Information Technology",
+    "WDC": "Information Technology",
+    "WDAY": "Information Technology",
+    "ZBRA": "Information Technology",
+    "ACGL": "Financials",
+    "AFL": "Financials",
+    "AIG": "Financials",
+    "AIZ": "Financials",
+    "AJG": "Financials",
+    "ALL": "Financials",
+    "AMP": "Financials",
+    "AON": "Financials",
+    "APO": "Financials",
+    "AXP": "Financials",
+    "BAC": "Financials",
+    "BEN": "Financials",
+    "BK": "Financials",
+    "BLK": "Financials",
+    "BRK-B": "Financials",
+    "BX": "Financials",
+    "C": "Financials",
+    "CB": "Financials",
+    "CBOE": "Financials",
+    "CFG": "Financials",
+    "CINF": "Financials",
+    "CME": "Financials",
+    "COF": "Financials",
+    "COR": "Financials",
+    "CPAY": "Financials",
+    "DFS": "Financials",
+    "EG": "Financials",
+    "ERIE": "Financials",
+    "FDS": "Financials",
+    "FI": "Financials",
+    "FIS": "Financials",
+    "FITB": "Financials",
+    "GPN": "Financials",
+    "GS": "Financials",
+    "HBAN": "Financials",
+    "HIG": "Financials",
+    "ICE": "Financials",
+    "IVZ": "Financials",
+    "JKHY": "Financials",
+    "JPM": "Financials",
+    "KEY": "Financials",
+    "KKR": "Financials",
+    "L": "Financials",
+    "MA": "Financials",
+    "MCO": "Financials",
+    "MET": "Financials",
+    "MKTX": "Financials",
+    "MMC": "Financials",
+    "MS": "Financials",
+    "MSCI": "Financials",
+    "MTB": "Financials",
+    "NDAQ": "Financials",
+    "NTRS": "Financials",
+    "PFG": "Financials",
+    "PGR": "Financials",
+    "PNC": "Financials",
+    "PRU": "Financials",
+    "PYPL": "Financials",
+    "RF": "Financials",
+    "RJF": "Financials",
+    "SCHW": "Financials",
+    "SPGI": "Financials",
+    "STT": "Financials",
+    "SYF": "Financials",
+    "TFC": "Financials",
+    "TROW": "Financials",
+    "TRV": "Financials",
+    "USB": "Financials",
+    "V": "Financials",
+    "WFC": "Financials",
+    "WRB": "Financials",
+    "WTW": "Financials",
+    "A": "Health Care",
+    "ABBV": "Health Care",
+    "ABT": "Health Care",
+    "ALGN": "Health Care",
+    "AMGN": "Health Care",
+    "BAX": "Health Care",
+    "BDX": "Health Care",
+    "BIIB": "Health Care",
+    "BMY": "Health Care",
+    "BSX": "Health Care",
+    "CAH": "Health Care",
+    "CI": "Health Care",
+    "CNC": "Health Care",
+    "COO": "Health Care",
+    "CRL": "Health Care",
+    "CVS": "Health Care",
+    "DGX": "Health Care",
+    "DHR": "Health Care",
+    "DXCM": "Health Care",
+    "ELV": "Health Care",
+    "EW": "Health Care",
+    "GEHC": "Health Care",
+    "GILD": "Health Care",
+    "HCA": "Health Care",
+    "HOLX": "Health Care",
+    "HSIC": "Health Care",
+    "HUM": "Health Care",
+    "IDXX": "Health Care",
+    "INCY": "Health Care",
+    "IQV": "Health Care",
+    "ISRG": "Health Care",
+    "JNJ": "Health Care",
+    "LH": "Health Care",
+    "LLY": "Health Care",
+    "MCK": "Health Care",
+    "MDT": "Health Care",
+    "MOH": "Health Care",
+    "MRK": "Health Care",
+    "MRNA": "Health Care",
+    "MTD": "Health Care",
+    "PFE": "Health Care",
+    "PODD": "Health Care",
+    "REGN": "Health Care",
+    "RMD": "Health Care",
+    "RVTY": "Health Care",
+    "SOLV": "Health Care",
+    "STE": "Health Care",
+    "SYK": "Health Care",
+    "TECH": "Health Care",
+    "TMO": "Health Care",
+    "UHS": "Health Care",
+    "UNH": "Health Care",
+    "VRTX": "Health Care",
+    "VTRS": "Health Care",
+    "WAT": "Health Care",
+    "WST": "Health Care",
+    "ZBH": "Health Care",
+    "ZTS": "Health Care",
+    "ABNB": "Consumer Discretionary",
+    "AMZN": "Consumer Discretionary",
+    "AZO": "Consumer Discretionary",
+    "BBY": "Consumer Discretionary",
+    "BKNG": "Consumer Discretionary",
+    "BLDR": "Consumer Discretionary",
+    "BWA": "Consumer Discretionary",
+    "CCL": "Consumer Discretionary",
+    "CMG": "Consumer Discretionary",
+    "CZR": "Consumer Discretionary",
+    "DECK": "Consumer Discretionary",
+    "DHI": "Consumer Discretionary",
+    "DPZ": "Consumer Discretionary",
+    "DRI": "Consumer Discretionary",
+    "EBAY": "Consumer Discretionary",
+    "EXPE": "Consumer Discretionary",
+    "F": "Consumer Discretionary",
+    "GM": "Consumer Discretionary",
+    "GPC": "Consumer Discretionary",
+    "GRMN": "Consumer Discretionary",
+    "HAS": "Consumer Discretionary",
+    "HD": "Consumer Discretionary",
+    "HLT": "Consumer Discretionary",
+    "KMX": "Consumer Discretionary",
+    "LEN": "Consumer Discretionary",
+    "LKQ": "Consumer Discretionary",
+    "LOW": "Consumer Discretionary",
+    "LULU": "Consumer Discretionary",
+    "LVS": "Consumer Discretionary",
+    "MAR": "Consumer Discretionary",
+    "MCD": "Consumer Discretionary",
+    "MGM": "Consumer Discretionary",
+    "MHK": "Consumer Discretionary",
+    "NCLH": "Consumer Discretionary",
+    "NKE": "Consumer Discretionary",
+    "NVR": "Consumer Discretionary",
+    "ORLY": "Consumer Discretionary",
+    "PHM": "Consumer Discretionary",
+    "POOL": "Consumer Discretionary",
+    "RCL": "Consumer Discretionary",
+    "RL": "Consumer Discretionary",
+    "ROST": "Consumer Discretionary",
+    "SBUX": "Consumer Discretionary",
+    "TJX": "Consumer Discretionary",
+    "TPR": "Consumer Discretionary",
+    "TSCO": "Consumer Discretionary",
+    "TSLA": "Consumer Discretionary",
+    "ULTA": "Consumer Discretionary",
+    "WSM": "Consumer Discretionary",
+    "WYNN": "Consumer Discretionary",
+    "YUM": "Consumer Discretionary",
+    "ALLE": "Industrials",
+    "AME": "Industrials",
+    "AOS": "Industrials",
+    "AXON": "Industrials",
+    "BA": "Industrials",
+    "BR": "Industrials",
+    "CARR": "Industrials",
+    "CAT": "Industrials",
+    "CHRW": "Industrials",
+    "CMI": "Industrials",
+    "CPRT": "Industrials",
+    "CSX": "Industrials",
+    "CTAS": "Industrials",
+    "DAL": "Industrials",
+    "DAY": "Industrials",
+    "DE": "Industrials",
+    "DOV": "Industrials",
+    "EFX": "Industrials",
+    "EME": "Industrials",
+    "EMR": "Industrials",
+    "ETN": "Industrials",
+    "EXPD": "Industrials",
+    "FAST": "Industrials",
+    "FDX": "Industrials",
+    "FTV": "Industrials",
+    "GD": "Industrials",
+    "GE": "Industrials",
+    "GEV": "Industrials",
+    "GNRC": "Industrials",
+    "GWW": "Industrials",
+    "HII": "Industrials",
+    "HON": "Industrials",
+    "HUBB": "Industrials",
+    "HWM": "Industrials",
+    "IEX": "Industrials",
+    "IR": "Industrials",
+    "ITW": "Industrials",
+    "J": "Industrials",
+    "JBHT": "Industrials",
+    "JCI": "Industrials",
+    "LHX": "Industrials",
+    "LII": "Industrials",
+    "LMT": "Industrials",
+    "LUV": "Industrials",
+    "MAS": "Industrials",
+    "MMM": "Industrials",
+    "NDSN": "Industrials",
+    "NOC": "Industrials",
+    "NSC": "Industrials",
+    "ODFL": "Industrials",
+    "OTIS": "Industrials",
+    "PAYC": "Industrials",
+    "PAYX": "Industrials",
+    "PCAR": "Industrials",
+    "PH": "Industrials",
+    "PNR": "Industrials",
+    "PWR": "Industrials",
+    "ROK": "Industrials",
+    "ROL": "Industrials",
+    "RSG": "Industrials",
+    "RTX": "Industrials",
+    "SNA": "Industrials",
+    "SWK": "Industrials",
+    "TDG": "Industrials",
+    "TT": "Industrials",
+    "TXT": "Industrials",
+    "UAL": "Industrials",
+    "UNP": "Industrials",
+    "UPS": "Industrials",
+    "URI": "Industrials",
+    "VLTO": "Industrials",
+    "VRSK": "Industrials",
+    "WAB": "Industrials",
+    "WM": "Industrials",
+    "XYL": "Industrials",
+    "CHTR": "Communication Services",
+    "CMCSA": "Communication Services",
+    "DIS": "Communication Services",
+    "EA": "Communication Services",
+    "FOXA": "Communication Services",
+    "GOOGL": "Communication Services",
+    "IPG": "Communication Services",
+    "LYV": "Communication Services",
+    "META": "Communication Services",
+    "MTCH": "Communication Services",
+    "NFLX": "Communication Services",
+    "NWSA": "Communication Services",
+    "OMC": "Communication Services",
+    "PARA": "Communication Services",
+    "T": "Communication Services",
+    "TMUS": "Communication Services",
+    "TTWO": "Communication Services",
+    "VZ": "Communication Services",
+    "WBD": "Communication Services",
+    "ADM": "Consumer Staples",
+    "BF-B": "Consumer Staples",
+    "BG": "Consumer Staples",
+    "CAG": "Consumer Staples",
+    "CHD": "Consumer Staples",
+    "CL": "Consumer Staples",
+    "CLX": "Consumer Staples",
+    "COST": "Consumer Staples",
+    "CPB": "Consumer Staples",
+    "DG": "Consumer Staples",
+    "DLTR": "Consumer Staples",
+    "EL": "Consumer Staples",
+    "GIS": "Consumer Staples",
+    "HRL": "Consumer Staples",
+    "HSY": "Consumer Staples",
+    "K": "Consumer Staples",
+    "KDP": "Consumer Staples",
+    "KHC": "Consumer Staples",
+    "KMB": "Consumer Staples",
+    "KO": "Consumer Staples",
+    "KR": "Consumer Staples",
+    "KVUE": "Consumer Staples",
+    "LW": "Consumer Staples",
+    "MDLZ": "Consumer Staples",
+    "MKC": "Consumer Staples",
+    "MNST": "Consumer Staples",
+    "MO": "Consumer Staples",
+    "PEP": "Consumer Staples",
+    "PG": "Consumer Staples",
+    "PM": "Consumer Staples",
+    "SJM": "Consumer Staples",
+    "STZ": "Consumer Staples",
+    "SYY": "Consumer Staples",
+    "TAP": "Consumer Staples",
+    "TGT": "Consumer Staples",
+    "TSN": "Consumer Staples",
+    "WBA": "Consumer Staples",
+    "WMT": "Consumer Staples",
+    "APA": "Energy",
+    "BKR": "Energy",
+    "COP": "Energy",
+    "CTRA": "Energy",
+    "CVX": "Energy",
+    "DVN": "Energy",
+    "EOG": "Energy",
+    "EQT": "Energy",
+    "FANG": "Energy",
+    "HAL": "Energy",
+    "HES": "Energy",
+    "KMI": "Energy",
+    "MPC": "Energy",
+    "MRO": "Energy",
+    "OKE": "Energy",
+    "OXY": "Energy",
+    "PSX": "Energy",
+    "SLB": "Energy",
+    "TPL": "Energy",
+    "TRGP": "Energy",
+    "VLO": "Energy",
+    "WMB": "Energy",
+    "XOM": "Energy",
+    "AEE": "Utilities",
+    "AEP": "Utilities",
+    "AES": "Utilities",
+    "ATO": "Utilities",
+    "AWK": "Utilities",
+    "CEG": "Utilities",
+    "CMS": "Utilities",
+    "CNP": "Utilities",
+    "D": "Utilities",
+    "DTE": "Utilities",
+    "DUK": "Utilities",
+    "ED": "Utilities",
+    "EIX": "Utilities",
+    "ES": "Utilities",
+    "ETR": "Utilities",
+    "EVRG": "Utilities",
+    "EXC": "Utilities",
+    "FE": "Utilities",
+    "LNT": "Utilities",
+    "NEE": "Utilities",
+    "NI": "Utilities",
+    "NRG": "Utilities",
+    "PCG": "Utilities",
+    "PEG": "Utilities",
+    "PNW": "Utilities",
+    "PPL": "Utilities",
+    "SO": "Utilities",
+    "SRE": "Utilities",
+    "VST": "Utilities",
+    "WEC": "Utilities",
+    "XEL": "Utilities",
+    "ARE": "Real Estate",
+    "AVB": "Real Estate",
+    "BXP": "Real Estate",
+    "CBRE": "Real Estate",
+    "CCI": "Real Estate",
+    "CPT": "Real Estate",
+    "CSGP": "Real Estate",
+    "DLR": "Real Estate",
+    "DOC": "Real Estate",
+    "EQIX": "Real Estate",
+    "EQR": "Real Estate",
+    "ESS": "Real Estate",
+    "EXR": "Real Estate",
+    "FRT": "Real Estate",
+    "HST": "Real Estate",
+    "INVH": "Real Estate",
+    "IRM": "Real Estate",
+    "KIM": "Real Estate",
+    "MAA": "Real Estate",
+    "O": "Real Estate",
+    "PLD": "Real Estate",
+    "PSA": "Real Estate",
+    "REG": "Real Estate",
+    "SBAC": "Real Estate",
+    "SPG": "Real Estate",
+    "UDR": "Real Estate",
+    "VICI": "Real Estate",
+    "VTR": "Real Estate",
+    "WELL": "Real Estate",
+    "WY": "Real Estate",
+    "ALB": "Materials",
+    "AMCR": "Materials",
+    "APD": "Materials",
+    "AVY": "Materials",
+    "BALL": "Materials",
+    "CE": "Materials",
+    "CF": "Materials",
+    "CTVA": "Materials",
+    "DD": "Materials",
+    "DOW": "Materials",
+    "ECL": "Materials",
+    "EMN": "Materials",
+    "FCX": "Materials",
+    "FMC": "Materials",
+    "IFF": "Materials",
+    "IP": "Materials",
+    "LIN": "Materials",
+    "LYB": "Materials",
+    "MLM": "Materials",
+    "MOS": "Materials",
+    "NEM": "Materials",
+    "NUE": "Materials",
+    "PKG": "Materials",
+    "PPG": "Materials",
+    "SHW": "Materials",
+    "SMG": "Materials",
+    "STLD": "Materials",
+    "SW": "Materials",
+    "VMC": "Materials",
+    "WRK": "Materials"
+  },
+  "constituents": [
+    {
+      "ticker": "AAPL",
+      "name": "AAPL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ACN",
+      "name": "ACN",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ADBE",
+      "name": "ADBE",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ADI",
+      "name": "ADI",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ADP",
+      "name": "ADP",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ADSK",
+      "name": "ADSK",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "AKAM",
+      "name": "AKAM",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "AMAT",
+      "name": "AMAT",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "AMD",
+      "name": "AMD",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ANET",
+      "name": "ANET",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ANSS",
+      "name": "ANSS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "APH",
+      "name": "APH",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "APTV",
+      "name": "APTV",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "AVGO",
+      "name": "AVGO",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CDNS",
+      "name": "CDNS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CDW",
+      "name": "CDW",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CRM",
+      "name": "CRM",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CRWD",
+      "name": "CRWD",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CSCO",
+      "name": "CSCO",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "CTSH",
+      "name": "CTSH",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "DELL",
+      "name": "DELL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ENPH",
+      "name": "ENPH",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "EPAM",
+      "name": "EPAM",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "FFIV",
+      "name": "FFIV",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "FICO",
+      "name": "FICO",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "FSLR",
+      "name": "FSLR",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "FTNT",
+      "name": "FTNT",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "GDDY",
+      "name": "GDDY",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "GEN",
+      "name": "GEN",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "GLW",
+      "name": "GLW",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "HPE",
+      "name": "HPE",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "HPQ",
+      "name": "HPQ",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "IBM",
+      "name": "IBM",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "INTC",
+      "name": "INTC",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "INTU",
+      "name": "INTU",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "IT",
+      "name": "IT",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "JBL",
+      "name": "JBL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "KEYS",
+      "name": "KEYS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "KLAC",
+      "name": "KLAC",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "LDOS",
+      "name": "LDOS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "LRCX",
+      "name": "LRCX",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "MCHP",
+      "name": "MCHP",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "MPWR",
+      "name": "MPWR",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "MSFT",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "MSI",
+      "name": "MSI",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "MU",
+      "name": "MU",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "NOW",
+      "name": "NOW",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "NTAP",
+      "name": "NTAP",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVDA",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "NXPI",
+      "name": "NXPI",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ON",
+      "name": "ON",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ORCL",
+      "name": "ORCL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "PANW",
+      "name": "PANW",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "PLTR",
+      "name": "PLTR",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "PTC",
+      "name": "PTC",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "QCOM",
+      "name": "QCOM",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "QRVO",
+      "name": "QRVO",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ROP",
+      "name": "ROP",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "SMCI",
+      "name": "SMCI",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "SNPS",
+      "name": "SNPS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "STX",
+      "name": "STX",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "SWKS",
+      "name": "SWKS",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TDY",
+      "name": "TDY",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TEL",
+      "name": "TEL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TER",
+      "name": "TER",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TRMB",
+      "name": "TRMB",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TXN",
+      "name": "TXN",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "TYL",
+      "name": "TYL",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "UBER",
+      "name": "UBER",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "VRSN",
+      "name": "VRSN",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "WDC",
+      "name": "WDC",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "WDAY",
+      "name": "WDAY",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ZBRA",
+      "name": "ZBRA",
+      "sector": "Information Technology"
+    },
+    {
+      "ticker": "ACGL",
+      "name": "ACGL",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AFL",
+      "name": "AFL",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AIG",
+      "name": "AIG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AIZ",
+      "name": "AIZ",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AJG",
+      "name": "AJG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "ALL",
+      "name": "ALL",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AMP",
+      "name": "AMP",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AON",
+      "name": "AON",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "APO",
+      "name": "APO",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "AXP",
+      "name": "AXP",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BAC",
+      "name": "BAC",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BEN",
+      "name": "BEN",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BK",
+      "name": "BK",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BLK",
+      "name": "BLK",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BRK-B",
+      "name": "BRK.B",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "BX",
+      "name": "BX",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "C",
+      "name": "C",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CB",
+      "name": "CB",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CBOE",
+      "name": "CBOE",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CFG",
+      "name": "CFG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CINF",
+      "name": "CINF",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CME",
+      "name": "CME",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "COF",
+      "name": "COF",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "COR",
+      "name": "COR",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "CPAY",
+      "name": "CPAY",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "DFS",
+      "name": "DFS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "EG",
+      "name": "EG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "ERIE",
+      "name": "ERIE",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "FDS",
+      "name": "FDS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "FI",
+      "name": "FI",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "FIS",
+      "name": "FIS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "FITB",
+      "name": "FITB",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "GPN",
+      "name": "GPN",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "GS",
+      "name": "GS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "HBAN",
+      "name": "HBAN",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "HIG",
+      "name": "HIG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "ICE",
+      "name": "ICE",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "IVZ",
+      "name": "IVZ",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "JKHY",
+      "name": "JKHY",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPM",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "KEY",
+      "name": "KEY",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "KKR",
+      "name": "KKR",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "L",
+      "name": "L",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MA",
+      "name": "MA",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MCO",
+      "name": "MCO",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MET",
+      "name": "MET",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MKTX",
+      "name": "MKTX",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MMC",
+      "name": "MMC",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MS",
+      "name": "MS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MSCI",
+      "name": "MSCI",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "MTB",
+      "name": "MTB",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "NDAQ",
+      "name": "NDAQ",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "NTRS",
+      "name": "NTRS",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "PFG",
+      "name": "PFG",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "PGR",
+      "name": "PGR",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "PNC",
+      "name": "PNC",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "PRU",
+      "name": "PRU",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "PYPL",
+      "name": "PYPL",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "RF",
+      "name": "RF",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "RJF",
+      "name": "RJF",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "SCHW",
+      "name": "SCHW",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "SPGI",
+      "name": "SPGI",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "STT",
+      "name": "STT",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "SYF",
+      "name": "SYF",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "TFC",
+      "name": "TFC",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "TROW",
+      "name": "TROW",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "TRV",
+      "name": "TRV",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "USB",
+      "name": "USB",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "V",
+      "name": "V",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "WFC",
+      "name": "WFC",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "WRB",
+      "name": "WRB",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "WTW",
+      "name": "WTW",
+      "sector": "Financials"
+    },
+    {
+      "ticker": "A",
+      "name": "A",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ABBV",
+      "name": "ABBV",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ABT",
+      "name": "ABT",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ALGN",
+      "name": "ALGN",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "AMGN",
+      "name": "AMGN",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "BAX",
+      "name": "BAX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "BDX",
+      "name": "BDX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "BIIB",
+      "name": "BIIB",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "BMY",
+      "name": "BMY",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "BSX",
+      "name": "BSX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "CAH",
+      "name": "CAH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "CI",
+      "name": "CI",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "CNC",
+      "name": "CNC",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "COO",
+      "name": "COO",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "CRL",
+      "name": "CRL",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "CVS",
+      "name": "CVS",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "DGX",
+      "name": "DGX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "DHR",
+      "name": "DHR",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "DXCM",
+      "name": "DXCM",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ELV",
+      "name": "ELV",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "EW",
+      "name": "EW",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "GEHC",
+      "name": "GEHC",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "GILD",
+      "name": "GILD",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "HCA",
+      "name": "HCA",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "HOLX",
+      "name": "HOLX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "HSIC",
+      "name": "HSIC",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "HUM",
+      "name": "HUM",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "IDXX",
+      "name": "IDXX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "INCY",
+      "name": "INCY",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "IQV",
+      "name": "IQV",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ISRG",
+      "name": "ISRG",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "JNJ",
+      "name": "JNJ",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "LH",
+      "name": "LH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "LLY",
+      "name": "LLY",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MCK",
+      "name": "MCK",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MDT",
+      "name": "MDT",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MOH",
+      "name": "MOH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MRK",
+      "name": "MRK",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MRNA",
+      "name": "MRNA",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "MTD",
+      "name": "MTD",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "PFE",
+      "name": "PFE",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "PODD",
+      "name": "PODD",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "REGN",
+      "name": "REGN",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "RMD",
+      "name": "RMD",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "RVTY",
+      "name": "RVTY",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "SOLV",
+      "name": "SOLV",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "STE",
+      "name": "STE",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "SYK",
+      "name": "SYK",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "TECH",
+      "name": "TECH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "TMO",
+      "name": "TMO",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "UHS",
+      "name": "UHS",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "UNH",
+      "name": "UNH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "VRTX",
+      "name": "VRTX",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "VTRS",
+      "name": "VTRS",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "WAT",
+      "name": "WAT",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "WST",
+      "name": "WST",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ZBH",
+      "name": "ZBH",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ZTS",
+      "name": "ZTS",
+      "sector": "Health Care"
+    },
+    {
+      "ticker": "ABNB",
+      "name": "ABNB",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "AMZN",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "AZO",
+      "name": "AZO",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "BBY",
+      "name": "BBY",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "BKNG",
+      "name": "BKNG",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "BLDR",
+      "name": "BLDR",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "BWA",
+      "name": "BWA",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "CCL",
+      "name": "CCL",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "CMG",
+      "name": "CMG",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "CZR",
+      "name": "CZR",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "DECK",
+      "name": "DECK",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "DHI",
+      "name": "DHI",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "DPZ",
+      "name": "DPZ",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "DRI",
+      "name": "DRI",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "EBAY",
+      "name": "EBAY",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "EXPE",
+      "name": "EXPE",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "F",
+      "name": "F",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "GM",
+      "name": "GM",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "GPC",
+      "name": "GPC",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "GRMN",
+      "name": "GRMN",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "HAS",
+      "name": "HAS",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "HD",
+      "name": "HD",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "HLT",
+      "name": "HLT",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "KMX",
+      "name": "KMX",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "LEN",
+      "name": "LEN",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "LKQ",
+      "name": "LKQ",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "LOW",
+      "name": "LOW",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "LULU",
+      "name": "LULU",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "LVS",
+      "name": "LVS",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "MAR",
+      "name": "MAR",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "MCD",
+      "name": "MCD",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "MGM",
+      "name": "MGM",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "MHK",
+      "name": "MHK",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "NCLH",
+      "name": "NCLH",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "NKE",
+      "name": "NKE",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "NVR",
+      "name": "NVR",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "ORLY",
+      "name": "ORLY",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "PHM",
+      "name": "PHM",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "POOL",
+      "name": "POOL",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "RCL",
+      "name": "RCL",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "RL",
+      "name": "RL",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "ROST",
+      "name": "ROST",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "SBUX",
+      "name": "SBUX",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "TJX",
+      "name": "TJX",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "TPR",
+      "name": "TPR",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "TSCO",
+      "name": "TSCO",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "TSLA",
+      "name": "TSLA",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "ULTA",
+      "name": "ULTA",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "WSM",
+      "name": "WSM",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "WYNN",
+      "name": "WYNN",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "YUM",
+      "name": "YUM",
+      "sector": "Consumer Discretionary"
+    },
+    {
+      "ticker": "ALLE",
+      "name": "ALLE",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "AME",
+      "name": "AME",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "AOS",
+      "name": "AOS",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "AXON",
+      "name": "AXON",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "BA",
+      "name": "BA",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "BR",
+      "name": "BR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CARR",
+      "name": "CARR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CAT",
+      "name": "CAT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CHRW",
+      "name": "CHRW",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CMI",
+      "name": "CMI",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CPRT",
+      "name": "CPRT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CSX",
+      "name": "CSX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CTAS",
+      "name": "CTAS",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "DAL",
+      "name": "DAL",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "DAY",
+      "name": "DAY",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "DE",
+      "name": "DE",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "DOV",
+      "name": "DOV",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "EFX",
+      "name": "EFX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "EME",
+      "name": "EME",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "EMR",
+      "name": "EMR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "ETN",
+      "name": "ETN",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "EXPD",
+      "name": "EXPD",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "FAST",
+      "name": "FAST",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "FDX",
+      "name": "FDX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "FTV",
+      "name": "FTV",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "GD",
+      "name": "GD",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "GE",
+      "name": "GE",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "GEV",
+      "name": "GEV",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "GNRC",
+      "name": "GNRC",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "GWW",
+      "name": "GWW",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "HII",
+      "name": "HII",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "HON",
+      "name": "HON",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "HUBB",
+      "name": "HUBB",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "HWM",
+      "name": "HWM",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "IEX",
+      "name": "IEX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "IR",
+      "name": "IR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "ITW",
+      "name": "ITW",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "J",
+      "name": "J",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "JBHT",
+      "name": "JBHT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "JCI",
+      "name": "JCI",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "LHX",
+      "name": "LHX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "LII",
+      "name": "LII",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "LMT",
+      "name": "LMT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "LUV",
+      "name": "LUV",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "MAS",
+      "name": "MAS",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "MMM",
+      "name": "MMM",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "NDSN",
+      "name": "NDSN",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "NOC",
+      "name": "NOC",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "NSC",
+      "name": "NSC",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "ODFL",
+      "name": "ODFL",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "OTIS",
+      "name": "OTIS",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PAYC",
+      "name": "PAYC",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PAYX",
+      "name": "PAYX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PCAR",
+      "name": "PCAR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PH",
+      "name": "PH",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PNR",
+      "name": "PNR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "PWR",
+      "name": "PWR",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "ROK",
+      "name": "ROK",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "ROL",
+      "name": "ROL",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "RSG",
+      "name": "RSG",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "RTX",
+      "name": "RTX",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "SNA",
+      "name": "SNA",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "SWK",
+      "name": "SWK",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "TDG",
+      "name": "TDG",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "TT",
+      "name": "TT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "TXT",
+      "name": "TXT",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "UAL",
+      "name": "UAL",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "UNP",
+      "name": "UNP",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "UPS",
+      "name": "UPS",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "URI",
+      "name": "URI",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "VLTO",
+      "name": "VLTO",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "VRSK",
+      "name": "VRSK",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "WAB",
+      "name": "WAB",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "WM",
+      "name": "WM",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "XYL",
+      "name": "XYL",
+      "sector": "Industrials"
+    },
+    {
+      "ticker": "CHTR",
+      "name": "CHTR",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "CMCSA",
+      "name": "CMCSA",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "DIS",
+      "name": "DIS",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "EA",
+      "name": "EA",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "FOXA",
+      "name": "FOXA",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "GOOGL",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "IPG",
+      "name": "IPG",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "LYV",
+      "name": "LYV",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "META",
+      "name": "META",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "MTCH",
+      "name": "MTCH",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "NFLX",
+      "name": "NFLX",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "NWSA",
+      "name": "NWSA",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "OMC",
+      "name": "OMC",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "PARA",
+      "name": "PARA",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "T",
+      "name": "T",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "TMUS",
+      "name": "TMUS",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "TTWO",
+      "name": "TTWO",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "VZ",
+      "name": "VZ",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "WBD",
+      "name": "WBD",
+      "sector": "Communication Services"
+    },
+    {
+      "ticker": "ADM",
+      "name": "ADM",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "BF-B",
+      "name": "BF.B",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "BG",
+      "name": "BG",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "CAG",
+      "name": "CAG",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "CHD",
+      "name": "CHD",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "CL",
+      "name": "CL",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "CLX",
+      "name": "CLX",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "COST",
+      "name": "COST",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "CPB",
+      "name": "CPB",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "DG",
+      "name": "DG",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "DLTR",
+      "name": "DLTR",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "EL",
+      "name": "EL",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "GIS",
+      "name": "GIS",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "HRL",
+      "name": "HRL",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "HSY",
+      "name": "HSY",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "K",
+      "name": "K",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KDP",
+      "name": "KDP",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KHC",
+      "name": "KHC",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KMB",
+      "name": "KMB",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KO",
+      "name": "KO",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KR",
+      "name": "KR",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "KVUE",
+      "name": "KVUE",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "LW",
+      "name": "LW",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "MDLZ",
+      "name": "MDLZ",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "MKC",
+      "name": "MKC",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "MNST",
+      "name": "MNST",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "MO",
+      "name": "MO",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "PEP",
+      "name": "PEP",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "PG",
+      "name": "PG",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "PM",
+      "name": "PM",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "SJM",
+      "name": "SJM",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "STZ",
+      "name": "STZ",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "SYY",
+      "name": "SYY",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "TAP",
+      "name": "TAP",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "TGT",
+      "name": "TGT",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "TSN",
+      "name": "TSN",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "WBA",
+      "name": "WBA",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "WMT",
+      "name": "WMT",
+      "sector": "Consumer Staples"
+    },
+    {
+      "ticker": "APA",
+      "name": "APA",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "BKR",
+      "name": "BKR",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "COP",
+      "name": "COP",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "CTRA",
+      "name": "CTRA",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "CVX",
+      "name": "CVX",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "DVN",
+      "name": "DVN",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "EOG",
+      "name": "EOG",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "EQT",
+      "name": "EQT",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "FANG",
+      "name": "FANG",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "HAL",
+      "name": "HAL",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "HES",
+      "name": "HES",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "KMI",
+      "name": "KMI",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "MPC",
+      "name": "MPC",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "MRO",
+      "name": "MRO",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "OKE",
+      "name": "OKE",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "OXY",
+      "name": "OXY",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "PSX",
+      "name": "PSX",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "SLB",
+      "name": "SLB",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "TPL",
+      "name": "TPL",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "TRGP",
+      "name": "TRGP",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "VLO",
+      "name": "VLO",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "WMB",
+      "name": "WMB",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "XOM",
+      "name": "XOM",
+      "sector": "Energy"
+    },
+    {
+      "ticker": "AEE",
+      "name": "AEE",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "AEP",
+      "name": "AEP",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "AES",
+      "name": "AES",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "ATO",
+      "name": "ATO",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "AWK",
+      "name": "AWK",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "CEG",
+      "name": "CEG",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "CMS",
+      "name": "CMS",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "CNP",
+      "name": "CNP",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "D",
+      "name": "D",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "DTE",
+      "name": "DTE",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "DUK",
+      "name": "DUK",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "ED",
+      "name": "ED",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "EIX",
+      "name": "EIX",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "ES",
+      "name": "ES",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "ETR",
+      "name": "ETR",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "EVRG",
+      "name": "EVRG",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "EXC",
+      "name": "EXC",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "FE",
+      "name": "FE",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "LNT",
+      "name": "LNT",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "NEE",
+      "name": "NEE",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "NI",
+      "name": "NI",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "NRG",
+      "name": "NRG",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "PCG",
+      "name": "PCG",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "PEG",
+      "name": "PEG",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "PNW",
+      "name": "PNW",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "PPL",
+      "name": "PPL",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "SO",
+      "name": "SO",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "SRE",
+      "name": "SRE",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "VST",
+      "name": "VST",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "WEC",
+      "name": "WEC",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "XEL",
+      "name": "XEL",
+      "sector": "Utilities"
+    },
+    {
+      "ticker": "ARE",
+      "name": "ARE",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "AVB",
+      "name": "AVB",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "BXP",
+      "name": "BXP",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "CBRE",
+      "name": "CBRE",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "CCI",
+      "name": "CCI",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "CPT",
+      "name": "CPT",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "CSGP",
+      "name": "CSGP",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "DLR",
+      "name": "DLR",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "DOC",
+      "name": "DOC",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "EQIX",
+      "name": "EQIX",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "EQR",
+      "name": "EQR",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "ESS",
+      "name": "ESS",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "EXR",
+      "name": "EXR",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "FRT",
+      "name": "FRT",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "HST",
+      "name": "HST",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "INVH",
+      "name": "INVH",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "IRM",
+      "name": "IRM",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "KIM",
+      "name": "KIM",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "MAA",
+      "name": "MAA",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "O",
+      "name": "O",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "PLD",
+      "name": "PLD",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "PSA",
+      "name": "PSA",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "REG",
+      "name": "REG",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "SBAC",
+      "name": "SBAC",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "SPG",
+      "name": "SPG",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "UDR",
+      "name": "UDR",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "VICI",
+      "name": "VICI",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "VTR",
+      "name": "VTR",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "WELL",
+      "name": "WELL",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "WY",
+      "name": "WY",
+      "sector": "Real Estate"
+    },
+    {
+      "ticker": "ALB",
+      "name": "ALB",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "AMCR",
+      "name": "AMCR",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "APD",
+      "name": "APD",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "AVY",
+      "name": "AVY",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "BALL",
+      "name": "BALL",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "CE",
+      "name": "CE",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "CF",
+      "name": "CF",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "CTVA",
+      "name": "CTVA",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "DD",
+      "name": "DD",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "DOW",
+      "name": "DOW",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "ECL",
+      "name": "ECL",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "EMN",
+      "name": "EMN",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "FCX",
+      "name": "FCX",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "FMC",
+      "name": "FMC",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "IFF",
+      "name": "IFF",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "IP",
+      "name": "IP",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "LIN",
+      "name": "LIN",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "LYB",
+      "name": "LYB",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "MLM",
+      "name": "MLM",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "MOS",
+      "name": "MOS",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "NEM",
+      "name": "NEM",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "NUE",
+      "name": "NUE",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "PKG",
+      "name": "PKG",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "PPG",
+      "name": "PPG",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "SHW",
+      "name": "SHW",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "SMG",
+      "name": "SMG",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "STLD",
+      "name": "STLD",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "SW",
+      "name": "SW",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "VMC",
+      "name": "VMC",
+      "sector": "Materials"
+    },
+    {
+      "ticker": "WRK",
+      "name": "WRK",
+      "sector": "Materials"
+    }
   ]
 }
