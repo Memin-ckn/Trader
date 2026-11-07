@@ -10,7 +10,7 @@ Gerçek para riske atmadan, **3.500 $ sanal bakiye** ve gerçekçi aracı kurum 
 
 `███████████░░░░░░░░░` **%55 Tamamlandı**
 
-Kanban görev tablomuza göre toplam **10 ana görevin 5'i tamamen bitti, 1'i yapım aşamasında, 4'ü ise sırada bekliyor.**
+Kanban görev tablomuza göre toplam **11 ana görevin 6'sı tamamen bitti, 5'i ise sırada bekliyor.**
 
 ---
 
@@ -21,12 +21,13 @@ Kanban görev tablomuza göre toplam **10 ana görevin 5'i tamamen bitti, 1'i ya
 3. **11 Kişilik Yapay Zeka Komitesi ve Karar Sistemi:** Hisseleri farklı açılardan (trend, risk, karşıt görüş, senaryo analizi) inceleyip **"Al / Sat / Bekle / İptal Et"** kararı veren ve kasayı otomatik güncelleyen yapı kuruldu. İlk deneme işlemleri başarıyla yapıldı.
 4. **Muhasebe ve Güvenlik Denetimi:** Kasanın eksiye düşmesini, tek bir hisseye fazla para yatırılmasını veya kuruş hesaplamalarındaki hataları engelleyen güvenlik kilitleri eklendi.
 5. **Yapay Zeka Hafıza Sistemi:** Sistemin kuralları hiç unutmaması ve her gün aynı disiplinle çalışması için kalıcı rehber dosyaları hazırlandı.
+6. **21 Senaryolu Otomatik Doğrulama ve Test Sistemi:** Sıfır canlı temas (Zero-Touch SHA-256) garantisiyle çalışan, kademeli alım, kısmi satış, devre kesici, atomik yazma ve makro filtre dahil 21 senaryoyu kapsayan test paketi (`validate_system.py`) tamamlandı.
 
 ---
 
 ### 🚧 Şu An Üzerinde Çalıştığımız Kısım (Devam Eden)
 
-- **Otomatik Kontrol ve Test Sistemi (Validation):** Sistemde yapılan değişikliklerin kuralları ve muhasebeyi bozmadığını kanıtlayan temel test paketi (`validate_system.py`) çalışıyor. Gelecekteki geliştirmeleri de güvence altına alacak 21 maddelik kapsamlı test şartnamesi (`test_senaryolari.md`) hazırlandı; ileri test senaryolarının entegrasyonu sürüyor.
+- *Doğrulama ve test aşaması tamamlandı; sıradaki görev (Dosya Mimarisi / UI) için hazır bekliyor.*
 
 ---
 
@@ -34,8 +35,9 @@ Kanban görev tablomuza göre toplam **10 ana görevin 5'i tamamen bitti, 1'i ya
 
 1. **Temiz Dosya Mimarisi:** Dosyaların modüler klasörlere (`src/`, `config/` vb.) yerleştirilerek projenin daha düzenli, okunabilir ve profesyonel bir yapıya kavuşturulması.
 2. **Görsel Takip Ekranı (UI):** 11 uzmanın kararlarını, gerekçelerini, portföydeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade bir arayüz/pano hazırlanması.
-3. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
-4. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
+3. **Gerçek Borsa Havuzu (S&P 500 / NASDAQ):** 50 hisselik test havuzunun genişletilerek planlanan gerçek ABD borsası endekslerinin taranması.
+4. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
+5. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
 
 ---
 

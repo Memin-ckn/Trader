@@ -11,15 +11,15 @@
     - Kullandığımız teknolojilerin izin verdiği kadar (maks 3 yıl min 1 yıl) geriye gidip 1 yıllık süreci simüle edeceğiz. Bu sayede oluşturduğumuz sistemin 1 yıllık getirisini tahmini olarak hesaplayabilriiz.
 
 # In Progress
-- Validation (`validate_system.py` & `test_senaryolari.md`)
-    - Proje üzerinde yapılan her değişikliğin sisteme uygun, hatasız ve temiz olduğunu test edebileceğimiz senaryolar oluşturulacak.
-    - Bu senaryolar her değişiklik sonrası test edilecek ve bütün testlerden geçilmeden hiçbir değişiklik onaylanmayacak.
-    - **Mevcut Durum:** İzole geçici dosyalar üzerinde çalışan ilk doğrulama paketi (`validate_system.py`) oluşturuldu (Kuyruk önceliği/taşma, 14 gün `EXPIRED` temizliği, `BUY -> HOLD -> SELL` muhasebe denkliği, %20 pozisyon tavanı/yetersiz bakiye ve `yfinance` `NaN` dayanıklılığı). Ayrıca tüm gerçek ABD borsası (S&P 500 / NASDAQ), gerçek tarihsel veriyle backtest, kademeli alım/kısmi satış komisyon muhasebesi, 11 ajan UI görünürlüğü ve Forex Factory (`USD` odaklı) testlerini kapsayan `test_senaryolari.md` şartnamesi revize edilerek tamamlandı.
-    - **Eksikler / Yapılacaklar:** `test_senaryolari.md` içinde tanımlanan yeni uç durum ve gerçek piyasa verisi senaryoları `validate_system.py` içerisine kodlanarak aktif test sayısı artırılacak.
 
 # Testing
 
 # Complete
+- Validation ve 21 Senaryolu Kapsamlı Test Paketi (`validate_system.py` & `test_senaryolari.md`)
+    - Proje üzerinde yapılan her değişikliğin sisteme uygun, hatasız ve temiz olduğunu test eden 21 test senaryosu eksiksiz kodlandı.
+    - Sıfır Canlı Temas (Zero-Touch SHA-256) kuralı uygulandı; canlı `state.json`, `universe.json`, `COMMITTEE_PROMPT.md` ve `PORTFOLIO_DASHBOARD.md` dosyalarına dokunulmadan izole geçici ortamlarda çalışması sağlandı.
+    - `claude-trading-skills` modülleri mock'lanmadan gerçek hesaplamalarla entegre edildi.
+    - Kademeli alım (Scale-In), kısmi satış (Scale-Out), devre kesici kilitleri, atomik yazma (`.tmp` + `os.replace`), idempotency ve Forex Factory makro süzgeci dahil 21 test senaryosunun tamamı başarıyla (`21 passed in 0.488s`) geçti.
 - Proje Altyapısı ve Anayasa Kurulumu (`PROJECT_CONTEXT.md`)
     - Çalışma dizini, `.venv` Python ortamı ve `tradermonty/claude-trading-skills` reposu kuruldu.
     - 3.500 $ başlangıç bakiyeli `state.json` ve 50 likit ABD hissesinden oluşan `universe.json` havuzu oluşturuldu.

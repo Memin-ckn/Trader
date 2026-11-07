@@ -20,6 +20,7 @@ Görevler:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import os
@@ -29,7 +30,7 @@ from decimal import ROUND_FLOOR, Decimal
 from pathlib import Path
 from typing import Any
 
-BASE_DIR = Path("/home/memin/Projects/Trader").resolve()
+BASE_DIR = Path(__file__).resolve().parent
 STATE_FILE = BASE_DIR / "state.json"
 DECISIONS_FILE = BASE_DIR / "decisions.json"
 DASHBOARD_FILE = BASE_DIR / "PORTFOLIO_DASHBOARD.md"
@@ -55,8 +56,19 @@ def load_json(filepath: Path) -> dict[str, Any]:
 
 
 def save_json(filepath: Path, data: dict[str, Any]) -> None:
-    with filepath.open("w", encoding="utf-8") as f:
+    """Veriyi önce geçici (.tmp) dosyaya yazıp ardından atomik olarak asıl dosyanın üzerine taşır."""
+    tmp_path = filepath.with_name(f"{filepath.name}.tmp")
+    with tmp_path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, filepath)
+
+
+def _sanitize_table_cell(text: Any) -> str:
+    """Markdown tablolarını bozabilecek pipe (|), yeni satır ve satır başı karakterlerini temizler."""
+    if text is None:
+        return "-"
+    cleaned = str(text).replace("|", "/").replace("\n", " ").replace("\r", " ").strip()
+    return cleaned if cleaned else "-"
 
 
 def generate_dashboard_markdown(
@@ -70,7 +82,7 @@ def generate_dashboard_markdown(
     open_positions = state.get("open_positions", [])
     positions_value = round(sum(round(pos["shares"] * pos["current_price"], 2) for pos in open_positions), 2)
     net_pnl = round(equity - INITIAL_CASH, 2)
-    net_pnl_pct = (net_pnl / INITIAL_CASH) * 100
+    net_pnl_pct = (net_pnl / INITIAL_CASH) * 100 if INITIAL_CASH > 0 else 0.0
 
     watchlist = [w for w in state.get("watchlist", []) if w.get("status") != "EXPIRED"]
     history = state.get("trade_history", [])
@@ -103,8 +115,9 @@ def generate_dashboard_markdown(
             cost = round(p["shares"] * p["avg_buy_price"], 2)
             pnl = round(val - cost, 2)
             pnl_pct = (pnl / cost) * 100 if cost > 0 else 0.0
+            thesis_clean = _sanitize_table_cell(p.get("thesis", "-"))
             lines.append(
-                f"| **{p['ticker']}** | {p['shares']:.2f} | `${p['avg_buy_price']:.2f}` | `${p['current_price']:.2f}` | `${val:,.2f}` | `${pnl:+,.2f}` | `{pnl_pct:+.2f}%` | `${p.get('stop_loss', 0):.2f}` | `${p.get('take_profit', 0):.2f}` | {p.get('thesis', '-')} |"
+                f"| **{p['ticker']}** | {p['shares']:.2f} | `${p['avg_buy_price']:.2f}` | `${p['current_price']:.2f}` | `${val:,.2f}` | `${pnl:+,.2f}` | `{pnl_pct:+.2f}%` | `${p.get('stop_loss', 0):.2f}` | `${p.get('take_profit', 0):.2f}` | {thesis_clean} |"
             )
     else:
         lines.append("*Şu anda açık pozisyon bulunmamaktadır (Nakit ağırlıklı).*")
@@ -120,8 +133,9 @@ def generate_dashboard_markdown(
             "|---|---|---|---|---|---|---|",
         ])
         for w in watchlist:
+            reason_clean = _sanitize_table_cell(w.get("reason", "-"))
             lines.append(
-                f"| **{w['ticker']}** | {w.get('added_date')} | {w.get('expires_date')} | `${w.get('target_entry_price', 0):.2f}` | `${w.get('stop_loss_plan', 0):.2f}` | `{w.get('status')}` | {w.get('reason', '-')} |"
+                f"| **{w['ticker']}** | {w.get('added_date')} | {w.get('expires_date')} | `${w.get('target_entry_price', 0):.2f}` | `${w.get('stop_loss_plan', 0):.2f}` | `{w.get('status')}` | {reason_clean} |"
             )
     else:
         lines.append("*İzleme listesinde aktif hisse bulunmamaktadır.*")
@@ -138,17 +152,19 @@ def generate_dashboard_markdown(
         ])
         for t in reversed(history[-10:]):
             pnl_str = f"${t.get('pnl_usd', 0):+,.2f}" if t.get("action") == "SELL" else "-"
+            summary_clean = _sanitize_table_cell(t.get("committee_summary", "-"))
             lines.append(
-                f"| {t.get('date')} | **{t.get('ticker')}** | `{t.get('action')}` | {t.get('shares', 0):.2f} | `${t.get('price', 0):.2f}` | `${t.get('fee_usd', 0):.2f}` | {pnl_str} | {t.get('committee_summary', '-')} |"
+                f"| {t.get('date')} | **{t.get('ticker')}** | `{t.get('action')}` | {t.get('shares', 0):.2f} | `${t.get('price', 0):.2f}` | `${t.get('fee_usd', 0):.2f}` | {pnl_str} | {summary_clean} |"
             )
     else:
         lines.append("*Henüz tamamlanmış işlem kaydı bulunmamaktadır.*")
 
+    committee_note = _sanitize_table_cell(decisions_data.get("committee_overall_note", "Kayıt yok."))
     lines.extend([
         "",
         "## 5. Bugünkü Komite Karar Özeti",
         f"**Devre Kesici Onayı:** `{decisions_data.get('circuit_breaker_acknowledged', 'UNKNOWN')}`",
-        f"**Komite Genel Notu:** {decisions_data.get('committee_overall_note', 'Kayıt yok.')}",
+        f"**Komite Genel Notu:** {committee_note}",
         "",
     ])
 
@@ -180,6 +196,14 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
 
     decisions = decisions_data.get("decisions", [])
     print(f"[*] İşlenecek Karar Sayısı: {len(decisions)}\n")
+
+    # İdempotency Koruması: Aynı gün aynı karar paketinin mükerrer çalışmasını engelle
+    batch_sig = hashlib.sha256(
+        f"{today_str}:{cb_status}:{json.dumps(decisions, sort_keys=True)}".encode()
+    ).hexdigest()
+    if summary.get("last_decisions_digest") == batch_sig:
+        print(f"    [*] İdempotency Koruması: {today_str} tarihli karar paketi daha önce zaten işlenmiş. Tekrar icra engellendi.")
+        return state
 
     for d in decisions:
         ticker = str(d.get("ticker", "")).upper().strip()
@@ -266,6 +290,8 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
                 existing_pos["stop_loss"] = stop_loss
                 existing_pos["take_profit"] = take_profit
                 existing_pos["thesis"] = thesis
+                existing_fees = float(existing_pos.get("fees_paid_usd", FEE_PER_TRADE))
+                existing_pos["fees_paid_usd"] = round(existing_fees + FEE_PER_TRADE, 2)
             else:
                 open_positions.append({
                     "ticker": ticker,
@@ -276,6 +302,7 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
                     "take_profit": take_profit,
                     "buy_date": today_str,
                     "thesis": thesis,
+                    "fees_paid_usd": FEE_PER_TRADE,
                 })
 
             # İşlem geçmişine yaz
@@ -305,29 +332,47 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
                 print(f"    [!] Uyarı: {ticker} açık pozisyonlarda bulunamadı!")
                 continue
 
+            current_pos = open_positions[match_idx]
             if not math.isfinite(price) or price <= 0:
-                price = float(open_positions[match_idx].get("current_price", 0.0))
+                price = float(current_pos.get("current_price", 0.0))
 
             price = round(price, 2)
-            pos = open_positions.pop(match_idx)
-            pos_shares = round(float(pos.get("shares", shares)), 2)
-            avg_buy = round(float(pos.get("avg_buy_price", price)), 2)
-            buy_date = pos.get("buy_date", today_str)
+            total_pos_shares = round(float(current_pos.get("shares", 0.0)), 2)
 
-            gross_proceeds = round(pos_shares * price, 2)
+            # Kısmi satış desteği: eğer karar adet belirtmişse ve bu adet toplamdan küçükse kısmi sat
+            req_shares = _floor_shares(shares) if shares > 0 else total_pos_shares
+            sell_shares = min(req_shares, total_pos_shares)
+            if sell_shares <= 0:
+                sell_shares = total_pos_shares
+
+            avg_buy = round(float(current_pos.get("avg_buy_price", price)), 2)
+            buy_date = current_pos.get("buy_date", today_str)
+
+            gross_proceeds = round(sell_shares * price, 2)
             net_proceeds = round(gross_proceeds - FEE_PER_TRADE, 2)
             cash = round(cash + net_proceeds, 2)
             total_fees = round(total_fees + FEE_PER_TRADE, 2)
 
-            # Net kâr/zarar hesabı: Satış tutarı - Alış tutarı - (Alış komisyonu + Satış komisyonu)
-            buy_cost = round(pos_shares * avg_buy, 2)
-            trade_net_pnl = round((gross_proceeds - buy_cost) - (FEE_PER_TRADE * 2), 2)
+            # Net kâr/zarar hesabı: Satış tutarı - Alış maliyeti - (İlgili Alış komisyonu + Satış komisyonu)
+            buy_cost = round(sell_shares * avg_buy, 2)
+            accum_buy_fees = float(current_pos.get("fees_paid_usd", FEE_PER_TRADE))
+
+            if sell_shares >= total_pos_shares:
+                open_positions.pop(match_idx)
+                trade_net_pnl = round((gross_proceeds - buy_cost) - (accum_buy_fees + FEE_PER_TRADE), 2)
+            else:
+                current_pos["shares"] = round(total_pos_shares - sell_shares, 2)
+                current_pos["current_price"] = price
+                sold_ratio = sell_shares / total_pos_shares if total_pos_shares > 0 else 1.0
+                fee_portion = round(accum_buy_fees * sold_ratio, 2)
+                current_pos["fees_paid_usd"] = round(accum_buy_fees - fee_portion, 2)
+                trade_net_pnl = round((gross_proceeds - buy_cost) - (fee_portion + FEE_PER_TRADE), 2)
 
             trade_history.append({
                 "date": today_str,
                 "ticker": ticker,
                 "action": "SELL",
-                "shares": pos_shares,
+                "shares": sell_shares,
                 "price": price,
                 "fee_usd": FEE_PER_TRADE,
                 "pnl_usd": trade_net_pnl,
@@ -337,7 +382,7 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
 
             pnl_sign = "+" if trade_net_pnl >= 0 else ""
             print(
-                f"    [✓] {pos_shares:.2f} adet {ticker} @ ${price:.2f} satıldı. Gelir: ${gross_proceeds:.2f} - ${FEE_PER_TRADE:.2f} komisyon."
+                f"    [✓] {sell_shares:.2f} adet {ticker} @ ${price:.2f} satıldı. Gelir: ${gross_proceeds:.2f} - ${FEE_PER_TRADE:.2f} komisyon."
             )
             print(f"        Net Kâr/Zarar: {pnl_sign}${trade_net_pnl:.2f}")
 
@@ -406,6 +451,7 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
     summary["total_equity_usd"] = round(new_total_equity, 2)
     summary["total_fees_paid_usd"] = round(total_fees, 2)
     summary["last_run_timestamp"] = datetime.now().isoformat()
+    summary["last_decisions_digest"] = batch_sig
 
     return state
 

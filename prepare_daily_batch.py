@@ -45,7 +45,7 @@ if hasattr(pd, "errors"):
 
 
 # Proje yolları
-BASE_DIR = Path("/home/memin/Projects/Trader").resolve()
+BASE_DIR = Path(__file__).resolve().parent
 STATE_FILE = BASE_DIR / "state.json"
 UNIVERSE_FILE = BASE_DIR / "universe.json"
 BRIEFING_FILE = BASE_DIR / "daily_briefing.json"
@@ -84,8 +84,19 @@ def load_json(filepath: Path) -> dict[str, Any]:
 
 
 def save_json(filepath: Path, data: dict[str, Any]) -> None:
-    with filepath.open("w", encoding="utf-8") as f:
+    """Veriyi önce geçici (.tmp) dosyaya yazıp ardından atomik olarak asıl dosyanın üzerine taşır."""
+    tmp_path = filepath.with_name(f"{filepath.name}.tmp")
+    with tmp_path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, filepath)
+
+
+def clean_universe_ticker(ticker: str) -> str:
+    """Ticker sembolünü yfinance standartlarına (örn: BRK.B -> BRK-B) ve büyük harfe dönüştürür."""
+    if not ticker:
+        return ""
+    t = str(ticker).strip().upper()
+    return t.replace(".", "-")
 
 
 def _is_finite_number(val: Any) -> bool:
@@ -178,7 +189,7 @@ def build_analysis_queue(
     raw_universe = universe.get("tickers", []) if isinstance(universe, dict) else []
     candidate_tickers: list[str] = []
     for t in raw_universe:
-        norm_t = str(t).upper().strip() if t else ""
+        norm_t = clean_universe_ticker(str(t)) if t else ""
         if norm_t and norm_t not in seen_tickers and norm_t not in candidate_tickers:
             candidate_tickers.append(norm_t)
 
@@ -193,6 +204,118 @@ def build_analysis_queue(
             })
 
     return queue
+
+
+def get_fallback_candidates(
+    state: dict[str, Any],
+    universe: dict[str, Any],
+    current_queue: list[dict[str, Any]],
+    count: int = 1,
+    failed_tickers: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """
+    Keşif sırasında veri alınamayan veya delist olan hisseler yerine
+    universe.json havuzundan yeni yedek adaylar çeker.
+    """
+    if count <= 0:
+        return []
+
+    failed = {t.upper().strip() for t in (failed_tickers or set())}
+    in_queue = {str(q.get("ticker", "")).upper().strip() for q in current_queue}
+    in_positions = {str(p.get("ticker", "")).upper().strip() for p in state.get("open_positions", [])}
+    in_watchlist = {str(w.get("ticker", "")).upper().strip() for w in state.get("watchlist", [])}
+    excluded = in_queue | in_positions | in_watchlist | failed
+
+    raw_universe = universe.get("tickers", []) if isinstance(universe, dict) else []
+    candidates = []
+    for t in raw_universe:
+        norm = clean_universe_ticker(str(t))
+        if norm and norm not in excluded and norm not in candidates:
+            candidates.append(norm)
+
+    if not candidates:
+        return []
+
+    chosen = random.sample(candidates, min(count, len(candidates)))
+    return [{"ticker": c, "source": "DISCOVERY_FALLBACK", "details": {}} for c in chosen]
+
+
+def is_market_session_valid(date_str: str, hist: pd.DataFrame | None = None) -> tuple[bool, str]:
+    """
+    ABD borsa seansı takvim kontrolü (Haftasonu, resmi tatil ve yarım gün/sıfır hacim kontrolü).
+    """
+    try:
+        dt = date.fromisoformat(date_str)
+    except (ValueError, TypeError):
+        return False, "Geçersiz tarih formatı"
+
+    if dt.weekday() >= 5:
+        return False, f"Haftasonu ({dt.strftime('%A')}): Borsa kapalı"
+
+    fixed_holidays = {
+        (1, 1): "New Year's Day",
+        (6, 19): "Juneteenth",
+        (7, 4): "Independence Day",
+        (12, 25): "Christmas Day",
+    }
+    if (dt.month, dt.day) in fixed_holidays:
+        return False, f"Resmi Borsa Tatili: {fixed_holidays[(dt.month, dt.day)]}"
+
+    if hist is not None and isinstance(hist, pd.DataFrame) and not hist.empty:
+        if "Volume" in hist.columns:
+            last_vol = hist["Volume"].iloc[-1]
+            if last_vol is None or np.isnan(last_vol) or float(last_vol) <= 0:
+                return False, "Eksik/Sıfır seans hacmi (Borsa açılmamış veya yarım gün olabilir)"
+
+    return True, "Geçerli işlem seansı"
+
+
+def evaluate_forex_factory_macro_risk(
+    events: list[dict[str, Any]] | None = None,
+    today_str: str | None = None,
+) -> dict[str, Any]:
+    """
+    Forex Factory / Makroekonomik Takvim değerlendirmesi.
+    Eğer USD para biriminde Yüksek Etkili (High / Red) veri (FOMC, CPI, NFP vb.) varsa
+    yüksek risk bayrağı üretir.
+    Veri sağlanmamışsa veya hata durumunda çökmez; FAIL_SAFE modunda çalışır.
+    """
+    if events is None:
+        return {
+            "status": "FAIL_SAFE",
+            "action": "PROCEED_WITH_CAUTION",
+            "high_impact_count": 0,
+            "events": [],
+            "note": "Makro veri kaynağına ulaşılamadı, standart teknik analize devam ediliyor.",
+        }
+
+    high_risk_events = []
+    for ev in events:
+        currency = str(ev.get("currency", "")).upper().strip()
+        impact = str(ev.get("impact", "")).upper().strip()
+        ev_date = ev.get("date")
+
+        # Bugünün USD ve Yüksek etkili (High / Red) olayları
+        if currency == "USD" and impact in ("HIGH", "RED"):
+            if today_str is None or ev_date is None or str(ev_date).startswith(today_str):
+                high_risk_events.append(ev)
+
+    if high_risk_events:
+        return {
+            "status": "MACRO_HIGH_RISK",
+            "action": "HALT_NEW_BUYS",
+            "high_impact_count": len(high_risk_events),
+            "events": high_risk_events,
+            "note": f"Bugün {len(high_risk_events)} adet yüksek etkili USD makro olayı var (Alımlar kısıtlanmalı).",
+        }
+
+    return {
+        "status": "MACRO_CLEAR",
+        "action": "TRADING_ALLOWED",
+        "high_impact_count": 0,
+        "events": [],
+        "note": "Yüksek etkili USD makro engeli bulunmuyor.",
+    }
 
 
 def _sanitize_history_df(hist: pd.DataFrame | None) -> pd.DataFrame:
