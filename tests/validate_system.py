@@ -35,14 +35,25 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+_SRC_DIR = _PROJECT_ROOT / "src"
+for _p in (str(_SRC_DIR), str(_PROJECT_ROOT)):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
 import execute_decisions as ed
 import prepare_daily_batch as pdb
-
-BASE_DIR = Path(__file__).resolve().parent
-REAL_STATE_FILE = BASE_DIR / "state.json"
-REAL_UNIVERSE_FILE = BASE_DIR / "universe.json"
-REAL_COMMITTEE_FILE = BASE_DIR / "COMMITTEE_PROMPT.md"
-REAL_DASHBOARD_FILE = BASE_DIR / "PORTFOLIO_DASHBOARD.md"
+from src.paths import (
+    BASE_DIR,
+    COMMITTEE_FILE as REAL_COMMITTEE_FILE,
+    DASHBOARD_FILE as REAL_DASHBOARD_FILE,
+    DATA_DIR,
+    DOCS_DIR,
+    SRC_DIR,
+    STATE_FILE as REAL_STATE_FILE,
+    TESTS_DIR,
+    UNIVERSE_FILE as REAL_UNIVERSE_FILE,
+)
 
 
 def _file_sha256(path: Path) -> str | None:
@@ -677,18 +688,31 @@ class TestPaperTradingOrchestra(unittest.TestCase):
 
     def test_tc12_dynamic_project_root_cwd_independence(self) -> None:
         """
-        TC-12: Dinamik Proje Kökü (CWD Independence) testi.
+        TC-12: Dinamik Proje Kökü (CWD Independence) ve Modüler Klasör Mimarisi testi.
         Test sırasında çalışma dizini /tmp gibi harici bir dizine değiştirildiğinde modüllerin
-        ve scriptlerin import/yol hatası vermeden dinamik kök dizini çözebilmesi.
+        ve scriptlerin import/yol hatası vermeden dinamik kök dizini çözebilmesi;
+        kök dizinde dağınık .py veya .json dosyası bulunmaması.
         """
         orig_cwd = os.getcwd()
         try:
             os.chdir(tempfile.gettempdir())
-            # Modüllerin dinamik BASE_DIR çözümü
+            # 1. Modüllerin dinamik BASE_DIR çözümü
             self.assertEqual(ed.BASE_DIR, BASE_DIR)
             self.assertEqual(pdb.BASE_DIR, BASE_DIR)
             self.assertTrue(ed.STATE_FILE.exists())
             self.assertTrue(pdb.UNIVERSE_FILE.exists())
+
+            # 2. Modüler klasörlerin (src/, data/, docs/, tests/) varlığı
+            self.assertTrue(SRC_DIR.is_dir())
+            self.assertTrue(DATA_DIR.is_dir())
+            self.assertTrue(DOCS_DIR.is_dir())
+            self.assertTrue(TESTS_DIR.is_dir())
+
+            # 3. Kök dizinde dağınık .py veya .json dosyası kalmamış olmalı
+            root_py_files = list(BASE_DIR.glob("*.py"))
+            root_json_files = list(BASE_DIR.glob("*.json"))
+            self.assertEqual(root_py_files, [], f"Kök dizinde dağınık .py dosyası bulundu: {root_py_files}")
+            self.assertEqual(root_json_files, [], f"Kök dizinde dağınık .json dosyası bulundu: {root_json_files}")
         finally:
             os.chdir(orig_cwd)
 

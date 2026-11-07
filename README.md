@@ -6,11 +6,11 @@ Gerçek para riske atmadan, **3.500 $ sanal bakiye** ve gerçekçi aracı kurum 
 
 ---
 
-## 🚀 Proje Ne Aşamada? (Genel İlerleme: %55)
+## 🚀 Proje Ne Aşamada? (Genel İlerleme: %64)
 
-`███████████░░░░░░░░░` **%55 Tamamlandı**
+`█████████████░░░░░░░` **%64 Tamamlandı**
 
-Kanban görev tablomuza göre toplam **11 ana görevin 6'sı tamamen bitti, 5'i ise sırada bekliyor.**
+Kanban görev tablomuza göre toplam **11 ana görevin 7'si tamamen bitti, 4'ü ise sırada bekliyor.**
 
 ---
 
@@ -21,24 +21,24 @@ Kanban görev tablomuza göre toplam **11 ana görevin 6'sı tamamen bitti, 5'i 
 3. **11 Kişilik Yapay Zeka Komitesi ve Karar Sistemi:** Hisseleri farklı açılardan (trend, risk, karşıt görüş, senaryo analizi) inceleyip **"Al / Sat / Bekle / İptal Et"** kararı veren ve kasayı otomatik güncelleyen yapı kuruldu. İlk deneme işlemleri başarıyla yapıldı.
 4. **Muhasebe ve Güvenlik Denetimi:** Kasanın eksiye düşmesini, tek bir hisseye fazla para yatırılmasını veya kuruş hesaplamalarındaki hataları engelleyen güvenlik kilitleri eklendi.
 5. **Yapay Zeka Hafıza Sistemi:** Sistemin kuralları hiç unutmaması ve her gün aynı disiplinle çalışması için kalıcı rehber dosyaları hazırlandı.
-6. **21 Senaryolu Otomatik Doğrulama ve Test Sistemi:** Sıfır canlı temas (Zero-Touch SHA-256) garantisiyle çalışan, kademeli alım, kısmi satış, devre kesici, atomik yazma ve makro filtre dahil 21 senaryoyu kapsayan test paketi (`validate_system.py`) tamamlandı.
+6. **21 Senaryolu Otomatik Doğrulama ve Test Sistemi:** Sıfır canlı temas (Zero-Touch SHA-256) garantisiyle çalışan, kademeli alım, kısmi satış, devre kesici, atomik yazma ve makro filtre dahil 21 senaryoyu kapsayan test paketi tamamlandı.
+7. **Temiz ve Modüler Dosya Mimarisi:** Kök dizindeki kalabalık giderilerek tüm kaynak kodlar (`src/`), canlı veriler (`data/`), belgeler/panolar (`docs/`) ve testler (`tests/`) kendi klasörlerine yerleştirildi.
 
 ---
 
 ### 🚧 Şu An Üzerinde Çalıştığımız Kısım (Devam Eden)
 
-- *Doğrulama ve test aşaması tamamlandı; sıradaki görev (Dosya Mimarisi / UI) için hazır bekliyor.*
+- *Dosya mimarisi düzenlemesi tamamlandı; sıradaki görev (Görsel Takip Ekranı / UI) için hazır bekliyor.*
 
 ---
 
 ### 📋 Sırada Ne Var? (Yapılacaklar)
 
-1. **Temiz Dosya Mimarisi:** Dosyaların modüler klasörlere (`src/`, `config/` vb.) yerleştirilerek projenin daha düzenli, okunabilir ve profesyonel bir yapıya kavuşturulması.
-2. **Görsel Takip Ekranı (UI):** 11 uzmanın kararlarını, gerekçelerini, portföydeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade bir arayüz/pano hazırlanması.
-3. **Gerçek Borsa Havuzu (S&P 500 / NASDAQ):** 50 hisselik test havuzunun genişletilerek planlanan gerçek ABD borsası endekslerinin taranması.
-4. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
-5. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
+1. **Görsel Takip Ekranı (UI):** 11 uzmanın kararlarını, gerekçelerini, portföydeki hisseleri ve toplam kâr/zarar durumunu kolayca görebileceğimiz sade bir arayüz/pano hazırlanması.
+2. **Gerçek Borsa Havuzu (S&P 500 / NASDAQ):** 50 hisselik test havuzunun genişletilerek planlanan gerçek ABD borsası endekslerinin taranması.
+3. **Ekonomik Takvim ve Haber Takibi (Forex Factory):** ABD faiz kararları, enflasyon gibi piyasayı dalgalandıran kritik makro haberleri takip edip riskli günlerde işlem açılmasını engelleyen bir haber analizi/ajanı eklenmesi.
+4. **Geçmişe Dönük Test (Backtest):** Sistemin 1 ila 3 yıllık geçmiş borsa verileri üzerinde simüle edilerek olası getirisinin ve başarısının hesaplanması.
 
 ---
 
-*📌 Not: Güncel cüzdan ve açık pozisyon durumu için [PORTFOLIO_DASHBOARD.md](PORTFOLIO_DASHBOARD.md) dosyasına, detaylı iş takibi için [Kanban.md](Kanban.md) tablosuna göz atabilirsiniz.*
+*📌 Not: Güncel cüzdan ve açık pozisyon durumu için [PORTFOLIO_DASHBOARD.md](docs/PORTFOLIO_DASHBOARD.md) dosyasına, detaylı iş takibi için [Kanban.md](docs/Kanban.md) tablosuna göz atabilirsiniz.*

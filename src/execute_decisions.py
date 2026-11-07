@@ -30,10 +30,11 @@ from decimal import ROUND_FLOOR, Decimal
 from pathlib import Path
 from typing import Any
 
-BASE_DIR = Path(__file__).resolve().parent
-STATE_FILE = BASE_DIR / "state.json"
-DECISIONS_FILE = BASE_DIR / "decisions.json"
-DASHBOARD_FILE = BASE_DIR / "PORTFOLIO_DASHBOARD.md"
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from src.paths import BASE_DIR, DASHBOARD_FILE, DECISIONS_FILE, STATE_FILE
 
 INITIAL_CASH = 3500.00
 FEE_PER_TRADE = 1.50

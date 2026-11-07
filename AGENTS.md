@@ -4,21 +4,32 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
 
 ---
 
-## 1. PROJE KİMLİĞİ & DİZİN YAPISI
+## 1. PROJE KİMLİĞİ & MODÜLER DİZİN YAPISI
 
 - **Çalışma Dizini:** `/home/memin/Projects/Trader`
 - **Python Çalışma Ortamı:** `/home/memin/Projects/Trader/.venv/bin/python` (Tüm betikler ve testler bu sanal ortam üzerinden çalıştırılır).
 - **Veri Kaynağı Kuralı:** Harici ücretli API anahtarları (FMP, Finviz Elite vb.) **KESİNLİKLE KULLANILMAZ**. Piyasa, fiyat, hacim ve temel rasyo verilerinin tek kaynağı `yfinance` kütüphanesidir.
-- **Ana Proje Dosyaları:**
-  - `PROJECT_CONTEXT.md`: Projenin kuruluş anayasası ve tek doğruluk kaynağı.
-  - `COMMITTEE_PROMPT.md`: 11 ajanlık yatırım komitesinin karar süzgeci ve `decisions.json` üretim kuralları.
-  - `prepare_daily_batch.py`: Günlük izleme listesi temizliği, 5 hisselik öncelikli kuyruk oluşturma, `yfinance` veri çekimi ve `daily_briefing.json` üretim motoru.
-  - `execute_decisions.py`: Komite kararlarını (`decisions.json`) icra eden, portföy muhasebesini yürüten, `state.json` ve `PORTFOLIO_DASHBOARD.md` dosyalarını güncelleyen yürütücü.
-  - `validate_system.py`: Gerçek dosyalara dokunmadan izole geçici dosyalar üzerinde çalışan kapsamlı QA ve muhasebe doğrulama test paketi.
-  - `state.json`: Portföy bakiyesi, açık pozisyonlar, izleme listesi ve işlem geçmişini tutan canlı hafıza dosyası.
-  - `universe.json`: Keşif için taranan likit ABD hisseleri (S&P 500 / NASDAQ) havuzu.
-  - `PORTFOLIO_DASHBOARD.md`: İnsan tarafından okunabilir güncel portföy ve performans gösterge paneli.
-  - `Kanban.md`: Proje görevlerinin ve geliştirme adımlarının takip edildiği canlı Kanban panosu.
+- **Modüler Klasör ve Dosya Yapısı:**
+  - **Kök Dizin (`/home/memin/Projects/Trader`):**
+    - `README.md`: Kullanıcı dostu proje özeti ve ilerleme durumu.
+    - `AGENTS.md` & `CLAUDE.md`: Ajanların oturum başında otomatik okuduğu mimari kılavuz.
+  - **`src/` (Kaynak Kodlar):**
+    - `src/paths.py`: Tüm dosya yollarını çalışma dizininden bağımsız (`CWD-independent`) çözümleyen merkezi modül.
+    - `src/prepare_daily_batch.py`: Günlük izleme listesi temizliği, 5 hisselik öncelikli kuyruk oluşturma, `yfinance` veri çekimi ve `data/daily_briefing.json` üretim motoru.
+    - `src/execute_decisions.py`: Komite kararlarını (`data/decisions.json`) icra eden, portföy muhasebesini yürüten, `data/state.json` ve `docs/PORTFOLIO_DASHBOARD.md` dosyalarını güncelleyen yürütücü.
+  - **`data/` (Canlı Hafıza ve Veri Dosyaları):**
+    - `data/state.json`: Portföy bakiyesi, açık pozisyonlar, izleme listesi ve işlem geçmişini tutan canlı hafıza dosyası.
+    - `data/universe.json`: Keşif için taranan likit ABD hisseleri (S&P 500 / NASDAQ) havuzu.
+    - `data/daily_briefing.json`: Günlük 5 aday hissenin teknik, temel ve risk/boyutlandırma verilerini içeren brifing paketi.
+    - `data/decisions.json`: 11 adımlı komitenin ürettiği günlük işlem kararları.
+  - **`docs/` (Anayasa, Panolar ve Şartnameler):**
+    - `docs/PORTFOLIO_DASHBOARD.md`: İnsan tarafından okunabilir güncel portföy ve performans gösterge paneli.
+    - `docs/Kanban.md`: Proje görevlerinin ve geliştirme adımlarının takip edildiği canlı Kanban panosu.
+    - `docs/PROJECT_CONTEXT.md`: Projenin kuruluş anayasası ve tek doğruluk kaynağı.
+    - `docs/COMMITTEE_PROMPT.md`: 11 ajanlık yatırım komitesinin karar süzgeci ve `decisions.json` üretim kuralları.
+    - `docs/test_senaryolari.md`: 21 senaryolu resmi QA ve test şartnamesi.
+  - **`tests/` (Doğrulama ve QA Test Paketi):**
+    - `tests/validate_system.py`: Gerçek dosyalara dokunmadan (`Zero-Touch SHA-256`) izole geçici dosyalar üzerinde çalışan 21 senaryolu kapsamlı doğrulama test paketi.
 
 ---
 
@@ -40,7 +51,7 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
 - **Kuyruk Öncelik Sırası (`build_analysis_queue`):**
   1. `open_positions` (Açık pozisyonlar: Stop-Loss, Take-Profit veya trend takibi)
   2. `watchlist` (İzleme listesindeki aktif `WAIT_BUY` hisseleri)
-  3. `universe.json` (İlk iki gruptan kalan boş kontenjan kadar rastgele ve **mükerrer olmayan** yeni keşif)
+  3. `data/universe.json` (İlk iki gruptan kalan boş kontenjan kadar rastgele ve **mükerrer olmayan** yeni keşif)
 - **Taşma (Overflow) Kuralı:** `open_positions` + `watchlist` sayısı 5'i aşarsa sistem çökmez; öncelik sırasını koruyarak kuyruğu tam 5 hissede kırpar (truncate).
 - **Watchlist Zaman Aşımı (TTL = 14 Gün):** İzleme listesine eklenen bir hissenin geçerlilik süresi **14 gündür** (`expires_date`). Süresi dolan hisseler `clean_watchlist` tarafından `EXPIRED` olarak işaretlenir ve `state["watchlist"]` dizisinden **fiziksel olarak silinir**.
 
@@ -48,11 +59,11 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
 
 ## 4. GERÇEK MODÜL ENTEGRASYONU (`claude-trading-skills`)
 
-- `claude-trading-skills` reposundaki aşağıdaki modüller `prepare_daily_batch.py` içerisinden doğrudan `sys.path` ile import edilerek gerçek hesaplamalarla çalıştırılır (**yüzeysel veya mock hesaplama yapılması kesinlikle yasaktır**):
+- `claude-trading-skills` reposundaki aşağıdaki modüller `src/prepare_daily_batch.py` içerisinden doğrudan `sys.path` ile import edilerek gerçek hesaplamalarla çalıştırılır (**yüzeysel veya mock hesaplama yapılması kesinlikle yasaktır**):
   1. `drawdown-circuit-breaker/scripts/check_circuit_breaker.py` (`evaluate_circuit_breaker`, `CircuitConfig`, `parse_as_of`)
   2. `technical-analyst/scripts/weekly_price_action.py` (`run_weekly_price_action`)
   3. `position-sizer/scripts/position_sizer.py` (`calculate_position`, `SizingParameters`)
-- **Devre Kesici Kilidi:** Devre kesici (`circuit_breaker`) durumu `HALTED` veya `COOLDOWN` döndürürse **kesinlikle yeni `BUY` işlemi yapılamaz** (`execute_decisions.py` bu durumda `BUY` emirlerini otomatik olarak reddeder).
+- **Devre Kesici Kilidi:** Devre kesici (`circuit_breaker`) durumu `HALTED` veya `COOLDOWN` döndürürse **kesinlikle yeni `BUY` işlemi yapılamaz** (`src/execute_decisions.py` bu durumda `BUY` emirlerini otomatik olarak reddeder).
 
 ---
 
@@ -60,27 +71,27 @@ Bu belge, Otonom Borsa Orkestrası (Paper Trading) projesi üzerinde çalışan 
 
 ### Günlük Operasyon Döngüsü
 ```bash
-# 1. Günlük veri paketini ve 5 hisselik kuyruğu hazırla (daily_briefing.json üretir)
-/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/prepare_daily_batch.py
+# 1. Günlük veri paketini ve 5 hisselik kuyruğu hazırla (data/daily_briefing.json üretir)
+/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/src/prepare_daily_batch.py
 
-# 2. daily_briefing.json verilerini COMMITTEE_PROMPT.md içindeki 11 adımlı komite süzgecinden geçir
-#    ve kararları /home/memin/Projects/Trader/decisions.json dosyasına yaz.
+# 2. data/daily_briefing.json verilerini docs/COMMITTEE_PROMPT.md içindeki 11 adımlı komite süzgecinden geçir
+#    ve kararları /home/memin/Projects/Trader/data/decisions.json dosyasına yaz.
 
-# 3. Kararları yürüt, state.json ve PORTFOLIO_DASHBOARD.md dosyalarını güncelle
-/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/execute_decisions.py
+# 3. Kararları yürüt, data/state.json ve docs/PORTFOLIO_DASHBOARD.md dosyalarını güncelle
+/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/src/execute_decisions.py
 ```
 
 ### Zorunlu QA ve Doğrulama Kuralı
-Kodlarda (`prepare_daily_batch.py`, `execute_decisions.py` vb.) herhangi bir değişiklik yapıldığında, gerçek `state.json` ve `PORTFOLIO_DASHBOARD.md` dosyalarına **dokunmadan** aşağıdaki doğrulama paketinin çalıştırılması ve **5 testin tamamının (`OK`) geçmesi zorunludur**:
+Kodlarda (`src/prepare_daily_batch.py`, `src/execute_decisions.py` vb.) herhangi bir değişiklik yapıldığında, gerçek `data/state.json` ve `docs/PORTFOLIO_DASHBOARD.md` dosyalarına **dokunmadan** aşağıdaki doğrulama paketinin çalıştırılması ve **21 testin tamamının (`OK`) geçmesi zorunludur**:
 ```bash
-/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/validate_system.py
+/home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/tests/validate_system.py
 ```
 
 ---
 
 ## 6. KANBAN VE GÖREV TAKİBİ
 
-- Proje kök dizininde (`/home/memin/Projects/Trader/Kanban.md`) canlı bir Kanban panosu bulunmaktadır.
-- Geliştirme sürecinde atılan her adım, çözülen her bug veya eklenen her özellik sonrasında `Kanban.md` dosyası güncel tutulacak; ilgili görev doğru sütuna taşınacaktır.
+- Proje doküman dizininde (`/home/memin/Projects/Trader/docs/Kanban.md`) canlı bir Kanban panosu bulunmaktadır.
+- Geliştirme sürecinde atılan her adım, çözülen her bug veya eklenen her özellik sonrasında `docs/Kanban.md` (ve genel ilerleme için `README.md`) dosyası güncel tutulacak; ilgili görev doğru sütuna taşınacaktır.
 - Günlük döngü veya kod değişiklikleri tamamlandığında Kanban panosundaki ilerleme kullanıcıya rapor edilecektir.
-- `Backlog` kısmı onay alındığı takdirde ajanın kendi anlayacağı şekilde düzenlenebilir; ancak görevler önem sırasına göre sıralandığı için değişiklik yapılmadan önce **kullanıcıdan mutlaka onay alınması** gerekmektedir.
+- `To do` (Backlog) kısmı onay alındığı takdirde ajanın kendi anlayacağı şekilde düzenlenebilir; ancak görevler önem sırasına göre sıralandığı için değişiklik yapılmadan önce **kullanıcıdan mutlaka onay alınması** gerekmektedir.

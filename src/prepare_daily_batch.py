@@ -44,12 +44,12 @@ if hasattr(pd, "errors"):
                 pass
 
 
-# Proje yolları
-BASE_DIR = Path(__file__).resolve().parent
-STATE_FILE = BASE_DIR / "state.json"
-UNIVERSE_FILE = BASE_DIR / "universe.json"
-BRIEFING_FILE = BASE_DIR / "daily_briefing.json"
-SKILLS_DIR = BASE_DIR / "claude-trading-skills" / "skills"
+# Proje yolları (Merkezi CWD-Independent Çözümleme)
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from src.paths import BASE_DIR, BRIEFING_FILE, SKILLS_DIR, STATE_FILE, UNIVERSE_FILE
 
 # Repo script dizinlerini sys.path'e ekle
 CIRCUIT_BREAKER_DIR = SKILLS_DIR / "drawdown-circuit-breaker" / "scripts"
