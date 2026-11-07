@@ -41,4 +41,4 @@ Kanban görev tablomuza göre toplam **11 ana görevin 7'si tamamen bitti, 4'ü 
 
 ---
 
-*📌 Not: Güncel cüzdan ve açık pozisyon durumu için [PORTFOLIO_DASHBOARD.md](docs/PORTFOLIO_DASHBOARD.md) dosyasına, detaylı iş takibi için [Kanban.md](docs/Kanban.md) tablosuna göz atabilirsiniz.*
+*📌 Not: Güncel cüzdan ve açık pozisyon durumu için [PORTFOLIO_DASHBOARD.md](docs/PORTFOLIO_DASHBOARD.md) dosyasına, detaylı iş takibi için [Kanban.md](docs/Kanban.md) tablosuna veya canlı [GitHub Project #10 (Trader)](https://github.com/users/Memin-ckn/projects/10) panosuna göz atabilirsiniz.*

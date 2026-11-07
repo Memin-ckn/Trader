@@ -89,9 +89,25 @@ Kodlarda (`src/prepare_daily_batch.py`, `src/execute_decisions.py` vb.) herhangi
 
 ---
 
-## 6. KANBAN VE GÖREV TAKİBİ
+## 6. KANBAN VE GÖREV TAKİBİ (DOKUNULMAZ SENKRONİZASYON KURALI)
 
-- Proje doküman dizininde (`/home/memin/Projects/Trader/docs/Kanban.md`) canlı bir Kanban panosu bulunmaktadır.
-- Geliştirme sürecinde atılan her adım, çözülen her bug veya eklenen her özellik sonrasında `docs/Kanban.md` (ve genel ilerleme için `README.md`) dosyası güncel tutulacak; ilgili görev doğru sütuna taşınacaktır.
-- Günlük döngü veya kod değişiklikleri tamamlandığında Kanban panosundaki ilerleme kullanıcıya rapor edilecektir.
-- `To do` (Backlog) kısmı onay alındığı takdirde ajanın kendi anlayacağı şekilde düzenlenebilir; ancak görevler önem sırasına göre sıralandığı için değişiklik yapılmadan önce **kullanıcıdan mutlaka onay alınması** gerekmektedir.
+- **Çift Yönlü Canlı Pano:** Görev takibi hem yerel doküman (`/home/memin/Projects/Trader/docs/Kanban.md`) hem de GitHub üzerindeki canlı **[Trader Project #10](https://github.com/users/Memin-ckn/projects/10)** panosu üzerinden yürütülür.
+- **Sütun ve Statü Eşleşmesi (1:1 Standart):**
+  - `# To do` <---> `Backlog`
+  - `# In Progress` <---> `In progress`
+  - `# Testing` <---> `In review`
+  - `# Complete` <---> `Done`
+- **Zorunlu Senkronizasyon Kuralı:**
+  1. **Oturum Başında:** Ajan çalışmaya başlamadan önce GitHub üzerindeki olası web değişikliklerini yerel dosyaya çekmek için senkronizasyonu kontrol eder / eşitler:
+     ```bash
+     /home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/src/sync_kanban.py --pull
+     ```
+  2. **Geliştirme Sırasında / Görev Taşıma:** Herhangi bir görev sütun değiştirdiğinde (`In progress`, `Testing`, `Done`) veya yeni görev eklendiğinde ajan `docs/Kanban.md` dosyasını günceller ve **HEMEN** GitHub'a senkronize eder:
+     ```bash
+     # Tüm yerel değişiklikleri GitHub'a iter:
+     /home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/src/sync_kanban.py --push
+     # VEYA tek bir görevi doğrudan taşır:
+     /home/memin/Projects/Trader/.venv/bin/python /home/memin/Projects/Trader/src/sync_kanban.py --move "Görev Adı" --to "In progress"
+     ```
+  3. **Git Commit Öncesi Otomatik Koruma:** `.git/hooks/pre-commit` kancası kuruludur; `docs/Kanban.md` değiştiğinde commit anında GitHub panosu otomatik güncellenir.
+- **Kullanıcı Onayı Kuralı:** `To do` (Backlog) kısmı onay alındığı takdirde ajanın kendi anlayacağı şekilde düzenlenebilir; ancak görevler önem sırasına göre sıralandığı için değişiklik yapılmadan önce **kullanıcıdan mutlaka onay alınması** gerekmektedir.

@@ -1,11 +1,14 @@
+> 🔗 **Canlı GitHub Project Panosu:** [Trader Project #10](https://github.com/users/Memin-ckn/projects/10)
+
 # To do
 - UI
     - 11 agent'ın verdiği kararlar, gerekçeleri, nihai karar, portfolyodaki hisseler, toplam para, kar/zarar gibi bilgileri görebileceğim bir ui istiyorum.
     - Bu UI hangisi daha kolay olacaksa o şekilde yapılsın. Basit web app, csv dosyası, ASCII art ile oluşturulmuş markdown ve benzeri herhangi bir şeyi kabul ederim. Yalnızca bilmem gerekenleri göreyim yeterli benim için.
-- Borsa
+- Borsa (S&P 500 Takibi)
     - Şu an anladığım kadarıyla test amaçlı yazdığımız 50 adet hisseyi kullanıyor ancak bunun planladığımız abd borsalarını (s&p 500 gibi) takip etmesi gerekiyor.
-- Forex Factory diye bir site var onun işimize yarayıp yaramadığı kontrol edilecek. Eğer iyiyse belki bir agent onun için ekleyebiliriz ya da şu anki agentlar orayı kontrol edebilir analiz için.
-- Backtest
+- Forex Factory Entegrasyonu ve Değerlendirmesi
+    - Forex Factory diye bir site var onun işimize yarayıp yaramadığı kontrol edilecek. Eğer iyiyse belki bir agent onun için ekleyebiliriz ya da şu anki agentlar orayı kontrol edebilir analiz için.
+- Backtest Simülasyonu
     - Kullandığımız teknolojilerin izin verdiği kadar (maks 3 yıl min 1 yıl) geriye gidip 1 yıllık süreci simüle edeceğiz. Bu sayede oluşturduğumuz sistemin 1 yıllık getirisini tahmini olarak hesaplayabilriiz.
 
 # In Progress
