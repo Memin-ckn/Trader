@@ -164,7 +164,7 @@ class TestPaperTradingOrchestra(unittest.TestCase):
         self.assertEqual(len(overflow_queue), 5)
         self.assertEqual([q["ticker"] for q in overflow_queue], ["AAPL", "MSFT", "NVDA", "GOOGL", "LLY"])
 
-        # 6 açık pozisyonda sadece ilk 5'i alınmalı
+        # 6 açık pozisyonda max_items=5 ile sadece ilk 5'i alınmalı
         heavy_open = {
             "open_positions": [{"ticker": f"T{i}"} for i in range(1, 7)],
             "watchlist": [{"ticker": "W1", "status": "WAIT_BUY"}],
@@ -172,6 +172,11 @@ class TestPaperTradingOrchestra(unittest.TestCase):
         heavy_queue = pdb.build_analysis_queue(heavy_open, universe, max_items=5)
         self.assertEqual(len(heavy_queue), 5)
         self.assertEqual([q["ticker"] for q in heavy_queue], ["T1", "T2", "T3", "T4", "T5"])
+
+        # Varsayılan MAX_QUEUE_SIZE (8) kotası doğrulaması
+        self.assertEqual(pdb.MAX_QUEUE_SIZE, 8)
+        default_queue = pdb.build_analysis_queue(state, universe)
+        self.assertEqual(len(default_queue), min(pdb.MAX_QUEUE_SIZE, len(set(universe["tickers"]))))
 
     def test_tc02_watchlist_ttl_expiration_and_deletion(self) -> None:
         """
@@ -946,50 +951,126 @@ class TestPaperTradingOrchestra(unittest.TestCase):
 
     def test_tc18_backtest_zero_lookahead_bias(self) -> None:
         """
-        TC-18: Backtest motoru: Geleceği görme (Zero Look-Ahead Bias) izolasyon testi.
-        T gününde çalışan indikatör fonksiyonlarına verilen serinin kesinlikle T+1 ve sonrasını içermediğinin kanıtı.
+        TC-18: Backtest motoru: Geleceği görme (Zero Look-Ahead Bias) Zaman Kilidi ve
+        Cevap Anahtarı Deposu (`src/backtest_data.py` & `prepare_daily_batch.py --as-of`) izolasyon testi.
         """
+        from src import backtest_data as btd
+
         np.random.seed(42)
-        dates = pd.date_range("2025-01-01", periods=250, freq="B")
-        prices = 100 + np.cumsum(np.random.randn(250))
+        dates = pd.date_range("2024-01-01", periods=300, freq="B")
+        prices = 120.0 + np.cumsum(np.random.randn(300) * 0.8)
+        prices = np.clip(prices, 20.0, None)
         df_full = pd.DataFrame(
-            {"Open": prices, "High": prices + 1.0, "Low": prices - 1.0, "Close": prices, "Volume": [100000] * 250},
+            {"Open": prices, "High": prices + 1.5, "Low": prices - 1.5, "Close": prices, "Volume": [250_000] * 300},
             index=dates,
         )
 
-        # T = 150 gününe kadar olan verilerle indikatör hesapla
-        t_index = 150
-        df_slice1 = df_full.iloc[: t_index + 1].copy()
-        ind1 = pdb.calculate_indicators(df_slice1, {})
+        # T = 180. iş günü (simülasyon tarihi)
+        t_index = 180
+        as_of_str = dates[t_index].strftime("%Y-%m-%d")
 
-        # T+1 ve sonrasına yapay şok dalgası ver (Gelecek değişiyor)
+        # T+1 ve sonrasına (geleceğe) 10x fiyat şoku uygula
         df_full_shocked = df_full.copy()
-        df_full_shocked.iloc[t_index + 1 :, df_full_shocked.columns.get_loc("Close")] *= 5.0
-        df_slice2 = df_full_shocked.iloc[: t_index + 1].copy()
-        ind2 = pdb.calculate_indicators(df_slice2, {})
+        df_full_shocked.iloc[t_index + 1 :, df_full_shocked.columns.get_loc("Close")] *= 10.0
+        df_full_shocked.iloc[t_index + 1 :, df_full_shocked.columns.get_loc("High")] *= 10.0
 
-        # T anındaki indikatörlerin gelecekteki şoktan zerre etkilenmediğini kanıtla
+        # 1. slice_history_as_of ve verify_no_lookahead kontrolü
+        sliced_normal = btd.slice_history_as_of(df_full, as_of_str)
+        sliced_shocked = btd.slice_history_as_of(df_full_shocked, as_of_str)
+
+        ok_normal, last_dt = btd.verify_no_lookahead(sliced_normal, as_of_str)
+        self.assertTrue(ok_normal)
+        self.assertEqual(last_dt, as_of_str)
+
+        ok_leak, leak_msg = btd.verify_no_lookahead(df_full, as_of_str)
+        self.assertFalse(ok_leak, "Kesilmemiş DataFrame gelecek verisi sızıntısı olarak yakalanmalıdır!")
+        self.assertIn("LOOKAHEAD_LEAK_DETECTED", leak_msg)
+
+        # 2. calculate_indicators(..., as_of_date=as_of_str) kesilmemiş tablo verilse bile geleceği kesmeli
+        ind1 = pdb.calculate_indicators(df_full, {}, as_of_date=as_of_str)
+        ind2 = pdb.calculate_indicators(df_full_shocked, {}, as_of_date=as_of_str)
         self.assertEqual(ind1["rsi_14"], ind2["rsi_14"])
         self.assertEqual(ind1["macd"], ind2["macd"])
         self.assertEqual(ind1["sma_50"], ind2["sma_50"])
         self.assertEqual(ind1["current_price"], ind2["current_price"])
 
+        # 3. Cevap Anahtarı Deposu (Cache) + prepare_daily_batch.main(as_of_date=...) uçtan uca testi
+        cache_dir = self.tmp_path / "bt_cache"
+        for sym in ("AAPL", "MSFT", "NVDA", "LLY", "AMZN"):
+            btd.save_ticker_to_cache(sym, df_full_shocked, info={"sector": "Information Technology"}, cache_dir=cache_dir)
+
+        bt_state = {
+            "portfolio_summary": {"cash_usd": 3500.0, "total_equity_usd": 3500.0, "total_fees_paid_usd": 0.0},
+            "open_positions": [],
+            "watchlist": [],
+            "trade_history": [],
+        }
+        bt_univ = {"tickers": ["AAPL", "MSFT", "NVDA", "LLY", "AMZN"], "sectors": {"AAPL": "Information Technology"}}
+        pdb.save_json(self.test_state_file, bt_state)
+        pdb.save_json(self.test_universe_file, bt_univ)
+
+        rc = pdb.main(
+            state_file=self.test_state_file,
+            universe_file=self.test_universe_file,
+            briefing_file=self.test_briefing_file,
+            as_of_date=as_of_str,
+            use_cache=True,
+            cache_dir=cache_dir,
+            allow_network=False,
+            random_seed=42,
+        )
+        self.assertEqual(rc, 0)
+        briefing = pdb.load_json(self.test_briefing_file)
+        self.assertEqual(briefing["as_of_date"], as_of_str)
+        self.assertTrue(briefing["time_lock_verified"])
+        self.assertEqual(len(briefing["candidates"]), 5)
+        for cand in briefing["candidates"]:
+            self.assertLessEqual(cand["market_data"]["last_bar_date"], as_of_str)
+            self.assertEqual(cand["market_data"]["current_price"], ind1["current_price"])
+
     def test_tc19_backtest_gap_down_execution_and_fee_accumulation(self) -> None:
         """
-        TC-19: Backtest motoru: Emir icrası, gap-down açılışlarda gerçekçi çıkış (stop fiyatı yerine Open fiyatı)
-        ve komisyon birikim doğrulaması.
+        TC-19: Backtest motoru: Emir icrası, Cevap Anahtarı ara gün SL/TP taraması (`check_sl_tp_in_window`),
+        gap-down açılışlarda gerçekçi çıkış (stop fiyatı yerine Open fiyatı) ve komisyon birikim doğrulaması.
         """
-        # Pozisyon: 10 adet AAPL @ 100.00$, Stop: 95.00$
+        from src import backtest_data as btd
+
+        # Pozisyon: 10 adet AAPL @ 100.00$, Stop: 95.00$, Take-Profit: 115.00$
         # Ertesi gün piyasa sert gap-down açılır: Open: 88.00$ (Stop fiyatının 7$ altında!)
         pos_shares = 10.0
         avg_buy = 100.00
         stop_plan = 95.00
+        tp_plan = 115.00
         open_gap = 88.00
 
-        # Gerçekçi icra: Stop altına gap ile açıldıysa stop fiyatından değil Open fiyatından çıkılır
-        execution_price = open_gap if open_gap < stop_plan else stop_plan
-        self.assertEqual(execution_price, 88.00)
+        cache_dir = self.tmp_path / "sl_tp_cache"
+        df_window = pd.DataFrame(
+            {
+                "Open": [100.0, 99.0, open_gap, 90.0],
+                "High": [102.0, 101.0, 91.0, 120.0],
+                "Low": [98.0, 96.0, 86.0, 89.0],
+                "Close": [100.5, 97.0, 87.5, 118.0],
+                "Volume": [100_000, 120_000, 300_000, 150_000],
+            },
+            index=pd.to_datetime(["2024-11-15", "2024-11-18", "2024-11-19", "2024-11-20"]),
+        )
+        btd.save_ticker_to_cache("AAPL", df_window, cache_dir=cache_dir)
 
+        trig = btd.check_sl_tp_in_window(
+            "AAPL",
+            stop_loss=stop_plan,
+            take_profit=tp_plan,
+            start_date_exclusive="2024-11-15",
+            end_date_inclusive="2024-11-20",
+            cache_dir=cache_dir,
+            allow_network=False,
+        )
+        self.assertTrue(trig["triggered"])
+        self.assertEqual(trig["trigger_type"], "STOP_LOSS")
+        self.assertEqual(trig["trigger_date"], "2024-11-19")
+        self.assertEqual(trig["execution_price"], 88.00, "Gap-down açılışta SL yerine Open fiyatından çıkılmalı!")
+
+        execution_price = trig["execution_price"]
         gross_proceeds = round(pos_shares * execution_price, 2)
         net_proceeds = round(gross_proceeds - ed.FEE_PER_TRADE, 2)
         total_fees = round(ed.FEE_PER_TRADE * 2, 2)  # Alış + Satış

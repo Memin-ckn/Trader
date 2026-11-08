@@ -19,6 +19,7 @@ Görevler:
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import random
@@ -49,7 +50,19 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from src.paths import BASE_DIR, BRIEFING_FILE, SKILLS_DIR, STATE_FILE, UNIVERSE_FILE
+from src.backtest_data import (
+    get_cached_or_fetch_ticker,
+    slice_history_as_of,
+    verify_no_lookahead,
+)
+from src.paths import (
+    BACKTEST_CACHE_DIR,
+    BASE_DIR,
+    BRIEFING_FILE,
+    SKILLS_DIR,
+    STATE_FILE,
+    UNIVERSE_FILE,
+)
 
 # Repo script dizinlerini sys.path'e ekle
 CIRCUIT_BREAKER_DIR = SKILLS_DIR / "drawdown-circuit-breaker" / "scripts"
@@ -140,14 +153,152 @@ def clean_watchlist(state: dict[str, Any], today_str: str) -> list[str]:
     return expired_tickers
 
 
+MAX_QUEUE_SIZE = 8
+
+
+def _quick_prescreen_ticker(
+    ticker: str,
+    as_of_date: str | date,
+    cache_dir: Path = BACKTEST_CACHE_DIR,
+) -> float | None:
+    """
+    Yerel önbellekteki (cache_dir) veriyi `as_of_date` Zaman Kilidi ile keserek
+    kesinlikle geleceğe bakmadan hızlı ön eleme (Pre-Screener) yapar:
+    - Fiyat > SMA(50) ve Fiyat > SMA(200)
+    - 50.0 <= RSI(14) <= 72.0
+    - Başarılı ise son 3 aylık getiri (perf_3m / momentum skoru), aksi halde None döner.
+    """
+    from src.backtest_data import _ticker_pkl_path
+
+    norm_t = clean_universe_ticker(ticker)
+    pkl_path = _ticker_pkl_path(norm_t, cache_dir)
+    if not pkl_path.exists():
+        return None
+
+    hist, _ = get_cached_or_fetch_ticker(
+        norm_t,
+        as_of_date=as_of_date,
+        cache_dir=cache_dir,
+        allow_network=False,
+        max_lookback_bars=260,
+    )
+    if hist.empty or len(hist) < 200 or "Close" not in hist.columns:
+        return None
+
+    close = hist["Close"].astype(float)
+    current_price = float(close.iloc[-1])
+    if not _is_finite_number(current_price) or current_price <= 0:
+        return None
+
+    sma_50 = float(close.iloc[-50:].mean())
+    sma_150 = float(close.iloc[-150:].mean()) if len(close) >= 150 else sma_50
+    sma_200 = float(close.iloc[-200:].mean())
+    if not (_is_finite_number(sma_50) and _is_finite_number(sma_150) and _is_finite_number(sma_200)):
+        return None
+    if not (current_price > sma_50 and current_price > sma_200):
+        return None
+
+    delta = close.iloc[-20:].diff()
+    gain = delta.clip(lower=0).iloc[-14:].mean()
+    loss = (-delta.clip(upper=0)).iloc[-14:].mean()
+    if not _is_finite_number(loss) or loss == 0:
+        rsi_14 = 100.0 if (_is_finite_number(gain) and gain > 0) else 50.0
+    else:
+        rs = gain / loss
+        rsi_14 = 100.0 - (100.0 / (1.0 + rs))
+
+    # Son 3 aylık getiri (momentum / relatif güç)
+    perf_3m = (
+        float((close.iloc[-1] / close.iloc[-65] - 1) * 100)
+        if len(close) >= 65 and close.iloc[-65] > 0
+        else 0.0
+    )
+
+    # V2 Ön Tarayıcı Kriterleri:
+    # 1. Aşırı şişmiş tepe hisselerini (Close > SMA50 * 1.08 veya RSI > 65 veya RSI < 45) doğrudan ele
+    if current_price > (sma_50 * 1.08) or rsi_14 > 65.0 or rsi_14 < 45.0:
+        return None
+
+    # 2. Stage 2 kusursuz dizilim (Close > SMA50 > SMA150 > SMA200) ve Close <= SMA50 * 1.07
+    is_v2_golden = (
+        (current_price > sma_50 > sma_150 > sma_200)
+        and (current_price <= sma_50 * 1.07)
+        and (45.0 <= rsi_14 <= 64.0)
+    )
+    if is_v2_golden:
+        # En yüksek öncelik: 1000 + son 3 aylık relatif güç
+        return 1000.0 + perf_3m
+    elif (current_price > sma_50 and current_price > sma_200) and (45.0 <= rsi_14 <= 64.0) and (current_price <= sma_50 * 1.07):
+        # Güçlü aday: 500 + perf_3m
+        return 500.0 + perf_3m
+    else:
+        # Yedek aday (1.07 ile 1.08 arası)
+        return perf_3m
+
+
+def select_discovery_candidates(
+    candidate_tickers: list[str],
+    count: int,
+    as_of_date: str | date | None = None,
+    cache_dir: Path | None = None,
+) -> list[str]:
+    """
+    Keşif (DISCOVERY) kontenjanını doldurmak için:
+    1. Eğer yerel önbellek ve `as_of_date` mevcutsa, adayları
+       Akıllı Ön Tarayıcıdan (`_quick_prescreen_ticker`: Fiyat > SMA50 & SMA200, 50 <= RSI <= 72)
+       geçirir ve son 3 aylık getirisi (`perf_3m` / momentum) en yüksek olan liderlere öncelik verir.
+    2. Yeterli güçlü aday çıkmazsa kalan kontenjanı rastgele yedeklerle tamamlar.
+    """
+    if count <= 0 or not candidate_tickers:
+        return []
+
+    eff_cache = cache_dir or BACKTEST_CACHE_DIR
+    use_prescreen = as_of_date is not None and eff_cache.exists() and any(eff_cache.glob("*.pkl"))
+
+    if not use_prescreen:
+        return random.sample(candidate_tickers, min(count, len(candidate_tickers)))
+
+    shuffled = list(candidate_tickers)
+    random.shuffle(shuffled)
+
+    # Hızlı tarama: Havuzdaki ilk 120 adayı tara, Stage 2'ye uyanları (ticker, perf_3m) topla
+    sample_to_scan = shuffled[:min(len(shuffled), 120)]
+    other_pool = shuffled[min(len(shuffled), 120):]
+
+    qualified: list[tuple[str, float]] = []
+    remaining_pool: list[str] = []
+
+    for t in sample_to_scan:
+        score = _quick_prescreen_ticker(t, as_of_date=as_of_date, cache_dir=eff_cache)
+        if score is not None:
+            qualified.append((t, score))
+        else:
+            remaining_pool.append(t)
+
+    # Son 3 aylık getirisi (perf_3m) en yüksek olandan en düşüğe doğru sırala
+    qualified.sort(key=lambda x: x[1], reverse=True)
+    strong_picks = [t for t, _ in qualified[:count]]
+
+    if len(strong_picks) < count:
+        needed = count - len(strong_picks)
+        fallback_pool = remaining_pool + other_pool
+        strong_picks.extend(fallback_pool[:needed])
+
+    return strong_picks[:count]
+
+
 def build_analysis_queue(
-    state: dict[str, Any], universe: dict[str, Any], max_items: int = 5
+    state: dict[str, Any],
+    universe: dict[str, Any],
+    max_items: int = MAX_QUEUE_SIZE,
+    as_of_date: str | date | None = None,
+    cache_dir: Path | None = None,
 ) -> list[dict[str, Any]]:
     """
     Öncelik Sırası:
     1. open_positions
     2. watchlist (status == WAIT_BUY veya aktif olanlar)
-    3. universe.json içinden rastgele yeni seçim
+    3. universe.json içinden Akıllı Ön Tarayıcı (Pre-Screener) öncelikli yeni keşif
     """
     if max_items <= 0:
         return []
@@ -184,7 +335,7 @@ def build_analysis_queue(
         if len(queue) >= max_items:
             return queue
 
-    # 3. Kalan kontenjan kadar universe'den rastgele keşif
+    # 3. Kalan kontenjan kadar universe'den Akıllı Ön Tarayıcı (Pre-Screener) + yedek keşif
     remaining = max_items - len(queue)
     raw_universe = universe.get("tickers", []) if isinstance(universe, dict) else []
     candidate_tickers: list[str] = []
@@ -194,7 +345,12 @@ def build_analysis_queue(
             candidate_tickers.append(norm_t)
 
     if candidate_tickers and remaining > 0:
-        chosen = random.sample(candidate_tickers, min(remaining, len(candidate_tickers)))
+        chosen = select_discovery_candidates(
+            candidate_tickers,
+            remaining,
+            as_of_date=as_of_date,
+            cache_dir=cache_dir,
+        )
         for ticker in chosen:
             seen_tickers.add(ticker)
             queue.append({
@@ -212,6 +368,8 @@ def get_fallback_candidates(
     current_queue: list[dict[str, Any]],
     count: int = 1,
     failed_tickers: set[str] | None = None,
+    as_of_date: str | date | None = None,
+    cache_dir: Path | None = None,
 ) -> list[dict[str, Any]]:
     """
     Keşif sırasında veri alınamayan veya delist olan hisseler yerine
@@ -236,7 +394,12 @@ def get_fallback_candidates(
     if not candidates:
         return []
 
-    chosen = random.sample(candidates, min(count, len(candidates)))
+    chosen = select_discovery_candidates(
+        candidates,
+        count,
+        as_of_date=as_of_date,
+        cache_dir=cache_dir,
+    )
     return [{"ticker": c, "source": "DISCOVERY_FALLBACK", "details": {}} for c in chosen]
 
 
@@ -377,12 +540,19 @@ def _sanitize_history_df(hist: pd.DataFrame | None) -> pd.DataFrame:
     return cleaned
 
 
-def calculate_indicators(hist: pd.DataFrame, info: dict[str, Any] | None) -> dict[str, Any]:
+def calculate_indicators(
+    hist: pd.DataFrame,
+    info: dict[str, Any] | None,
+    as_of_date: str | date | None = None,
+) -> dict[str, Any]:
     """
     yfinance verilerinden teknik ve temel indikatörleri hesaplar.
+    Eğer `as_of_date` verilmişse ZAMAN KİLİDİ (`slice_history_as_of`) uygulayarak
+    o tarihten sonraki gelecek barlarını kesin olarak keser.
     """
     info = info or {}
-    cleaned = _sanitize_history_df(hist)
+    source_hist = slice_history_as_of(hist, as_of_date) if as_of_date is not None else hist
+    cleaned = _sanitize_history_df(source_hist)
     if cleaned.empty or len(cleaned) < 30:
         return {"error": "Yetersiz fiyat verisi (en az 30 geçerli gün gerekli)"}
 
@@ -687,10 +857,19 @@ def main(
     state_file: Path | None = None,
     universe_file: Path | None = None,
     briefing_file: Path | None = None,
+    as_of_date: str | None = None,
+    use_cache: bool = False,
+    cache_dir: Path | None = None,
+    allow_network: bool = True,
+    random_seed: int | None = None,
 ) -> int:
     state_path = state_file or STATE_FILE
     universe_path = universe_file or UNIVERSE_FILE
     briefing_path = briefing_file or BRIEFING_FILE
+    eff_cache_dir = cache_dir or BACKTEST_CACHE_DIR
+
+    if random_seed is not None:
+        random.seed(random_seed)
 
     print("=" * 60)
     print("Yerel Paper Trading Orkestrası - Günlük Veri Motoru (prepare_daily_batch)")
@@ -699,9 +878,11 @@ def main(
     # 1. State ve Universe Yükle
     state = load_json(state_path)
     universe = load_json(universe_path)
-    today_str = date.today().strftime("%Y-%m-%d")
+    real_today_str = date.today().strftime("%Y-%m-%d")
+    today_str = str(as_of_date).strip()[:10] if as_of_date else real_today_str
+    is_historical_mode = (as_of_date is not None) or use_cache or (cache_dir is not None)
 
-    print(f"[*] İşlem Tarihi: {today_str}")
+    print(f"[*] İşlem / Simülasyon Tarihi (as_of): {today_str}{' [ZAMAN KİLİTLİ / BACKTEST MODU]' if is_historical_mode else ''}")
     account_size = float(state.get("portfolio_summary", {}).get("total_equity_usd", 3500.0))
     print(f"[*] Mevcut Toplam Varlık (Equity): ${account_size:,.2f}")
 
@@ -713,8 +894,14 @@ def main(
     else:
         print("[*] İzleme listesinde süresi dolan hisse yok.")
 
-    # 3. Analiz Kuyruğunu Oluştur (Maks 5)
-    queue = build_analysis_queue(state, universe, max_items=5)
+    # 3. Analiz Kuyruğunu Oluştur (Maks MAX_QUEUE_SIZE = 8)
+    queue = build_analysis_queue(
+        state,
+        universe,
+        max_items=MAX_QUEUE_SIZE,
+        as_of_date=today_str if is_historical_mode else None,
+        cache_dir=eff_cache_dir if is_historical_mode else None,
+    )
     print(f"[*] Analiz Kuyruğu ({len(queue)} hisse):")
     for q in queue:
         print(f"    - {q['ticker']} ({q['source']})")
@@ -724,15 +911,15 @@ def main(
     print(f"[*] Devre Kesici Durumu: {circuit_breaker_result['recommendation']}")
     print(f"    {circuit_breaker_result['rationale']}")
 
-    # 5. Hisse Verilerini Çek ve Modülleri Çalıştır (Discovery Fallback & Seans Koruması Aktif)
+    # 5. Hisse Verilerini Çek ve Modülleri Çalıştır (Discovery Fallback & Zaman Kilidi Aktif)
     candidates_data: list[dict[str, Any]] = []
     failed_tickers: set[str] = set()
     fallback_attempts = 0
-    max_fallback_attempts = 10
+    max_fallback_attempts = 16
     sectors_map = universe.get("sectors", {}) if isinstance(universe, dict) else {}
 
     idx = 0
-    while idx < len(queue) and len(candidates_data) < 5:
+    while idx < len(queue) and len(candidates_data) < MAX_QUEUE_SIZE:
         item = queue[idx]
         idx += 1
         ticker = item["ticker"]
@@ -741,74 +928,100 @@ def main(
 
         fetch_failed = False
         try:
-            yf_ticker = yf.Ticker(ticker)
-            hist = yf_ticker.history(period="2y")
-            info = yf_ticker.info or {}
+            if is_historical_mode:
+                hist, info = get_cached_or_fetch_ticker(
+                    ticker,
+                    as_of_date=today_str,
+                    cache_dir=eff_cache_dir,
+                    allow_network=allow_network,
+                )
+            else:
+                yf_ticker = yf.Ticker(ticker)
+                hist = yf_ticker.history(period="2y")
+                info = yf_ticker.info or {}
 
             if hist is None or hist.empty:
                 print(f"    [!] {ticker} için fiyat verisi alınamadı!")
                 fetch_failed = True
             else:
-                hist, stripped_intraday = strip_incomplete_intraday_bar(hist)
-                if stripped_intraday:
-                    print(
-                        f"    [*] Not: ABD seansı henüz kapanmadığı için {ticker} yarım günlük barı kırpıldı (Son tam kapanış baz alındı)."
-                    )
+                if not is_historical_mode or today_str >= real_today_str:
+                    hist, stripped_intraday = strip_incomplete_intraday_bar(hist)
+                    if stripped_intraday:
+                        print(
+                            f"    [*] Not: ABD seansı henüz kapanmadığı için {ticker} yarım günlük barı kırpıldı (Son tam kapanış baz alındı)."
+                        )
 
-                last_bar_dt = (
-                    hist.index[-1].strftime("%Y-%m-%d")
-                    if hasattr(hist.index[-1], "strftime")
-                    else today_str
-                )
-                session_ok, session_msg = is_market_session_valid(last_bar_dt, hist)
-                if not session_ok and "hacmi" in session_msg:
-                    print(f"    [!] {ticker} seans/hacim uyarısı: {session_msg}")
+                # ZAMAN KİLİDİ (Point-in-Time Slicing): today_str sonrası tüm barları kesin olarak kes
+                hist = slice_history_as_of(hist, today_str)
+                no_leak, leak_info = verify_no_lookahead(hist, today_str)
+                if not no_leak:
+                    raise RuntimeError(f"Kritik Zaman Kilidi İhlali ({ticker}): {leak_info}")
+
+                if hist.empty:
+                    print(f"    [!] {ticker} için {today_str} ve öncesinde geçerli fiyat verisi bulunamadı!")
                     fetch_failed = True
                 else:
-                    indicators = calculate_indicators(hist, info)
-                    if "error" in indicators:
-                        print(f"    [!] {ticker} veri hatası: {indicators['error']}")
+                    last_bar_dt = (
+                        hist.index[-1].strftime("%Y-%m-%d")
+                        if hasattr(hist.index[-1], "strftime")
+                        else today_str
+                    )
+                    session_ok, session_msg = is_market_session_valid(last_bar_dt, hist)
+                    if not session_ok and "hacmi" in session_msg:
+                        print(f"    [!] {ticker} seans/hacim uyarısı: {session_msg}")
                         fetch_failed = True
                     else:
-                        if ticker in sectors_map:
-                            indicators["sector"] = sectors_map[ticker]
-                        elif info.get("sector"):
-                            indicators["sector"] = str(info.get("sector"))
+                        indicators = calculate_indicators(hist, info, as_of_date=today_str)
+                        if "error" in indicators:
+                            print(f"    [!] {ticker} veri hatası: {indicators['error']}")
+                            fetch_failed = True
+                        else:
+                            if ticker in sectors_map:
+                                indicators["sector"] = sectors_map[ticker]
+                            elif info.get("sector"):
+                                indicators["sector"] = str(info.get("sector"))
+                            indicators["last_bar_date"] = last_bar_dt
 
-                        pa_res, sizing_res = run_technical_and_sizing(
-                            ticker, hist, indicators, account_size, today_str
-                        )
+                            pa_res, sizing_res = run_technical_and_sizing(
+                                ticker, hist, indicators, account_size, today_str
+                            )
 
-                        candidate_payload = {
-                            "ticker": ticker,
-                            "source": source,
-                            "source_details": item["details"],
-                            "market_data": indicators,
-                            "weekly_price_action": pa_res,
-                            "position_sizing": sizing_res,
-                        }
-                        candidates_data.append(candidate_payload)
+                            candidate_payload = {
+                                "ticker": ticker,
+                                "source": source,
+                                "source_details": item["details"],
+                                "market_data": indicators,
+                                "weekly_price_action": pa_res,
+                                "position_sizing": sizing_res,
+                            }
+                            candidates_data.append(candidate_payload)
 
-                        print(
-                            f"    Fiyat: ${indicators['current_price']} | RSI(14): {indicators['rsi_14']} | SMA50: {indicators['sma_50']}"
-                        )
-                        print(
-                            f"    Stage 2 Skoru: {indicators['trend_template']['score']}/100 (Geçti mi: {indicators['trend_template']['passed']})"
-                        )
-                        print(
-                            f"    Önerilen Pozisyon: {sizing_res['recommended_shares']} adet (${sizing_res['position_value']:.2f}) | Risk: ${sizing_res.get('risk_dollars', 0)}"
-                        )
+                            print(
+                                f"    Fiyat ({last_bar_dt}): ${indicators['current_price']} | RSI(14): {indicators['rsi_14']} | SMA50: {indicators['sma_50']}"
+                            )
+                            print(
+                                f"    Stage 2 Skoru: {indicators['trend_template']['score']}/100 (Geçti mi: {indicators['trend_template']['passed']})"
+                            )
+                            print(
+                                f"    Önerilen Pozisyon: {sizing_res['recommended_shares']} adet (${sizing_res['position_value']:.2f}) | Risk: ${sizing_res.get('risk_dollars', 0)}"
+                            )
 
         except Exception as exc:
             print(f"    [!] {ticker} işlenirken hata oluştu: {exc}")
             fetch_failed = True
 
-        # Keşif (DISCOVERY) sırasında hata alınırsa 5 hisselik kotayı korumak için yedek aday çek (TC-15)
+        # Keşif (DISCOVERY) sırasında hata alınırsa kotayı korumak için yedek aday çek (TC-15)
         if fetch_failed and source in ("DISCOVERY", "DISCOVERY_FALLBACK"):
             failed_tickers.add(ticker)
             if fallback_attempts < max_fallback_attempts:
                 fallbacks = get_fallback_candidates(
-                    state, universe, queue, count=1, failed_tickers=failed_tickers
+                    state,
+                    universe,
+                    queue,
+                    count=1,
+                    failed_tickers=failed_tickers,
+                    as_of_date=today_str if is_historical_mode else None,
+                    cache_dir=eff_cache_dir if is_historical_mode else None,
                 )
                 if fallbacks:
                     fb_item = fallbacks[0]
@@ -823,6 +1036,7 @@ def main(
         "schema_version": "1.0",
         "generated_at": datetime.now().isoformat(),
         "as_of_date": today_str,
+        "time_lock_verified": True,
         "portfolio_summary": state.get("portfolio_summary", {}),
         "circuit_breaker": circuit_breaker_result,
         "queue_summary": {
@@ -838,9 +1052,34 @@ def main(
 
     save_json(briefing_path, briefing)
     print(f"\n[✓] Günlük brifing hazırlandı ve kaydedildi: {briefing_path}")
-    print(f"[✓] Toplam {len(candidates_data)} hisse incelendi.")
+    print(f"[✓] Toplam {len(candidates_data)} hisse incelendi (Zaman Kilidi: <= {today_str}).")
     return 0
 
 
+def _cli() -> int:
+    parser = argparse.ArgumentParser(description="Günlük Veri ve Kuyruk Motoru (prepare_daily_batch)")
+    parser.add_argument("--as-of", dest="as_of_date", help="Tarihsel Zaman Kilidi tarihi (YYYY-MM-DD, örn: 2024-11-15)")
+    parser.add_argument("--use-cache", action="store_true", help="Yerel Cevap Anahtarı Deposunu (data/backtest_cache/) kullan")
+    parser.add_argument("--cache-dir", type=Path, default=None, help="Özel önbellek klasörü yolu")
+    parser.add_argument("--state-file", type=Path, default=None, help="Özel state.json dosya yolu")
+    parser.add_argument("--universe-file", type=Path, default=None, help="Özel universe.json dosya yolu")
+    parser.add_argument("--briefing-file", type=Path, default=None, help="Özel daily_briefing.json çıktı yolu")
+    parser.add_argument("--offline", action="store_true", help="Ağ erişimini kapat, yalnızca yerel önbellekten oku")
+    parser.add_argument("--seed", type=int, default=None, help="Rastgele keşif seçimi için deterministik tohum (seed)")
+    args = parser.parse_args()
+
+    return main(
+        state_file=args.state_file,
+        universe_file=args.universe_file,
+        briefing_file=args.briefing_file,
+        as_of_date=args.as_of_date,
+        use_cache=args.use_cache,
+        cache_dir=args.cache_dir,
+        allow_network=not args.offline,
+        random_seed=args.seed,
+    )
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(_cli())
+

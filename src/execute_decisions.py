@@ -78,7 +78,11 @@ def save_json(filepath: Path, data: dict[str, Any]) -> None:
     os.replace(tmp_path, filepath)
 
 
-def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> dict[str, Any]:
+def process_decisions(
+    state: dict[str, Any],
+    decisions_data: dict[str, Any],
+    enforce_risk_cap: bool = False,
+) -> dict[str, Any]:
     """
     Kararları state sözlüğü üzerinde yürütür, portföy özetini ve açık pozisyonları günceller.
     """
@@ -115,12 +119,12 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
     for d in decisions:
         ticker = str(d.get("ticker", "")).upper().strip()
         action = str(d.get("action", "")).upper().strip()
-        raw_price = d.get("price", 0.0)
+        raw_price = d.get("price") if d.get("price") is not None else d.get("limit_price", 0.0)
         raw_shares = d.get("shares", 0.0)
         price = float(raw_price) if raw_price is not None else 0.0
         shares = float(raw_shares) if raw_shares is not None else 0.0
-        reason = d.get("reason", "")
-        thesis = d.get("thesis", reason)
+        reason = d.get("reason") or d.get("rationale") or ""
+        thesis = d.get("thesis") or reason
 
         if not ticker:
             continue
@@ -161,6 +165,26 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
                 print(
                     f"    [!] Pozisyon boyutu kasanın %20'si ile sınırlandı (Maks: ${rem_allowed_val:.2f}) -> {shares:.2f} adet (${position_cost:.2f})."
                 )
+
+            # Mekanik %1 Kasa Riski Tavanı (Maksimum %1 Risk, ~$35-38):
+            is_risk_cap_active = (
+                enforce_risk_cap
+                or bool(decisions_data.get("enforce_risk_cap", False))
+                or bool(d.get("enforce_risk_cap", False))
+            )
+            raw_sl = d.get("stop_loss")
+            if is_risk_cap_active and raw_sl is not None:
+                sl_val = float(raw_sl)
+                if sl_val > 0 and price > sl_val:
+                    max_risk_usd = round(total_equity * 0.01, 2)
+                    per_share_risk = price - sl_val
+                    max_risk_shares = _floor_shares(max_risk_usd / per_share_risk)
+                    if shares > max_risk_shares:
+                        shares = max_risk_shares
+                        position_cost = round(shares * price, 2)
+                        print(
+                            f"    [!] %1 risk tavanı uygulandı (Maks Risk: ${max_risk_usd:.2f}, Lot Başı Risk: ${per_share_risk:.2f}) -> {shares:.2f} adet (${position_cost:.2f})."
+                        )
 
             total_buy_required = round(position_cost + FEE_PER_TRADE, 2)
             if total_buy_required > cash:
@@ -294,7 +318,8 @@ def process_decisions(state: dict[str, Any], decisions_data: dict[str, Any]) -> 
             print(f"        Net Kâr/Zarar: {pnl_sign}${trade_net_pnl:.2f}")
 
         elif action == "WAIT_BUY":
-            target_entry = float(d.get("target_entry_price", price))
+            raw_tgt = d.get("target_entry_price") or d.get("target_price") or price
+            target_entry = float(raw_tgt) if raw_tgt is not None else 0.0
             stop_plan = float(d.get("stop_loss_plan", target_entry * 0.94))
             expires = (date.fromisoformat(today_str) + timedelta(days=14)).strftime("%Y-%m-%d")
 

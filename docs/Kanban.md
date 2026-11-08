@@ -1,10 +1,6 @@
 > 🔗 **Canlı GitHub Project Panosu:** [Trader Project #10](https://github.com/users/Memin-ckn/projects/10)
 
 # To do
-- Forex Factory Entegrasyonu ve Değerlendirmesi
-    - Forex Factory diye bir site var onun işimize yarayıp yaramadığı kontrol edilecek. Eğer iyiyse belki bir agent onun için ekleyebiliriz ya da şu anki agentlar orayı kontrol edebilir analiz için.
-- Backtest Simülasyonu
-    - Kullandığımız teknolojilerin izin verdiği kadar (maks 3 yıl min 1 yıl) geriye gidip 1 yıllık süreci simüle edeceğiz. Bu sayede oluşturduğumuz sistemin 1 yıllık getirisini tahmini olarak hesaplayabilriiz.
 - Optimizasyon
     - Projede kullanılmayan, işe yaramayan, daha optimize şekilde yapılabilecek, tekrar eden ne varsa silinmeli. Tekrarlar fonksiyon haline getirilip kullanılmalı. Projede kalabalık yaratan ve verimliliği azaltan her şeyden kurtulunup tertemiz hale getirilmeli.
 
@@ -13,6 +9,14 @@
 # Testing
 
 # Complete
+- Backtest Simülasyonunun Yürütülmesi (Kasım 2024 – Kasım 2026)
+    - Gerçek 11 ajanlı AGY komitesi kararlarıyla (`docs/COMMITTEE_PROMPT.md`, zero look-ahead) `src/backtest_step.py` üzerinden 105+ haftalık 2 yıllık simülasyon %100 tamamlandı (`COMPLETED`).
+    - Strateji V2 disiplini (1% mekanik risk kilidi, maks 2 sektör kotası, akıllı ön tarayıcı) uygulandı; tüm detaylar, equity eğrisi ve trade logları `docs/BACKTEST_REPORT.md` içinde belgelendi.
+- Backtest Simülasyonu — Altyapı (alt görev 1, 2, 3 & 4)
+    - **1. Cevap Anahtarı Deposu ve Toplu Veri Önbelleği (`src/backtest_data.py` & `data/backtest_cache/`):** OHLCV verileri ve `SPY` kıyas endeksi yerel önbellekte tutuluyor (SMA(200) / 52 haftalık indikatörler Kasım 2024 başında hazır).
+    - **2. Zaman Kilidi ve Geleceği Görmeme Kalkanı (`Point-in-Time Slicing` / `src/prepare_daily_batch.py`):** `--as-of` ve yerel önbellek desteği; `hist.loc[:as_of_date]` kesimi ile Look-Ahead Bias engellendi.
+    - **3. İzole Checkpoint Kasası (`data/backtest_state.json`):** `src/backtest_step.py --init` ile 3.500 $ başlangıçlı, `current_sim_date` / `status` (`READY` / `AWAITING_DECISIONS` / `COMPLETED`) taşıyan kasa kuruldu; kaldığı yerden devam eder.
+    - **4. Adım Adım Backtest Yürütücüsü (`src/backtest_step.py` & `docs/BACKTEST_REPORT.md`):** `--prepare` (tarih ilerletme, ara gün SL/TP otomatik satış, Zaman Kilitli brifing), `--execute` (kararları `process_decisions` ile işleme, equity_curve + SPY kıyası, karne), `--status` modları kodlandı. 21 test geçti.
 - Borsa (S&P 500 Takibi)
     - `src/update_universe.py` betiği yazılarak S&P 500 bileşenleri ve 11 GICS sektör bilgisi çekildi; semboller `yfinance` formatına (`BRK.B` -> `BRK-B`, `BF.B` -> `BF-B`) normalize edildi.
     - Aynı şirketin ikincil pay sınıfları (`GOOG`, `FOX`, `NWS`) elenip tekilleştirilerek `data/universe.json` dosyası tam 500 tekil S&P 500 hissesi ve sektör haritasıyla güncellendi.

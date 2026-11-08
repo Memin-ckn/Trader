@@ -1,0 +1,2895 @@
+{
+  "cash_usd": 205.96,
+  "total_equity_usd": 2819.78,
+  "total_fees_paid_usd": 298.5,
+  "start_date": "2024-11-04",
+  "end_date": "2026-11-04",
+  "current_sim_date": "2026-11-04",
+  "step_days": 7,
+  "status": "COMPLETED",
+  "spy_start_date": "2024-11-04",
+  "spy_start_price": 556.96,
+  "open_positions": [
+    {
+      "ticker": "KO",
+      "shares": 5.86,
+      "avg_buy_price": 88.61,
+      "current_price": 95.8,
+      "stop_loss": 90.05,
+      "take_profit": 102.79,
+      "buy_date": "2026-09-22",
+      "thesis": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($29.07) ve R:R 2.80 kurgusu.",
+      "fees_paid_usd": 1.5
+    },
+    {
+      "ticker": "EXPD",
+      "shares": 2.69,
+      "avg_buy_price": 191.8,
+      "current_price": 197.69,
+      "stop_loss": 181.06,
+      "take_profit": 222.49,
+      "buy_date": "2026-10-06",
+      "thesis": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.90) ve R:R 2.80 kurgusu.",
+      "fees_paid_usd": 1.5
+    },
+    {
+      "ticker": "TMO",
+      "shares": 0.73,
+      "avg_buy_price": 698.34,
+      "current_price": 706.16,
+      "stop_loss": 659.23,
+      "take_profit": 810.07,
+      "buy_date": "2026-11-03",
+      "thesis": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.62) ve R:R 2.80 kurgusu.",
+      "fees_paid_usd": 1.5
+    },
+    {
+      "ticker": "BMY",
+      "shares": 7.86,
+      "avg_buy_price": 64.19,
+      "current_price": 64.19,
+      "stop_loss": 60.6,
+      "take_profit": 74.46,
+      "buy_date": "2026-11-04",
+      "thesis": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu.",
+      "fees_paid_usd": 1.5
+    },
+    {
+      "ticker": "DE",
+      "shares": 0.74,
+      "avg_buy_price": 676.5,
+      "current_price": 676.5,
+      "stop_loss": 638.62,
+      "take_profit": 784.74,
+      "buy_date": "2026-11-04",
+      "thesis": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu.",
+      "fees_paid_usd": 1.5
+    }
+  ],
+  "watchlist": [],
+  "trade_history": [
+    {
+      "date": "2024-11-04",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "shares": 3.08,
+      "price": 195.78,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "AWS bulut büyümesi ve e-ticaret marj genişlemesi."
+    },
+    {
+      "date": "2024-11-04",
+      "ticker": "APH",
+      "action": "BUY",
+      "shares": 17.32,
+      "price": 33.61,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Yapay zeka sunucu ara bağlantı konnektörlerinde güçlü pazar payı."
+    },
+    {
+      "date": "2024-11-11",
+      "ticker": "ANET",
+      "action": "BUY",
+      "shares": 6.2,
+      "price": 99.33,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Veri merkezi ağ anahtarlama talebinde liderlik."
+    },
+    {
+      "date": "2024-11-15",
+      "ticker": "ANET",
+      "action": "SELL",
+      "shares": 6.2,
+      "price": 93.57,
+      "fee_usd": 1.5,
+      "pnl_usd": -38.72,
+      "buy_date": "2024-11-11",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2024-11-15 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2024-11-18",
+      "ticker": "AXP",
+      "action": "BUY",
+      "shares": 2.27,
+      "price": 279.35,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Premium tüketici harcamaları ve yüksek kredi kalitesi."
+    },
+    {
+      "date": "2024-11-25",
+      "ticker": "GILD",
+      "action": "BUY",
+      "shares": 7.54,
+      "price": 85.75,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "HIV ve onkoloji portföyünde güçlü marj artışı ve biyofarma savunması."
+    },
+    {
+      "date": "2024-12-02",
+      "ticker": "HLT",
+      "action": "BUY",
+      "shares": 2.62,
+      "price": 249.55,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Küresel turizm ve kurumsal konaklama talebinde rekor RevPAR büyümesi."
+    },
+    {
+      "date": "2024-12-06",
+      "ticker": "AMZN",
+      "action": "SELL",
+      "shares": 3.08,
+      "price": 227.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 93.16,
+      "buy_date": "2024-11-04",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2024-12-06 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2024-12-09",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "shares": 4.5,
+      "price": 138.45,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Yapay zeka veri merkezi hızlandırıcılarında pazar liderliği."
+    },
+    {
+      "date": "2024-12-16",
+      "ticker": "NVDA",
+      "action": "SELL",
+      "shares": 4.5,
+      "price": 130.42,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.13,
+      "buy_date": "2024-12-09",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2024-12-16 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2024-12-18",
+      "ticker": "APH",
+      "action": "SELL",
+      "shares": 17.32,
+      "price": 35.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 29.73,
+      "buy_date": "2024-11-04",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2024-12-18 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2024-12-30",
+      "ticker": "CNP",
+      "action": "BUY",
+      "shares": 20.91,
+      "price": 30.56,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Defansif kamu hizmetleri regüle altyapı büyümesi."
+    },
+    {
+      "date": "2025-01-06",
+      "ticker": "WMB",
+      "action": "BUY",
+      "shares": 11.92,
+      "price": 52.78,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Doğalgaz boru hattı ve enerji altyapısı istikrarlı nakit akışı."
+    },
+    {
+      "date": "2025-01-27",
+      "ticker": "WMB",
+      "action": "SELL",
+      "shares": 11.92,
+      "price": 53.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 5.58,
+      "buy_date": "2025-01-06",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-01-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-01-28",
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 6.28,
+      "price": 99.83,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Teknoloji sektörü girişi, %1 kasa riski ($36.61) ve R:R 2.74 kurgusu."
+    },
+    {
+      "date": "2025-02-12",
+      "ticker": "GILD",
+      "action": "SELL",
+      "shares": 7.54,
+      "price": 99.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 100.68,
+      "buy_date": "2024-11-25",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2025-02-12 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2025-02-18",
+      "ticker": "AAPL",
+      "action": "BUY",
+      "shares": 2.77,
+      "price": 242.98,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Teknoloji sektörü 2. hissesi, %1 kasa riski ($38.72) ve R:R 2.78 kurgusu."
+    },
+    {
+      "date": "2025-02-20",
+      "ticker": "AXP",
+      "action": "SELL",
+      "shares": 2.27,
+      "price": 293.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 29.13,
+      "buy_date": "2024-11-18",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-02-20 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-02-24",
+      "ticker": "FTNT",
+      "action": "SELL",
+      "shares": 6.28,
+      "price": 108.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 48.31,
+      "buy_date": "2025-01-28",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-02-24 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-02-25",
+      "ticker": "KR",
+      "action": "BUY",
+      "shares": 10.45,
+      "price": 63.39,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Defansif perakende sektörü girişi, %1 kasa riski ($38.04) ve R:R 2.78 kurgusu."
+    },
+    {
+      "date": "2025-02-25",
+      "ticker": "INCY",
+      "action": "BUY",
+      "shares": 8.95,
+      "price": 74.4,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "GILD çıkışı sonrası Sağlık/Biyofarma sektörü pozisyonu, %1 risk bütçesi ($38.04) ve R:R 2.80."
+    },
+    {
+      "date": "2025-02-28",
+      "ticker": "AAPL",
+      "action": "SELL",
+      "shares": 2.77,
+      "price": 229.0,
+      "fee_usd": 1.5,
+      "pnl_usd": -41.72,
+      "buy_date": "2025-02-18",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-02-28 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-03-03",
+      "ticker": "INCY",
+      "action": "SELL",
+      "shares": 8.95,
+      "price": 70.15,
+      "fee_usd": 1.5,
+      "pnl_usd": -41.04,
+      "buy_date": "2025-02-25",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-03-03 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-03-04",
+      "ticker": "CSCO",
+      "action": "BUY",
+      "shares": 10.64,
+      "price": 60.96,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Teknoloji sektörü girişi, %1 kasa riski ($36.81) ve R:R 2.81 kurgusu."
+    },
+    {
+      "date": "2025-03-06",
+      "ticker": "HLT",
+      "action": "SELL",
+      "shares": 2.62,
+      "price": 251.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.8,
+      "buy_date": "2024-12-02",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-03-06 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-03-11",
+      "ticker": "BRK-B",
+      "action": "BUY",
+      "shares": 1.32,
+      "price": 496.25,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Finansal çeşitlendirme, %1 risk bütçesi ($36.63) ve R:R 2.87 kurgusu."
+    },
+    {
+      "date": "2025-03-11",
+      "ticker": "WELL",
+      "action": "BUY",
+      "shares": 4.49,
+      "price": 143.85,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Sağlık gayrimenkulü defansif büyüme, %1 risk bütçesi ($36.82) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-03-13",
+      "ticker": "CSCO",
+      "action": "SELL",
+      "shares": 10.64,
+      "price": 57.5,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.81,
+      "buy_date": "2025-03-04",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-03-13 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-03-18",
+      "ticker": "RTX",
+      "action": "BUY",
+      "shares": 5.06,
+      "price": 129.52,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Sanayi sektörü çeşitlendirmesi, %1 risk bütçesi ($37.29) ve R:R 2.81 kurgusu."
+    },
+    {
+      "date": "2025-03-31",
+      "ticker": "CNP",
+      "action": "SELL",
+      "shares": 20.91,
+      "price": 35.45,
+      "fee_usd": 1.5,
+      "pnl_usd": 99.25,
+      "buy_date": "2024-12-30",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2025-03-31 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2025-04-01",
+      "ticker": "ABT",
+      "action": "BUY",
+      "shares": 5.23,
+      "price": 126.77,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Sağlık sektörü girişi, %1 risk bütçesi ($38.02) ve R:R 2.79 kurgusu."
+    },
+    {
+      "date": "2025-04-04",
+      "ticker": "ABT",
+      "action": "SELL",
+      "shares": 5.23,
+      "price": 119.5,
+      "fee_usd": 1.5,
+      "pnl_usd": -41.02,
+      "buy_date": "2025-04-01",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-04-04 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-04-04",
+      "ticker": "BRK-B",
+      "action": "SELL",
+      "shares": 1.32,
+      "price": 510.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 15.15,
+      "buy_date": "2025-03-11",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-04-04 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-04-04",
+      "ticker": "RTX",
+      "action": "SELL",
+      "shares": 5.06,
+      "price": 122.15,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.29,
+      "buy_date": "2025-03-18",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-04-04 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-04-04",
+      "ticker": "WELL",
+      "action": "SELL",
+      "shares": 4.49,
+      "price": 143.9,
+      "fee_usd": 1.5,
+      "pnl_usd": -2.78,
+      "buy_date": "2025-03-11",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-04-04 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-04-08",
+      "ticker": "WRB",
+      "action": "BUY",
+      "shares": 10.09,
+      "price": 62.96,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Defansif sigorta nakit akışı, %1 risk bütçesi ($36.43) ve R:R 2.79 kurgusu."
+    },
+    {
+      "date": "2025-04-15",
+      "ticker": "VRSN",
+      "action": "BUY",
+      "shares": 2.63,
+      "price": 245.77,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "İnternet altyapı tekeli ve istikrarlı nakit akışı, %1 risk bütçesi ($36.88) ve R:R 2.80."
+    },
+    {
+      "date": "2025-04-15",
+      "ticker": "KO",
+      "action": "BUY",
+      "shares": 9.51,
+      "price": 68.98,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Küresel defansif tüketim lideri, %1 risk bütçesi ($36.90) ve R:R 2.84 kurgusu."
+    },
+    {
+      "date": "2025-04-22",
+      "ticker": "DGX",
+      "action": "BUY",
+      "shares": 3.92,
+      "price": 168.46,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Tanısal test ve sağlık laboratuvarı büyümesi, %1 risk bütçesi ($37.67) ve R:R 2.80."
+    },
+    {
+      "date": "2025-04-25",
+      "ticker": "KR",
+      "action": "SELL",
+      "shares": 10.45,
+      "price": 67.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 39.95,
+      "buy_date": "2025-02-25",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-04-25 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-04-29",
+      "ticker": "CMS",
+      "action": "BUY",
+      "shares": 9.74,
+      "price": 69.78,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "CNP çıkışı sonrası altyapı defansif nakit akışı, %1 risk bütçesi ($38.28) ve R:R 2.84."
+    },
+    {
+      "date": "2025-05-13",
+      "ticker": "CMS",
+      "action": "SELL",
+      "shares": 9.74,
+      "price": 65.85,
+      "fee_usd": 1.5,
+      "pnl_usd": -41.28,
+      "buy_date": "2025-04-29",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-05-13 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-05-13",
+      "ticker": "MAA",
+      "action": "BUY",
+      "shares": 4.35,
+      "price": 150.09,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Konut GYO istikrarlı kira getirisi ve defansif büyüme, %1 risk bütçesi ($37.37) ve R:R 2.80."
+    },
+    {
+      "date": "2025-05-27",
+      "ticker": "VRSN",
+      "action": "SELL",
+      "shares": 2.63,
+      "price": 270.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 60.72,
+      "buy_date": "2025-04-15",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-05-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-05-27",
+      "ticker": "KMI",
+      "action": "BUY",
+      "shares": 25.35,
+      "price": 26.58,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Doğalgaz boru hattı ve enerji altyapısı istikrarlı temettü/nakit akışı, %1 risk bütçesi ($37.52) ve R:R 2.89."
+    },
+    {
+      "date": "2025-06-03",
+      "ticker": "MAA",
+      "action": "SELL",
+      "shares": 4.35,
+      "price": 141.5,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.37,
+      "buy_date": "2025-05-13",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-06-03 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-06-03",
+      "ticker": "ETR",
+      "action": "BUY",
+      "shares": 8.32,
+      "price": 80.38,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($37.47) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-06-09",
+      "ticker": "WRB",
+      "action": "SELL",
+      "shares": 10.09,
+      "price": 69.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 62.98,
+      "buy_date": "2025-04-08",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-06-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-06-10",
+      "ticker": "CTAS",
+      "action": "BUY",
+      "shares": 3.01,
+      "price": 219.56,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($37.10) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-07-17",
+      "ticker": "CTAS",
+      "action": "SELL",
+      "shares": 3.01,
+      "price": 207.26,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.03,
+      "buy_date": "2025-06-10",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-07-17 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-07-22",
+      "ticker": "JPM",
+      "action": "BUY",
+      "shares": 2.32,
+      "price": 284.54,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.97) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-07-23",
+      "ticker": "KMI",
+      "action": "SELL",
+      "shares": 25.35,
+      "price": 25.1,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.51,
+      "buy_date": "2025-05-27",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-07-23 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-07-29",
+      "ticker": "DE",
+      "action": "BUY",
+      "shares": 1.29,
+      "price": 504.95,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($36.54) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-08-14",
+      "ticker": "DE",
+      "action": "SELL",
+      "shares": 1.29,
+      "price": 476.67,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.49,
+      "buy_date": "2025-07-29",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-08-14 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-08-19",
+      "ticker": "CBOE",
+      "action": "BUY",
+      "shares": 2.68,
+      "price": 244.33,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.74) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-09-02",
+      "ticker": "CBOE",
+      "action": "SELL",
+      "shares": 2.68,
+      "price": 230.65,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.66,
+      "buy_date": "2025-08-19",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-09-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-09-02",
+      "ticker": "MS",
+      "action": "BUY",
+      "shares": 4.46,
+      "price": 144.67,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.18) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-09-08",
+      "ticker": "KO",
+      "action": "SELL",
+      "shares": 9.51,
+      "price": 65.1,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.9,
+      "buy_date": "2025-04-15",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-09-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-09-09",
+      "ticker": "PLTR",
+      "action": "BUY",
+      "shares": 3.98,
+      "price": 162.36,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($36.21) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-09-25",
+      "ticker": "PLTR",
+      "action": "SELL",
+      "shares": 3.98,
+      "price": 175.35,
+      "fee_usd": 1.5,
+      "pnl_usd": 48.7,
+      "buy_date": "2025-09-09",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-09-25 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-09-30",
+      "ticker": "AZO",
+      "action": "BUY",
+      "shares": 0.15,
+      "price": 4290.24,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Discretionary sektoru cesitlendirmesi, %1 risk butcesi ($38.19) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-02",
+      "ticker": "DGX",
+      "action": "SELL",
+      "shares": 3.92,
+      "price": 175.4,
+      "fee_usd": 1.5,
+      "pnl_usd": 24.21,
+      "buy_date": "2025-04-22",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-10-03",
+      "ticker": "ETR",
+      "action": "SELL",
+      "shares": 8.32,
+      "price": 93.58,
+      "fee_usd": 1.5,
+      "pnl_usd": 106.83,
+      "buy_date": "2025-06-03",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2025-10-03 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2025-10-07",
+      "ticker": "EBAY",
+      "action": "BUY",
+      "shares": 7.26,
+      "price": 91.87,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Discretionary sektoru cesitlendirmesi, %1 risk butcesi ($37.35) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-07",
+      "ticker": "DGX",
+      "action": "BUY",
+      "shares": 3.72,
+      "price": 178.88,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($37.35) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-08",
+      "ticker": "AZO",
+      "action": "SELL",
+      "shares": 0.15,
+      "price": 4049.99,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.04,
+      "buy_date": "2025-09-30",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-10-13",
+      "ticker": "EBAY",
+      "action": "SELL",
+      "shares": 7.26,
+      "price": 86.73,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.32,
+      "buy_date": "2025-10-07",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-13 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-10-14",
+      "ticker": "JPM",
+      "action": "SELL",
+      "shares": 2.32,
+      "price": 289.49,
+      "fee_usd": 1.5,
+      "pnl_usd": 8.49,
+      "buy_date": "2025-07-22",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-14 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-10-14",
+      "ticker": "GEV",
+      "action": "BUY",
+      "shares": 1.01,
+      "price": 642.57,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($36.66) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-14",
+      "ticker": "ALLE",
+      "action": "BUY",
+      "shares": 3.77,
+      "price": 173.6,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($36.66) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-16",
+      "ticker": "GEV",
+      "action": "SELL",
+      "shares": 1.01,
+      "price": 606.59,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.34,
+      "buy_date": "2025-10-14",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-16 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-10-21",
+      "ticker": "F",
+      "action": "BUY",
+      "shares": 54.37,
+      "price": 12.0,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Discretionary sektoru cesitlendirmesi, %1 risk butcesi ($36.54) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-21",
+      "ticker": "EXPE",
+      "action": "BUY",
+      "shares": 2.9,
+      "price": 224.47,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Discretionary sektoru cesitlendirmesi, %1 risk butcesi ($36.54) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-10-29",
+      "ticker": "ALLE",
+      "action": "SELL",
+      "shares": 3.77,
+      "price": 163.88,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.64,
+      "buy_date": "2025-10-14",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-10-29 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-11-03",
+      "ticker": "EXPE",
+      "action": "SELL",
+      "shares": 2.9,
+      "price": 211.9,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.45,
+      "buy_date": "2025-10-21",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-11-03 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-11-04",
+      "ticker": "CMI",
+      "action": "BUY",
+      "shares": 1.51,
+      "price": 422.56,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($35.74) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-11-04",
+      "ticker": "SRE",
+      "action": "BUY",
+      "shares": 7.1,
+      "price": 89.77,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($35.74) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-11-12",
+      "ticker": "MS",
+      "action": "SELL",
+      "shares": 4.46,
+      "price": 167.82,
+      "fee_usd": 1.5,
+      "pnl_usd": 100.25,
+      "buy_date": "2025-09-02",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2025-11-12 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2025-11-18",
+      "ticker": "ES",
+      "action": "BUY",
+      "shares": 9.26,
+      "price": 71.25,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($36.96) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-11-19",
+      "ticker": "ES",
+      "action": "SELL",
+      "shares": 9.26,
+      "price": 67.26,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.94,
+      "buy_date": "2025-11-18",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-11-19 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-11-25",
+      "ticker": "HII",
+      "action": "BUY",
+      "shares": 2.15,
+      "price": 309.58,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($37.44) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-11-26",
+      "ticker": "CMI",
+      "action": "SELL",
+      "shares": 1.51,
+      "price": 490.17,
+      "fee_usd": 1.5,
+      "pnl_usd": 99.09,
+      "buy_date": "2025-11-04",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2025-11-26 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2025-12-02",
+      "ticker": "CEG",
+      "action": "BUY",
+      "shares": 1.81,
+      "price": 362.06,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($36.71) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-12-17",
+      "ticker": "CEG",
+      "action": "SELL",
+      "shares": 1.81,
+      "price": 341.78,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.71,
+      "buy_date": "2025-12-02",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-12-17 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-12-17",
+      "ticker": "SRE",
+      "action": "SELL",
+      "shares": 7.1,
+      "price": 84.74,
+      "fee_usd": 1.5,
+      "pnl_usd": -38.72,
+      "buy_date": "2025-11-04",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2025-12-17 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2025-12-23",
+      "ticker": "L",
+      "action": "BUY",
+      "shares": 6.14,
+      "price": 107.33,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.95) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2025-12-23",
+      "ticker": "GILD",
+      "action": "BUY",
+      "shares": 5.36,
+      "price": 122.98,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($36.95) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-02",
+      "ticker": "HII",
+      "action": "SELL",
+      "shares": 2.15,
+      "price": 334.35,
+      "fee_usd": 1.5,
+      "pnl_usd": 50.25,
+      "buy_date": "2025-11-25",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-05",
+      "ticker": "DGX",
+      "action": "SELL",
+      "shares": 3.72,
+      "price": 168.86,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.27,
+      "buy_date": "2025-10-07",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-05 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-05",
+      "ticker": "GILD",
+      "action": "SELL",
+      "shares": 5.36,
+      "price": 116.09,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.93,
+      "buy_date": "2025-12-23",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-05 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-06",
+      "ticker": "SOLV",
+      "action": "BUY",
+      "shares": 7.76,
+      "price": 83.16,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($36.17) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-06",
+      "ticker": "MNST",
+      "action": "BUY",
+      "shares": 17.05,
+      "price": 37.86,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($36.17) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-08",
+      "ticker": "F",
+      "action": "SELL",
+      "shares": 54.37,
+      "price": 13.92,
+      "fee_usd": 1.5,
+      "pnl_usd": 101.39,
+      "buy_date": "2025-10-21",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-01-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-01-13",
+      "ticker": "BIIB",
+      "action": "BUY",
+      "shares": 3.63,
+      "price": 178.3,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($36.28) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-13",
+      "ticker": "MS",
+      "action": "BUY",
+      "shares": 3.62,
+      "price": 178.71,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.28) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-14",
+      "ticker": "BIIB",
+      "action": "SELL",
+      "shares": 3.63,
+      "price": 168.32,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.23,
+      "buy_date": "2026-01-13",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-14 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-20",
+      "ticker": "HSIC",
+      "action": "BUY",
+      "shares": 8.26,
+      "price": 77.73,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($35.99) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-22",
+      "ticker": "L",
+      "action": "SELL",
+      "shares": 6.14,
+      "price": 101.32,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.91,
+      "buy_date": "2025-12-23",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-22 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-27",
+      "ticker": "SOLV",
+      "action": "SELL",
+      "shares": 7.76,
+      "price": 78.25,
+      "fee_usd": 1.5,
+      "pnl_usd": -41.1,
+      "buy_date": "2026-01-06",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-01-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-01-27",
+      "ticker": "DOV",
+      "action": "BUY",
+      "shares": 3.1,
+      "price": 205.73,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($35.79) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-01-27",
+      "ticker": "STLD",
+      "action": "BUY",
+      "shares": 3.66,
+      "price": 174.29,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Materials sektoru cesitlendirmesi, %1 risk butcesi ($35.79) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-03",
+      "ticker": "HSIC",
+      "action": "SELL",
+      "shares": 8.26,
+      "price": 73.38,
+      "fee_usd": 1.5,
+      "pnl_usd": -38.93,
+      "buy_date": "2026-01-20",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-02-03 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-02-03",
+      "ticker": "C",
+      "action": "BUY",
+      "shares": 5.59,
+      "price": 115.93,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.31) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-09",
+      "ticker": "STLD",
+      "action": "SELL",
+      "shares": 3.66,
+      "price": 202.18,
+      "fee_usd": 1.5,
+      "pnl_usd": 99.08,
+      "buy_date": "2026-01-27",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-02-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-02-10",
+      "ticker": "UAL",
+      "action": "BUY",
+      "shares": 5.69,
+      "price": 116.36,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($37.13) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-12",
+      "ticker": "C",
+      "action": "SELL",
+      "shares": 5.59,
+      "price": 109.44,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.28,
+      "buy_date": "2026-02-03",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-02-12 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-02-12",
+      "ticker": "MS",
+      "action": "SELL",
+      "shares": 3.62,
+      "price": 168.7,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.24,
+      "buy_date": "2026-01-13",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-02-12 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-02-12",
+      "ticker": "UAL",
+      "action": "SELL",
+      "shares": 5.69,
+      "price": 109.84,
+      "fee_usd": 1.5,
+      "pnl_usd": -40.1,
+      "buy_date": "2026-02-10",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-02-12 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-02-17",
+      "ticker": "EMR",
+      "action": "BUY",
+      "shares": 4.37,
+      "price": 147.75,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($36.22) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-17",
+      "ticker": "APA",
+      "action": "BUY",
+      "shares": 24.1,
+      "price": 26.83,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($36.22) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-24",
+      "ticker": "BEN",
+      "action": "BUY",
+      "shares": 25.0,
+      "price": 26.2,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($36.75) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-02-27",
+      "ticker": "DOV",
+      "action": "SELL",
+      "shares": 3.1,
+      "price": 222.19,
+      "fee_usd": 1.5,
+      "pnl_usd": 48.03,
+      "buy_date": "2026-01-27",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-02-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-02",
+      "ticker": "APA",
+      "action": "SELL",
+      "shares": 24.1,
+      "price": 31.92,
+      "fee_usd": 1.5,
+      "pnl_usd": 119.67,
+      "buy_date": "2026-02-17",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-03-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-03-02",
+      "ticker": "MNST",
+      "action": "SELL",
+      "shares": 17.05,
+      "price": 40.89,
+      "fee_usd": 1.5,
+      "pnl_usd": 48.66,
+      "buy_date": "2026-01-06",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-03",
+      "ticker": "TXT",
+      "action": "BUY",
+      "shares": 6.65,
+      "price": 98.48,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($36.72) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-03",
+      "ticker": "MU",
+      "action": "BUY",
+      "shares": 1.72,
+      "price": 379.4,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($36.72) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-06",
+      "ticker": "EMR",
+      "action": "SELL",
+      "shares": 4.37,
+      "price": 137.91,
+      "fee_usd": 1.5,
+      "pnl_usd": -46.0,
+      "buy_date": "2026-02-17",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-06 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-09",
+      "ticker": "BEN",
+      "action": "SELL",
+      "shares": 25.0,
+      "price": 24.73,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.75,
+      "buy_date": "2026-02-24",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-09",
+      "ticker": "MU",
+      "action": "SELL",
+      "shares": 1.72,
+      "price": 358.15,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.55,
+      "buy_date": "2026-03-03",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-09",
+      "ticker": "TXT",
+      "action": "SELL",
+      "shares": 6.65,
+      "price": 92.97,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.64,
+      "buy_date": "2026-03-03",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-10",
+      "ticker": "INTC",
+      "action": "BUY",
+      "shares": 13.49,
+      "price": 46.78,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($35.35) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-10",
+      "ticker": "MO",
+      "action": "BUY",
+      "shares": 9.84,
+      "price": 64.04,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($35.35) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-17",
+      "ticker": "INTC",
+      "action": "SELL",
+      "shares": 13.49,
+      "price": 44.16,
+      "fee_usd": 1.5,
+      "pnl_usd": -38.34,
+      "buy_date": "2026-03-10",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-17 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-17",
+      "ticker": "FE",
+      "action": "BUY",
+      "shares": 12.55,
+      "price": 49.69,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($34.94) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-17",
+      "ticker": "LYV",
+      "action": "BUY",
+      "shares": 4.0,
+      "price": 155.82,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Communication Services sektoru cesitlendirmesi, %1 risk butcesi ($34.94) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-20",
+      "ticker": "FE",
+      "action": "SELL",
+      "shares": 12.55,
+      "price": 46.91,
+      "fee_usd": 1.5,
+      "pnl_usd": -37.89,
+      "buy_date": "2026-03-17",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-20 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-24",
+      "ticker": "HUBB",
+      "action": "BUY",
+      "shares": 1.21,
+      "price": 502.55,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($34.17) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-24",
+      "ticker": "C",
+      "action": "BUY",
+      "shares": 5.44,
+      "price": 112.02,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($34.17) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-27",
+      "ticker": "C",
+      "action": "SELL",
+      "shares": 5.44,
+      "price": 105.75,
+      "fee_usd": 1.5,
+      "pnl_usd": -37.11,
+      "buy_date": "2026-03-24",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-27",
+      "ticker": "HUBB",
+      "action": "SELL",
+      "shares": 1.21,
+      "price": 474.41,
+      "fee_usd": 1.5,
+      "pnl_usd": -37.05,
+      "buy_date": "2026-03-24",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-27",
+      "ticker": "LYV",
+      "action": "SELL",
+      "shares": 4.0,
+      "price": 147.09,
+      "fee_usd": 1.5,
+      "pnl_usd": -37.92,
+      "buy_date": "2026-03-17",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-03-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-03-31",
+      "ticker": "ADM",
+      "action": "BUY",
+      "shares": 8.32,
+      "price": 71.76,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($33.45) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-03-31",
+      "ticker": "NEE",
+      "action": "BUY",
+      "shares": 6.52,
+      "price": 91.52,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($33.45) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-04-07",
+      "ticker": "CVX",
+      "action": "BUY",
+      "shares": 3.01,
+      "price": 197.98,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($33.45) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-04-07",
+      "ticker": "CBOE",
+      "action": "BUY",
+      "shares": 2.02,
+      "price": 294.2,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($33.45) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-04-08",
+      "ticker": "ADM",
+      "action": "SELL",
+      "shares": 8.32,
+      "price": 67.74,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.44,
+      "buy_date": "2026-03-31",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-04-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-04-08",
+      "ticker": "CVX",
+      "action": "SELL",
+      "shares": 3.01,
+      "price": 186.89,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.38,
+      "buy_date": "2026-04-07",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-04-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-04-14",
+      "ticker": "TGT",
+      "action": "BUY",
+      "shares": 4.96,
+      "price": 117.51,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($32.66) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-04-14",
+      "ticker": "JCI",
+      "action": "BUY",
+      "shares": 4.12,
+      "price": 141.26,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($32.66) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "CBOE",
+      "action": "SELL",
+      "shares": 2.02,
+      "price": 341.27,
+      "fee_usd": 1.5,
+      "pnl_usd": 92.09,
+      "buy_date": "2026-04-07",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-05-05 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-05-05",
+      "ticker": "COP",
+      "action": "BUY",
+      "shares": 5.14,
+      "price": 121.6,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($35.03) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-07",
+      "ticker": "COP",
+      "action": "SELL",
+      "shares": 5.14,
+      "price": 114.51,
+      "fee_usd": 1.5,
+      "pnl_usd": -39.44,
+      "buy_date": "2026-05-05",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-07 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-07",
+      "ticker": "TGT",
+      "action": "SELL",
+      "shares": 4.96,
+      "price": 122.08,
+      "fee_usd": 1.5,
+      "pnl_usd": 19.67,
+      "buy_date": "2026-04-14",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-07 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-08",
+      "ticker": "MO",
+      "action": "SELL",
+      "shares": 9.84,
+      "price": 66.35,
+      "fee_usd": 1.5,
+      "pnl_usd": 19.73,
+      "buy_date": "2026-03-10",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-08 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-12",
+      "ticker": "PLD",
+      "action": "BUY",
+      "shares": 4.24,
+      "price": 141.6,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Real Estate sektoru cesitlendirmesi, %1 risk butcesi ($33.70) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-12",
+      "ticker": "NI",
+      "action": "BUY",
+      "shares": 12.91,
+      "price": 46.56,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($33.70) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-18",
+      "ticker": "NEE",
+      "action": "SELL",
+      "shares": 6.52,
+      "price": 86.39,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.45,
+      "buy_date": "2026-03-31",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-18 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-19",
+      "ticker": "JCI",
+      "action": "SELL",
+      "shares": 4.12,
+      "price": 133.35,
+      "fee_usd": 1.5,
+      "pnl_usd": -35.59,
+      "buy_date": "2026-04-14",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-19 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-19",
+      "ticker": "TGT",
+      "action": "BUY",
+      "shares": 4.65,
+      "price": 126.27,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($32.89) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-19",
+      "ticker": "OXY",
+      "action": "BUY",
+      "shares": 9.75,
+      "price": 60.14,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($32.89) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-20",
+      "ticker": "TGT",
+      "action": "SELL",
+      "shares": 4.65,
+      "price": 119.2,
+      "fee_usd": 1.5,
+      "pnl_usd": -35.88,
+      "buy_date": "2026-05-19",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-20 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-05-26",
+      "ticker": "SPG",
+      "action": "BUY",
+      "shares": 2.85,
+      "price": 202.52,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Real Estate sektoru cesitlendirmesi, %1 risk butcesi ($32.43) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-26",
+      "ticker": "EVRG",
+      "action": "BUY",
+      "shares": 6.94,
+      "price": 83.41,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Utilities sektoru cesitlendirmesi, %1 risk butcesi ($32.43) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-05-27",
+      "ticker": "OXY",
+      "action": "SELL",
+      "shares": 9.75,
+      "price": 56.08,
+      "fee_usd": 1.5,
+      "pnl_usd": -42.59,
+      "buy_date": "2026-05-19",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-05-27 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-06-02",
+      "ticker": "ROST",
+      "action": "BUY",
+      "shares": 2.52,
+      "price": 222.95,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Discretionary sektoru cesitlendirmesi, %1 risk butcesi ($31.50) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-06-26",
+      "ticker": "ROST",
+      "action": "SELL",
+      "shares": 2.52,
+      "price": 210.46,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.47,
+      "buy_date": "2026-06-02",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-06-26 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-06-30",
+      "ticker": "PWR",
+      "action": "BUY",
+      "shares": 0.79,
+      "price": 719.93,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($32.19) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-07-02",
+      "ticker": "PWR",
+      "action": "SELL",
+      "shares": 0.79,
+      "price": 679.61,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.85,
+      "buy_date": "2026-06-30",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-07-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-07-07",
+      "ticker": "CPAY",
+      "action": "BUY",
+      "shares": 1.61,
+      "price": 357.1,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($32.32) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-07-10",
+      "ticker": "SPG",
+      "action": "SELL",
+      "shares": 2.85,
+      "price": 211.29,
+      "fee_usd": 1.5,
+      "pnl_usd": 22.0,
+      "buy_date": "2026-05-26",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-07-10 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-07-14",
+      "ticker": "UNH",
+      "action": "BUY",
+      "shares": 1.33,
+      "price": 422.59,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($31.69) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-07-30",
+      "ticker": "NI",
+      "action": "SELL",
+      "shares": 12.91,
+      "price": 43.95,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.7,
+      "buy_date": "2026-05-12",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-07-30 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-08-04",
+      "ticker": "HWM",
+      "action": "BUY",
+      "shares": 1.95,
+      "price": 287.86,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($31.49) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-08-05",
+      "ticker": "UNH",
+      "action": "SELL",
+      "shares": 1.33,
+      "price": 398.92,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.48,
+      "buy_date": "2026-07-14",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-08-05 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-08-11",
+      "ticker": "STT",
+      "action": "BUY",
+      "shares": 3.0,
+      "price": 186.23,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($31.29) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-08-13",
+      "ticker": "CPAY",
+      "action": "SELL",
+      "shares": 1.61,
+      "price": 414.24,
+      "fee_usd": 1.5,
+      "pnl_usd": 89.0,
+      "buy_date": "2026-07-07",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-08-13 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-08-18",
+      "ticker": "FTNT",
+      "action": "BUY",
+      "shares": 3.6,
+      "price": 158.01,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($31.92) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-08-21",
+      "ticker": "FTNT",
+      "action": "SELL",
+      "shares": 3.6,
+      "price": 149.16,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.86,
+      "buy_date": "2026-08-18",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-08-21 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-08-21",
+      "ticker": "HWM",
+      "action": "SELL",
+      "shares": 1.95,
+      "price": 271.74,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.44,
+      "buy_date": "2026-08-04",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-08-21 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-08-25",
+      "ticker": "PH",
+      "action": "BUY",
+      "shares": 0.54,
+      "price": 1014.27,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($31.18) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-08-25",
+      "ticker": "BALL",
+      "action": "BUY",
+      "shares": 8.7,
+      "price": 63.88,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Materials sektoru cesitlendirmesi, %1 risk butcesi ($31.18) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-01",
+      "ticker": "PH",
+      "action": "SELL",
+      "shares": 0.54,
+      "price": 957.47,
+      "fee_usd": 1.5,
+      "pnl_usd": -33.68,
+      "buy_date": "2026-08-25",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-01 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-01",
+      "ticker": "EOG",
+      "action": "BUY",
+      "shares": 3.68,
+      "price": 147.36,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($30.43) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-09",
+      "ticker": "BALL",
+      "action": "SELL",
+      "shares": 8.7,
+      "price": 60.3,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.15,
+      "buy_date": "2026-08-25",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-09 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-10",
+      "ticker": "PLD",
+      "action": "SELL",
+      "shares": 4.24,
+      "price": 133.67,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.62,
+      "buy_date": "2026-05-12",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-10 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-15",
+      "ticker": "C",
+      "action": "BUY",
+      "shares": 3.95,
+      "price": 135.43,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Financials sektoru cesitlendirmesi, %1 risk butcesi ($29.99) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-15",
+      "ticker": "KDP",
+      "action": "BUY",
+      "shares": 17.13,
+      "price": 31.26,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($29.99) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-22",
+      "ticker": "EOG",
+      "action": "SELL",
+      "shares": 3.68,
+      "price": 138.39,
+      "fee_usd": 1.5,
+      "pnl_usd": -36.0,
+      "buy_date": "2026-09-01",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-22 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-22",
+      "ticker": "KO",
+      "action": "BUY",
+      "shares": 5.86,
+      "price": 88.61,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($29.07) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-23",
+      "ticker": "EVRG",
+      "action": "SELL",
+      "shares": 6.94,
+      "price": 78.74,
+      "fee_usd": 1.5,
+      "pnl_usd": -35.41,
+      "buy_date": "2026-05-26",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-23 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-29",
+      "ticker": "STT",
+      "action": "SELL",
+      "shares": 3.0,
+      "price": 175.8,
+      "fee_usd": 1.5,
+      "pnl_usd": -34.29,
+      "buy_date": "2026-08-11",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-09-29 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-09-29",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "shares": 2.25,
+      "price": 227.21,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($28.67) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-09-29",
+      "ticker": "ETN",
+      "action": "BUY",
+      "shares": 1.18,
+      "price": 433.27,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.67) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-10-01",
+      "ticker": "C",
+      "action": "SELL",
+      "shares": 3.95,
+      "price": 127.25,
+      "fee_usd": 1.5,
+      "pnl_usd": -35.31,
+      "buy_date": "2026-09-15",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-01 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-10-06",
+      "ticker": "EXPD",
+      "action": "BUY",
+      "shares": 2.69,
+      "price": 191.8,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.90) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-10-14",
+      "ticker": "ETN",
+      "action": "SELL",
+      "shares": 1.18,
+      "price": 409.01,
+      "fee_usd": 1.5,
+      "pnl_usd": -31.63,
+      "buy_date": "2026-09-29",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-14 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-10-15",
+      "ticker": "NVDA",
+      "action": "SELL",
+      "shares": 2.25,
+      "price": 214.49,
+      "fee_usd": 1.5,
+      "pnl_usd": -31.62,
+      "buy_date": "2026-09-29",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-15 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-10-20",
+      "ticker": "DGX",
+      "action": "BUY",
+      "shares": 2.18,
+      "price": 237.12,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($29.08) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-10-20",
+      "ticker": "ZBRA",
+      "action": "BUY",
+      "shares": 1.35,
+      "price": 384.08,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Information Technology sektoru cesitlendirmesi, %1 risk butcesi ($29.08) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-10-21",
+      "ticker": "DGX",
+      "action": "SELL",
+      "shares": 2.18,
+      "price": 223.84,
+      "fee_usd": 1.5,
+      "pnl_usd": -31.95,
+      "buy_date": "2026-10-20",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-21 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-10-27",
+      "ticker": "BAX",
+      "action": "BUY",
+      "shares": 20.46,
+      "price": 24.92,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.65) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-10-29",
+      "ticker": "BAX",
+      "action": "SELL",
+      "shares": 20.46,
+      "price": 23.52,
+      "fee_usd": 1.5,
+      "pnl_usd": -31.64,
+      "buy_date": "2026-10-27",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-29 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "ZBRA",
+      "action": "SELL",
+      "shares": 1.35,
+      "price": 362.57,
+      "fee_usd": 1.5,
+      "pnl_usd": -32.04,
+      "buy_date": "2026-10-20",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-10-30 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-11-02",
+      "ticker": "KDP",
+      "action": "SELL",
+      "shares": 17.13,
+      "price": 36.26,
+      "fee_usd": 1.5,
+      "pnl_usd": 82.65,
+      "buy_date": "2026-09-15",
+      "committee_summary": "OTOMATİK TAKE_PROFIT: Take-Profit seviyesi 2026-11-02 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "TAKE_PROFIT"
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "TRGP",
+      "action": "BUY",
+      "shares": 1.71,
+      "price": 298.56,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Energy sektoru cesitlendirmesi, %1 risk butcesi ($28.62) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "TMO",
+      "action": "BUY",
+      "shares": 0.73,
+      "price": 698.34,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.62) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-11-04",
+      "ticker": "TRGP",
+      "action": "SELL",
+      "shares": 1.71,
+      "price": 281.84,
+      "fee_usd": 1.5,
+      "pnl_usd": -31.59,
+      "buy_date": "2026-11-03",
+      "committee_summary": "OTOMATİK STOP_LOSS: Stop-Loss seviyesi 2026-11-04 seansında tetiklendi (Cevap Anahtarı).",
+      "exit_reason": "STOP_LOSS"
+    },
+    {
+      "date": "2026-11-04",
+      "ticker": "BMY",
+      "action": "BUY",
+      "shares": 7.86,
+      "price": 64.19,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu."
+    },
+    {
+      "date": "2026-11-04",
+      "ticker": "DE",
+      "action": "BUY",
+      "shares": 0.74,
+      "price": 676.5,
+      "fee_usd": 1.5,
+      "pnl_usd": 0.0,
+      "committee_summary": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu."
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2024-11-04",
+      "portfolio_value_usd": 3497.0,
+      "spy_value_usd": 3500.0,
+      "cash_usd": 2311.87
+    },
+    {
+      "date": "2024-11-11",
+      "portfolio_value_usd": 3573.73,
+      "spy_value_usd": 3677.78,
+      "cash_usd": 1694.52
+    },
+    {
+      "date": "2024-11-18",
+      "portfolio_value_usd": 3489.04,
+      "spy_value_usd": 3612.61,
+      "cash_usd": 1637.53
+    },
+    {
+      "date": "2024-11-25",
+      "portfolio_value_usd": 3559.57,
+      "spy_value_usd": 3670.24,
+      "cash_usd": 989.48
+    },
+    {
+      "date": "2024-12-02",
+      "portfolio_value_usd": 3603.56,
+      "spy_value_usd": 3707.69,
+      "cash_usd": 334.16
+    },
+    {
+      "date": "2024-12-09",
+      "portfolio_value_usd": 3617.72,
+      "spy_value_usd": 3714.16,
+      "cash_usd": 407.3
+    },
+    {
+      "date": "2024-12-16",
+      "portfolio_value_usd": 3633.42,
+      "spy_value_usd": 3727.11,
+      "cash_usd": 992.69
+    },
+    {
+      "date": "2024-12-23",
+      "portfolio_value_usd": 3597.02,
+      "spy_value_usd": 3665.08,
+      "cash_usd": 1606.05
+    },
+    {
+      "date": "2024-12-30",
+      "portfolio_value_usd": 3575.76,
+      "spy_value_usd": 3625.24,
+      "cash_usd": 965.54
+    },
+    {
+      "date": "2025-01-06",
+      "portfolio_value_usd": 3552.47,
+      "spy_value_usd": 3669.23,
+      "cash_usd": 334.9
+    },
+    {
+      "date": "2025-01-13",
+      "portfolio_value_usd": 3540.75,
+      "spy_value_usd": 3583.14,
+      "cash_usd": 334.9
+    },
+    {
+      "date": "2025-01-21",
+      "portfolio_value_usd": 3705.68,
+      "spy_value_usd": 3716.61,
+      "cash_usd": 334.9
+    },
+    {
+      "date": "2025-01-28",
+      "portfolio_value_usd": 3662.33,
+      "spy_value_usd": 3725.66,
+      "cash_usd": 342.69
+    },
+    {
+      "date": "2025-02-04",
+      "portfolio_value_usd": 3718.14,
+      "spy_value_usd": 3708.82,
+      "cash_usd": 342.69
+    },
+    {
+      "date": "2025-02-11",
+      "portfolio_value_usd": 3758.02,
+      "spy_value_usd": 3730.56,
+      "cash_usd": 342.69
+    },
+    {
+      "date": "2025-02-18",
+      "portfolio_value_usd": 3884.47,
+      "spy_value_usd": 3768.65,
+      "cash_usd": 416.87
+    },
+    {
+      "date": "2025-02-25",
+      "portfolio_value_usd": 3800.7,
+      "spy_value_usd": 3662.32,
+      "cash_usd": 427.05
+    },
+    {
+      "date": "2025-03-04",
+      "portfolio_value_usd": 3682.71,
+      "spy_value_usd": 3555.24,
+      "cash_usd": 1036.11
+    },
+    {
+      "date": "2025-03-11",
+      "portfolio_value_usd": 3682.41,
+      "spy_value_usd": 3426.16,
+      "cash_usd": 388.29
+    },
+    {
+      "date": "2025-03-18",
+      "portfolio_value_usd": 3733.45,
+      "spy_value_usd": 3457.58,
+      "cash_usd": 341.72
+    },
+    {
+      "date": "2025-03-25",
+      "portfolio_value_usd": 3722.28,
+      "spy_value_usd": 3557.25,
+      "cash_usd": 341.72
+    },
+    {
+      "date": "2025-04-01",
+      "portfolio_value_usd": 3805.02,
+      "spy_value_usd": 3467.7,
+      "cash_usd": 416.97
+    },
+    {
+      "date": "2025-04-08",
+      "portfolio_value_usd": 3643.37,
+      "spy_value_usd": 3069.04,
+      "cash_usd": 2336.58
+    },
+    {
+      "date": "2025-04-15",
+      "portfolio_value_usd": 3687.8,
+      "spy_value_usd": 3323.29,
+      "cash_usd": 1031.2
+    },
+    {
+      "date": "2025-04-22",
+      "portfolio_value_usd": 3772.52,
+      "spy_value_usd": 3259.26,
+      "cash_usd": 369.34
+    },
+    {
+      "date": "2025-04-29",
+      "portfolio_value_usd": 3826.51,
+      "spy_value_usd": 3426.6,
+      "cash_usd": 392.06
+    },
+    {
+      "date": "2025-05-06",
+      "portfolio_value_usd": 3835.21,
+      "spy_value_usd": 3454.25,
+      "cash_usd": 392.06
+    },
+    {
+      "date": "2025-05-13",
+      "portfolio_value_usd": 3736.51,
+      "spy_value_usd": 3627.57,
+      "cash_usd": 377.55
+    },
+    {
+      "date": "2025-05-20",
+      "portfolio_value_usd": 3806.16,
+      "spy_value_usd": 3664.77,
+      "cash_usd": 377.55
+    },
+    {
+      "date": "2025-05-27",
+      "portfolio_value_usd": 3750.81,
+      "spy_value_usd": 3654.21,
+      "cash_usd": 410.85
+    },
+    {
+      "date": "2025-06-03",
+      "portfolio_value_usd": 3745.93,
+      "spy_value_usd": 3684.75,
+      "cash_usd": 354.61
+    },
+    {
+      "date": "2025-06-10",
+      "portfolio_value_usd": 3708.77,
+      "spy_value_usd": 3727.99,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-06-17",
+      "portfolio_value_usd": 3683.54,
+      "spy_value_usd": 3693.68,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-06-24",
+      "portfolio_value_usd": 3739.85,
+      "spy_value_usd": 3761.92,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-07-01",
+      "portfolio_value_usd": 3745.74,
+      "spy_value_usd": 3829.35,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-07-08",
+      "portfolio_value_usd": 3664.96,
+      "spy_value_usd": 3846.0,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-07-15",
+      "portfolio_value_usd": 3638.76,
+      "spy_value_usd": 3857.19,
+      "cash_usd": 391.98
+    },
+    {
+      "date": "2025-07-22",
+      "portfolio_value_usd": 3695.94,
+      "spy_value_usd": 3898.85,
+      "cash_usd": 352.7
+    },
+    {
+      "date": "2025-07-29",
+      "portfolio_value_usd": 3652.82,
+      "spy_value_usd": 3938.51,
+      "cash_usd": 334.6
+    },
+    {
+      "date": "2025-08-05",
+      "portfolio_value_usd": 3669.82,
+      "spy_value_usd": 3893.32,
+      "cash_usd": 334.6
+    },
+    {
+      "date": "2025-08-12",
+      "portfolio_value_usd": 3709.7,
+      "spy_value_usd": 3984.57,
+      "cash_usd": 334.6
+    },
+    {
+      "date": "2025-08-19",
+      "portfolio_value_usd": 3672.22,
+      "spy_value_usd": 3966.72,
+      "cash_usd": 291.7
+    },
+    {
+      "date": "2025-08-26",
+      "portfolio_value_usd": 3665.17,
+      "spy_value_usd": 3999.9,
+      "cash_usd": 291.7
+    },
+    {
+      "date": "2025-09-02",
+      "portfolio_value_usd": 3616.08,
+      "spy_value_usd": 3969.55,
+      "cash_usd": 261.61
+    },
+    {
+      "date": "2025-09-09",
+      "portfolio_value_usd": 3619.7,
+      "spy_value_usd": 4031.95,
+      "cash_usd": 231.52
+    },
+    {
+      "date": "2025-09-16",
+      "portfolio_value_usd": 3692.9,
+      "spy_value_usd": 4091.9,
+      "cash_usd": 231.52
+    },
+    {
+      "date": "2025-09-23",
+      "portfolio_value_usd": 3818.44,
+      "spy_value_usd": 4123.2,
+      "cash_usd": 231.52
+    },
+    {
+      "date": "2025-09-30",
+      "portfolio_value_usd": 3817.98,
+      "spy_value_usd": 4141.67,
+      "cash_usd": 282.87
+    },
+    {
+      "date": "2025-10-07",
+      "portfolio_value_usd": 3732.37,
+      "spy_value_usd": 4159.96,
+      "cash_usd": 410.62
+    },
+    {
+      "date": "2025-10-14",
+      "portfolio_value_usd": 3663.5,
+      "spy_value_usd": 4117.1,
+      "cash_usd": 1008.43
+    },
+    {
+      "date": "2025-10-21",
+      "portfolio_value_usd": 3651.24,
+      "spy_value_usd": 4173.41,
+      "cash_usd": 313.19
+    },
+    {
+      "date": "2025-10-28",
+      "portfolio_value_usd": 3642.65,
+      "spy_value_usd": 4271.5,
+      "cash_usd": 313.19
+    },
+    {
+      "date": "2025-11-04",
+      "portfolio_value_usd": 3570.51,
+      "spy_value_usd": 4197.98,
+      "cash_usd": 264.09
+    },
+    {
+      "date": "2025-11-11",
+      "portfolio_value_usd": 3732.82,
+      "spy_value_usd": 4246.24,
+      "cash_usd": 264.09
+    },
+    {
+      "date": "2025-11-18",
+      "portfolio_value_usd": 3694.75,
+      "spy_value_usd": 4103.71,
+      "cash_usd": 349.8
+    },
+    {
+      "date": "2025-11-25",
+      "portfolio_value_usd": 3742.53,
+      "spy_value_usd": 4196.66,
+      "cash_usd": 304.03
+    },
+    {
+      "date": "2025-12-02",
+      "portfolio_value_usd": 3669.71,
+      "spy_value_usd": 4237.13,
+      "cash_usd": 385.86
+    },
+    {
+      "date": "2025-12-09",
+      "portfolio_value_usd": 3655.19,
+      "spy_value_usd": 4246.49,
+      "cash_usd": 385.86
+    },
+    {
+      "date": "2025-12-16",
+      "portfolio_value_usd": 3721.1,
+      "spy_value_usd": 4220.54,
+      "cash_usd": 385.86
+    },
+    {
+      "date": "2025-12-23",
+      "portfolio_value_usd": 3691.81,
+      "spy_value_usd": 4289.72,
+      "cash_usd": 281.95
+    },
+    {
+      "date": "2025-12-30",
+      "portfolio_value_usd": 3645.25,
+      "spy_value_usd": 4283.82,
+      "cash_usd": 281.95
+    },
+    {
+      "date": "2026-01-06",
+      "portfolio_value_usd": 3613.76,
+      "spy_value_usd": 4313.73,
+      "cash_usd": 952.87
+    },
+    {
+      "date": "2026-01-13",
+      "portfolio_value_usd": 3624.83,
+      "spy_value_usd": 4325.92,
+      "cash_usd": 411.04
+    },
+    {
+      "date": "2026-01-20",
+      "portfolio_value_usd": 3597.99,
+      "spy_value_usd": 4225.0,
+      "cash_usd": 376.99
+    },
+    {
+      "date": "2026-01-27",
+      "portfolio_value_usd": 3575.94,
+      "spy_value_usd": 4336.67,
+      "cash_usd": 324.65
+    },
+    {
+      "date": "2026-02-03",
+      "portfolio_value_usd": 3629.72,
+      "spy_value_usd": 4299.53,
+      "cash_usd": 279.72
+    },
+    {
+      "date": "2026-02-10",
+      "portfolio_value_usd": 3711.86,
+      "spy_value_usd": 4315.68,
+      "cash_usd": 354.61
+    },
+    {
+      "date": "2026-02-17",
+      "portfolio_value_usd": 3619.02,
+      "spy_value_usd": 4257.86,
+      "cash_usd": 902.29
+    },
+    {
+      "date": "2026-02-24",
+      "portfolio_value_usd": 3673.36,
+      "spy_value_usd": 4285.89,
+      "cash_usd": 245.79
+    },
+    {
+      "date": "2026-03-03",
+      "portfolio_value_usd": 3669.31,
+      "spy_value_usd": 4242.15,
+      "cash_usd": 1086.06
+    },
+    {
+      "date": "2026-03-10",
+      "portfolio_value_usd": 3532.25,
+      "spy_value_usd": 4222.48,
+      "cash_usd": 2271.04
+    },
+    {
+      "date": "2026-03-17",
+      "portfolio_value_usd": 3490.84,
+      "spy_value_usd": 4182.64,
+      "cash_usd": 1615.37
+    },
+    {
+      "date": "2026-03-24",
+      "portfolio_value_usd": 3414.07,
+      "spy_value_usd": 4083.98,
+      "cash_usd": 982.11
+    },
+    {
+      "date": "2026-03-31",
+      "portfolio_value_usd": 3342.05,
+      "spy_value_usd": 4066.2,
+      "cash_usd": 1518.54
+    },
+    {
+      "date": "2026-04-07",
+      "portfolio_value_usd": 3342.12,
+      "spy_value_usd": 4121.75,
+      "cash_usd": 325.34
+    },
+    {
+      "date": "2026-04-14",
+      "portfolio_value_usd": 3262.87,
+      "spy_value_usd": 4342.07,
+      "cash_usd": 280.64
+    },
+    {
+      "date": "2026-04-21",
+      "portfolio_value_usd": 3297.84,
+      "spy_value_usd": 4402.21,
+      "cash_usd": 280.64
+    },
+    {
+      "date": "2026-04-28",
+      "portfolio_value_usd": 3358.08,
+      "spy_value_usd": 4449.78,
+      "cash_usd": 280.64
+    },
+    {
+      "date": "2026-05-05",
+      "portfolio_value_usd": 3501.66,
+      "spy_value_usd": 4525.32,
+      "cash_usd": 341.99
+    },
+    {
+      "date": "2026-05-12",
+      "portfolio_value_usd": 3367.0,
+      "spy_value_usd": 4615.43,
+      "cash_usd": 980.0
+    },
+    {
+      "date": "2026-05-19",
+      "portfolio_value_usd": 3285.59,
+      "spy_value_usd": 4587.59,
+      "cash_usd": 913.13
+    },
+    {
+      "date": "2026-05-26",
+      "portfolio_value_usd": 3240.48,
+      "spy_value_usd": 4693.04,
+      "cash_usd": 306.86
+    },
+    {
+      "date": "2026-06-02",
+      "portfolio_value_usd": 3148.79,
+      "spy_value_usd": 4749.16,
+      "cash_usd": 288.81
+    },
+    {
+      "date": "2026-06-09",
+      "portfolio_value_usd": 3235.81,
+      "spy_value_usd": 4608.39,
+      "cash_usd": 288.81
+    },
+    {
+      "date": "2026-06-16",
+      "portfolio_value_usd": 3285.83,
+      "spy_value_usd": 4691.41,
+      "cash_usd": 288.81
+    },
+    {
+      "date": "2026-06-23",
+      "portfolio_value_usd": 3273.01,
+      "spy_value_usd": 4598.46,
+      "cash_usd": 288.81
+    },
+    {
+      "date": "2026-06-30",
+      "portfolio_value_usd": 3217.25,
+      "spy_value_usd": 4681.16,
+      "cash_usd": 247.43
+    },
+    {
+      "date": "2026-07-07",
+      "portfolio_value_usd": 3230.64,
+      "spy_value_usd": 4687.07,
+      "cash_usd": 206.39
+    },
+    {
+      "date": "2026-07-14",
+      "portfolio_value_usd": 3167.23,
+      "spy_value_usd": 4712.9,
+      "cash_usd": 243.53
+    },
+    {
+      "date": "2026-07-21",
+      "portfolio_value_usd": 3203.03,
+      "spy_value_usd": 4690.65,
+      "cash_usd": 243.53
+    },
+    {
+      "date": "2026-07-28",
+      "portfolio_value_usd": 3220.02,
+      "spy_value_usd": 4644.09,
+      "cash_usd": 243.53
+    },
+    {
+      "date": "2026-08-04",
+      "portfolio_value_usd": 3147.02,
+      "spy_value_usd": 4835.12,
+      "cash_usd": 246.59
+    },
+    {
+      "date": "2026-08-11",
+      "portfolio_value_usd": 3127.68,
+      "spy_value_usd": 4830.28,
+      "cash_usd": 215.46
+    },
+    {
+      "date": "2026-08-18",
+      "portfolio_value_usd": 3190.2,
+      "spy_value_usd": 4810.8,
+      "cash_usd": 310.55
+    },
+    {
+      "date": "2026-08-25",
+      "portfolio_value_usd": 3115.13,
+      "spy_value_usd": 4801.13,
+      "cash_usd": 267.95
+    },
+    {
+      "date": "2026-09-01",
+      "portfolio_value_usd": 3041.81,
+      "spy_value_usd": 4775.24,
+      "cash_usd": 239.7
+    },
+    {
+      "date": "2026-09-08",
+      "portfolio_value_usd": 3027.82,
+      "spy_value_usd": 4801.44,
+      "cash_usd": 239.7
+    },
+    {
+      "date": "2026-09-15",
+      "portfolio_value_usd": 2996.08,
+      "spy_value_usd": 4747.71,
+      "cash_usd": 254.64
+    },
+    {
+      "date": "2026-09-22",
+      "portfolio_value_usd": 2905.19,
+      "spy_value_usd": 4860.01,
+      "cash_usd": 241.67
+    },
+    {
+      "date": "2026-09-29",
+      "portfolio_value_usd": 2863.81,
+      "spy_value_usd": 4802.32,
+      "cash_usd": 287.05
+    },
+    {
+      "date": "2026-10-06",
+      "portfolio_value_usd": 2888.41,
+      "spy_value_usd": 4895.89,
+      "cash_usd": 270.75
+    },
+    {
+      "date": "2026-10-13",
+      "portfolio_value_usd": 2902.74,
+      "spy_value_usd": 4889.1,
+      "cash_usd": 270.75
+    },
+    {
+      "date": "2026-10-20",
+      "portfolio_value_usd": 2904.76,
+      "spy_value_usd": 4832.8,
+      "cash_usd": 194.55
+    },
+    {
+      "date": "2026-10-27",
+      "portfolio_value_usd": 2863.26,
+      "spy_value_usd": 4836.63,
+      "cash_usd": 169.66
+    },
+    {
+      "date": "2026-11-03",
+      "portfolio_value_usd": 2859.1,
+      "spy_value_usd": 4740.42,
+      "cash_usd": 733.65
+    },
+    {
+      "date": "2026-11-04",
+      "portfolio_value_usd": 2819.78,
+      "spy_value_usd": 4818.72,
+      "cash_usd": 205.96
+    }
+  ],
+  "last_decisions_digest": "75ecaed16c129d414ab7f9a453706d08ca17db704c84d904800453ee3f040490"
+}

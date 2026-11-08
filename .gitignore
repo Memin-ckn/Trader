@@ -20,6 +20,7 @@ reports/
 # Kişisel Portföy / Canlı İşlem ve Yerel UI Gizlilik Koruması (Public GitHub'a gitmez)
 docs/dashboard.html
 data/live_*.json
+data/backtest_cache/
 *.private.*
 
 # Ortam değişkenleri ve gizli anahtarlar

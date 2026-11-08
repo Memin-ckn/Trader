@@ -1,0 +1,75 @@
+{
+  "decisions_date": "2026-11-04",
+  "circuit_breaker": "TRADING_ALLOWED",
+  "enforce_risk_cap": true,
+  "decisions": [
+    {
+      "ticker": "KO",
+      "action": "HOLD",
+      "shares": 5.86,
+      "price": 95.8,
+      "stop_loss": 90.05,
+      "take_profit": 102.79,
+      "reason": "Fiyat $95.80, SMA50 uzerinde +%8.11 karda; V2 +%8 kurali geregi stop-loss $90.05 seviyesine cekilerek pozisyon risksiz hale getirildi.",
+      "thesis": "Stage 2 100.0/100, RSI 61.34, kar kilitleme."
+    },
+    {
+      "ticker": "EXPD",
+      "action": "HOLD",
+      "shares": 2.69,
+      "price": 197.69,
+      "stop_loss": 181.06,
+      "take_profit": 222.49,
+      "reason": "Fiyat $197.69, kar/zarar %3.07; V2 nefes aldirma kurali (+%8 esigi) geregi ilk stop $181.06 korundu.",
+      "thesis": "Stage 2 100.0/100, RSI 48.25, SMA50 destegi uzerinde pozisyon koruma."
+    },
+    {
+      "ticker": "TMO",
+      "action": "HOLD",
+      "shares": 0.73,
+      "price": 706.16,
+      "stop_loss": 659.23,
+      "take_profit": 810.07,
+      "reason": "Fiyat $706.16, kar/zarar %1.12; V2 nefes aldirma kurali (+%8 esigi) geregi ilk stop $659.23 korundu.",
+      "thesis": "Stage 2 100.0/100, RSI 53.52, SMA50 destegi uzerinde pozisyon koruma."
+    },
+    {
+      "ticker": "BMY",
+      "action": "BUY",
+      "shares": 8.56,
+      "price": 64.19,
+      "stop_loss": 60.6,
+      "take_profit": 74.46,
+      "reason": "Stage 2 100.0/100, Fiyat $64.19 > SMA50 ($62.19) mesafesi %3.2 (< %7), RSI 61.34 ideal bolgede, Health Care sektoru girisi.",
+      "thesis": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu."
+    },
+    {
+      "ticker": "DE",
+      "action": "BUY",
+      "shares": 0.81,
+      "price": 676.5,
+      "stop_loss": 638.62,
+      "take_profit": 784.74,
+      "reason": "Stage 2 100.0/100, Fiyat $676.50 > SMA50 ($664.68) mesafesi %1.8 (< %7), RSI 62.23 ideal bolgede, Industrials sektoru girisi.",
+      "thesis": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.23) ve R:R 2.80 kurgusu."
+    },
+    {
+      "ticker": "WELL",
+      "action": "DROP",
+      "reason": "Portfoyde nakit kapasitesi yetersiz.",
+      "thesis": "Butce kisiti."
+    },
+    {
+      "ticker": "IEX",
+      "action": "DROP",
+      "reason": "Industrials sektorunde zaten 2 pozisyon bulunuyor.",
+      "thesis": "Sektor tavani kurali."
+    },
+    {
+      "ticker": "AIG",
+      "action": "DROP",
+      "reason": "Portfoyde nakit kapasitesi yetersiz.",
+      "thesis": "Butce kisiti."
+    }
+  ]
+}

@@ -22,11 +22,18 @@ UNIVERSE_FILE = DATA_DIR / "universe.json"
 BRIEFING_FILE = DATA_DIR / "daily_briefing.json"
 DECISIONS_FILE = DATA_DIR / "decisions.json"
 
+BACKTEST_CACHE_DIR = DATA_DIR / "backtest_cache"
+BACKTEST_STATE_FILE = DATA_DIR / "backtest_state.json"
+BACKTEST_BRIEFING_FILE = DATA_DIR / "backtest_briefing.json"
+BACKTEST_DECISIONS_FILE = DATA_DIR / "backtest_decisions.json"
+
 DASHBOARD_FILE = DOCS_DIR / "PORTFOLIO_DASHBOARD.md"
 HTML_DASHBOARD_FILE = DOCS_DIR / "dashboard.html"
+BACKTEST_REPORT_FILE = DOCS_DIR / "BACKTEST_REPORT.md"
 KANBAN_FILE = DOCS_DIR / "Kanban.md"
 COMMITTEE_FILE = DOCS_DIR / "COMMITTEE_PROMPT.md"
 PROJECT_CONTEXT_FILE = DOCS_DIR / "PROJECT_CONTEXT.md"
 TEST_SCENARIOS_FILE = DOCS_DIR / "test_senaryolari.md"
 
 SKILLS_DIR = BASE_DIR / "claude-trading-skills" / "skills"
+

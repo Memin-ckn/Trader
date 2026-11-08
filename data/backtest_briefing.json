@@ -1,0 +1,549 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-08T22:48:39.653118",
+  "as_of_date": "2026-11-04",
+  "time_lock_verified": true,
+  "portfolio_summary": {
+    "cash_usd": 1214.1,
+    "total_equity_usd": 2822.78,
+    "total_fees_paid_usd": 295.5
+  },
+  "circuit_breaker": {
+    "recommendation": "TRADING_ALLOWED",
+    "rationale": "No account-level circuit breaker rules are active; new trade risk may proceed.",
+    "triggered_rules": [],
+    "metrics": {
+      "realized_pnl_today": -31.59,
+      "realized_pnl_wtd": 51.06,
+      "realized_pnl_mtd": 51.06,
+      "consecutive_losses": 1,
+      "last_loss_exit_at": "2026-11-04T11:00:00-05:00",
+      "theses_scanned": 97
+    }
+  },
+  "queue_summary": {
+    "total_candidates": 8,
+    "open_positions_count": 3,
+    "watchlist_count": 0,
+    "discovery_count": 5
+  },
+  "candidates": [
+    {
+      "ticker": "KO",
+      "source": "OPEN_POSITION",
+      "source_details": {
+        "ticker": "KO",
+        "shares": 5.86,
+        "avg_buy_price": 88.61,
+        "current_price": 95.8,
+        "stop_loss": 83.65,
+        "take_profit": 102.79,
+        "buy_date": "2026-09-22",
+        "thesis": "Consumer Staples sektoru cesitlendirmesi, %1 risk butcesi ($29.07) ve R:R 2.80 kurgusu.",
+        "fees_paid_usd": 1.5
+      },
+      "market_data": {
+        "current_price": 95.8,
+        "change_1m_pct": 11.18,
+        "change_3m_pct": 10.99,
+        "change_1y_pct": 43.24,
+        "high_52w": 96.56,
+        "low_52w": 65.99,
+        "rsi_14": 61.34,
+        "macd": 1.6792,
+        "macd_signal": 1.4659,
+        "macd_hist": 0.2133,
+        "sma_50": 89.56,
+        "sma_150": 83.81,
+        "sma_200": 81.77,
+        "volume_latest": 27088300,
+        "volume_20d_avg": 16738485,
+        "volume_change_pct": 61.83,
+        "atr_14": 1.83,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Consumer Staples",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "continuation_intact",
+        "nearest_swing_high": 89.82401078563296,
+        "nearest_swing_low": 85.12999725341797,
+        "stop_reference": 85.13
+      },
+      "position_sizing": {
+        "entry_price": 95.8,
+        "stop_price": 85.13,
+        "recommended_shares": 2.64,
+        "position_value": 252.91,
+        "risk_dollars": 28.17,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "EXPD",
+      "source": "OPEN_POSITION",
+      "source_details": {
+        "ticker": "EXPD",
+        "shares": 2.69,
+        "avg_buy_price": 191.8,
+        "current_price": 197.69,
+        "stop_loss": 181.06,
+        "take_profit": 222.49,
+        "buy_date": "2026-10-06",
+        "thesis": "Industrials sektoru cesitlendirmesi, %1 risk butcesi ($28.90) ve R:R 2.80 kurgusu.",
+        "fees_paid_usd": 1.5
+      },
+      "market_data": {
+        "current_price": 197.69,
+        "change_1m_pct": 3.07,
+        "change_3m_pct": 8.97,
+        "change_1y_pct": 47.17,
+        "high_52w": 207.93,
+        "low_52w": 126.78,
+        "rsi_14": 48.25,
+        "macd": 2.4528,
+        "macd_signal": 2.3896,
+        "macd_hist": 0.0632,
+        "sma_50": 192.51,
+        "sma_150": 173.04,
+        "sma_200": 167.13,
+        "volume_latest": 2575200,
+        "volume_20d_avg": 1203140,
+        "volume_change_pct": 114.04,
+        "atr_14": 5.29,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Industrials",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "continuation_intact",
+        "nearest_swing_high": 200.66000366210938,
+        "nearest_swing_low": 183.36000061035156,
+        "stop_reference": 183.36
+      },
+      "position_sizing": {
+        "entry_price": 197.69,
+        "stop_price": 183.36,
+        "recommended_shares": 1.96,
+        "position_value": 387.47,
+        "risk_dollars": 28.09,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "TMO",
+      "source": "OPEN_POSITION",
+      "source_details": {
+        "ticker": "TMO",
+        "shares": 0.73,
+        "avg_buy_price": 698.34,
+        "current_price": 706.16,
+        "stop_loss": 659.23,
+        "take_profit": 810.07,
+        "buy_date": "2026-11-03",
+        "thesis": "Health Care sektoru cesitlendirmesi, %1 risk butcesi ($28.62) ve R:R 2.80 kurgusu.",
+        "fees_paid_usd": 1.5
+      },
+      "market_data": {
+        "current_price": 706.16,
+        "change_1m_pct": 7.55,
+        "change_3m_pct": 22.3,
+        "change_1y_pct": 25.37,
+        "high_52w": 712.17,
+        "low_52w": 434.5,
+        "rsi_14": 53.52,
+        "macd": 12.0839,
+        "macd_signal": 12.2005,
+        "macd_hist": -0.1166,
+        "sma_50": 658.54,
+        "sma_150": 561.36,
+        "sma_200": 551.82,
+        "volume_latest": 2460700,
+        "volume_20d_avg": 2317280,
+        "volume_change_pct": 6.19,
+        "atr_14": 21.06,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Health Care",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "failed_extreme",
+        "nearest_swing_high": 646.5044214656405,
+        "nearest_swing_low": 635.3200073242188,
+        "stop_reference": 635.32
+      },
+      "position_sizing": {
+        "entry_price": 706.16,
+        "stop_price": 635.32,
+        "recommended_shares": 0.39,
+        "position_value": 275.4,
+        "risk_dollars": 27.63,
+        "risk_pct": 0.98,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "DE",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 676.5,
+        "change_1m_pct": -0.92,
+        "change_3m_pct": 10.8,
+        "change_1y_pct": 46.11,
+        "high_52w": 719.5,
+        "low_52w": 450.77,
+        "rsi_14": 62.23,
+        "macd": 1.8643,
+        "macd_signal": -2.5224,
+        "macd_hist": 4.3867,
+        "sma_50": 664.68,
+        "sma_150": 614.04,
+        "sma_200": 604.71,
+        "volume_latest": 1246200,
+        "volume_20d_avg": 1111175,
+        "volume_change_pct": 12.15,
+        "atr_14": 18.13,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Industrials",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 719.5030580224836,
+        "nearest_swing_low": 618.0,
+        "stop_reference": 618.0
+      },
+      "position_sizing": {
+        "entry_price": 676.5,
+        "stop_price": 618.0,
+        "recommended_shares": 0.48,
+        "position_value": 324.72,
+        "risk_dollars": 28.08,
+        "risk_pct": 0.99,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "WELL",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 247.99,
+        "change_1m_pct": 9.84,
+        "change_3m_pct": 4.92,
+        "change_1y_pct": 36.5,
+        "high_52w": 254.24,
+        "low_52w": 178.34,
+        "rsi_14": 62.91,
+        "macd": 2.3531,
+        "macd_signal": 1.0122,
+        "macd_hist": 1.3409,
+        "sma_50": 233.6,
+        "sma_150": 225.04,
+        "sma_200": 218.37,
+        "volume_latest": 4008500,
+        "volume_20d_avg": 2881840,
+        "volume_change_pct": 39.1,
+        "atr_14": 6.54,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Real Estate",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 243.0399932861328,
+        "nearest_swing_low": 220.0,
+        "stop_reference": 220.0
+      },
+      "position_sizing": {
+        "entry_price": 247.99,
+        "stop_price": 220.0,
+        "recommended_shares": 1.0,
+        "position_value": 247.99,
+        "risk_dollars": 27.99,
+        "risk_pct": 0.99,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "AIG",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 81.71,
+        "change_1m_pct": 8.79,
+        "change_3m_pct": 2.66,
+        "change_1y_pct": 3.73,
+        "high_52w": 85.64,
+        "low_52w": 69.9,
+        "rsi_14": 59.49,
+        "macd": 1.3322,
+        "macd_signal": 1.3671,
+        "macd_hist": -0.0348,
+        "sma_50": 77.23,
+        "sma_150": 76.53,
+        "sma_200": 76.19,
+        "volume_latest": 5783900,
+        "volume_20d_avg": 4141700,
+        "volume_change_pct": 39.65,
+        "atr_14": 1.65,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 85.7,
+          "passed_count": 6,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": false,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Financials",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 80.5067069000989,
+        "nearest_swing_low": 72.62999725341797,
+        "stop_reference": 72.63
+      },
+      "position_sizing": {
+        "entry_price": 81.71,
+        "stop_price": 72.63,
+        "recommended_shares": 3.1,
+        "position_value": 253.3,
+        "risk_dollars": 28.15,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "BMY",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 64.19,
+        "change_1m_pct": 7.72,
+        "change_3m_pct": 1.92,
+        "change_1y_pct": 47.06,
+        "high_52w": 67.94,
+        "low_52w": 43.34,
+        "rsi_14": 61.34,
+        "macd": 0.3968,
+        "macd_signal": -0.0134,
+        "macd_hist": 0.4102,
+        "sma_50": 62.19,
+        "sma_150": 59.61,
+        "sma_200": 59.01,
+        "volume_latest": 14122800,
+        "volume_20d_avg": 12174850,
+        "volume_change_pct": 16.0,
+        "atr_14": 1.71,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Health Care",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 67.93640240667764,
+        "nearest_swing_low": 56.150001525878906,
+        "stop_reference": 56.15
+      },
+      "position_sizing": {
+        "entry_price": 64.19,
+        "stop_price": 56.15,
+        "recommended_shares": 3.51,
+        "position_value": 225.31,
+        "risk_dollars": 28.22,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    },
+    {
+      "ticker": "IEX",
+      "source": "DISCOVERY",
+      "source_details": {},
+      "market_data": {
+        "current_price": 233.69,
+        "change_1m_pct": -1.1,
+        "change_3m_pct": -1.07,
+        "change_1y_pct": 41.13,
+        "high_52w": 243.03,
+        "low_52w": 158.42,
+        "rsi_14": 46.52,
+        "macd": 1.3583,
+        "macd_signal": 1.4143,
+        "macd_hist": -0.0559,
+        "sma_50": 229.94,
+        "sma_150": 221.46,
+        "sma_200": 215.55,
+        "volume_latest": 1131000,
+        "volume_20d_avg": 805760,
+        "volume_change_pct": 40.36,
+        "atr_14": 6.68,
+        "pe_ratio": null,
+        "pb_ratio": null,
+        "trend_template": {
+          "passed": true,
+          "score": 100.0,
+          "passed_count": 7,
+          "criteria": {
+            "c1_price_above_sma150_200": true,
+            "c2_sma150_above_sma200": true,
+            "c3_sma200_trending_up": true,
+            "c4_price_above_sma50": true,
+            "c5_25pct_above_52w_low": true,
+            "c6_within_25pct_52w_high": true,
+            "c7_positive_1y_relative_strength": true
+          }
+        },
+        "sector": "Industrials",
+        "last_bar_date": "2026-11-04"
+      },
+      "weekly_price_action": {
+        "verdict": "NOT_CONFIRMED",
+        "confidence": "MEDIUM",
+        "verdict_reason": "no_reversal_evidence",
+        "nearest_swing_high": 241.3000030517578,
+        "nearest_swing_low": 218.74306896665718,
+        "stop_reference": 218.74
+      },
+      "position_sizing": {
+        "entry_price": 233.69,
+        "stop_price": 218.74,
+        "recommended_shares": 1.88,
+        "position_value": 439.34,
+        "risk_dollars": 28.11,
+        "risk_pct": 1.0,
+        "binding_constraint": null
+      }
+    }
+  ],
+  "backtest": {
+    "mode": true,
+    "current_sim_date": "2026-11-04",
+    "previous_sim_date": "2026-11-03",
+    "step_days": 7,
+    "interim_exits": [
+      {
+        "ticker": "TRGP",
+        "type": "STOP_LOSS",
+        "date": "2026-11-04",
+        "price": 281.84
+      }
+    ],
+    "decisions_date_required": "2026-11-04"
+  }
+}
